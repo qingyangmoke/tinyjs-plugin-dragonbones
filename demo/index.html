@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Tiny-骨骼动画</title>
+  <meta charset="utf-8">
+  <script src="libs/tiny.debug.js"></script>
+  <script src="../dist/index.debug.js"></script>
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2,minimum-scale=1,user-scalable=1">
+  <style type="text/css">
+    body,
+    html,
+    canvas {
+      padding: 0;
+      margin: 0;
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+    }
+  </style>
+</head>
+
+<body>
+
+  <script>
+    var config = {
+      showFPS: true, // 显示帧频
+      dpi: 1, // 分辨率
+      renderOptions: {
+        backgroundColor: 0x2a3145 // 画布背景色
+      }
+    };
+
+    var app = new Tiny.Application(config);
+
+    function setTitle(title, container) {
+      var title = new Tiny.Text(title, {
+        fontSize: '18px',
+        fill: 'white',
+      });
+
+      title.position.set(Tiny.WIN_SIZE.width / 2, 30);
+      title.anchor.set(0.5, 0);
+      container.addChild(title);
+    }
+
+    var sprite;
+    function init() {
+      container = new Tiny.Container();
+
+      setTitle('Tiny骨骼动画演示', container);
+
+      //设置别名
+      var dragonBones = Tiny.DragonBones;
+      var resources = Tiny.Loader.resources;
+
+      dragonBones.addDragonBonesData(resources["dragonBonesData"].data);
+      dragonBones.addTextureAtlasData(resources["textureDataA"].data, resources["textureA"].texture);
+      armatureDisplay = dragonBones.buildArmatureDisplay('Dragon');
+      // //DragonBones Pro 默认生成四个动作 fall、jump、stand、walk
+      // armatureDisplay.animation.play("walk");
+      armatureDisplay.play('walk');
+      container.addChild(armatureDisplay);
+      armatureDisplay.x = app.renderer.width * 0.5;
+      armatureDisplay.y = app.renderer.height * 0.5 + 150;
+      armatureDisplay.scale.set(-0.3, 0.3);
+
+      armatureDisplay.debugDraw = true;
+
+      dragonBones.addDragonBonesData(resources["dragonBonesData2"].data);
+      dragonBones.addTextureAtlasData(resources["textureDataA2"].data, resources["textureA2"].texture);
+
+      armatureDisplay2 = dragonBones.buildArmatureDisplay('DragonBoy');
+      armatureDisplay2.play('walk');
+      container.addChild(armatureDisplay2);
+      armatureDisplay2.x = app.renderer.width * 0.5;
+      armatureDisplay2.y = armatureDisplay2.height / 2 + 150;
+
+      app.run(container);
+    }
+
+    Tiny.Loader
+      .add("dragonBonesData", "./resource/Dragon/Dragon_ske.json")
+      .add("textureDataA", "./resource/Dragon/Dragon_tex.json")
+      .add("textureA", "./resource/Dragon/Dragon_tex.png")
+      .add("dragonBonesData2", "./resource/DragonBoy/DragonBoy.json")
+      .add("textureDataA2", "./resource/DragonBoy/DragonBoy_texture_1.json")
+      .add("textureA2", "./resource/DragonBoy/DragonBoy_texture_1.png")
+      .load(function () {
+        init();
+      });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+{
+  "name": "tinyjs-plugin-dragonbones",
+  "version": "0.0.1",
+  "author": "fusheng.sfs",
+  "description": "骨骼动画",
+  "keywords": [
+    "tinyjs",
+    "plugin"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ant-tinyjs/tinyjs-plugin-dragonbones.git"
+  },
+  "main": "src/index.js",
+  "files": [
+    "src",
+    "demo",
+    "tests"
+  ],
+  "scripts": {
+    "start": "webpack-dev-server --devtool source-map --inline --hot --host 0.0.0.0 --config ./config/webpack.dev.config.js ",
+    "dev": "webpack --progress --colors --devtool source-map  --watch --config ./config/webpack.dev.config.js ",
+    "build": "webpack --progress --colors",
+    "doc": "rm -rf docs && jsdoc README.md src -r -d docs -t node_modules/docdash",
+    "lint": "eslint src/** tests/**",
+    "test": "mocha ./tests --recursive --require ./tests/setup.js",
+    "test-cov": "istanbul cover _mocha -- ./tests --recursive --require ./tests/setup.js",
+    "ci": "npm run lint && npm run test-cov",
+    "preversion": "npm run ci",
+    "postversion": "git push && git push --tags"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.23.0",
+    "babel-loader": "^6.3.1",
+    "babel-plugin-static-fs": "^1.1.0",
+    "babel-preset-es2015": "^6.22.0",
+    "eslint": "~3.5.0",
+    "eslint-config-standard": "~6.0.1",
+    "eslint-plugin-promise": "~3.4.0",
+    "eslint-plugin-standard": "~2.0.1",
+    "floss": "^2.0.1",
+    "jsdoc": "~3.4.2",
+    "docdash": "^0.4.0",
+    "webpack": "^1.13.1",
+    "webpack-dev-server": "^1.14.1",
+    "webpack-merge": "~0.15.0"
+  },
+  "bugs": {
+    "url": "https://github.com/ant-tinyjs/tinyjs-plugin-DragonBones/issues"
+  },
+  "homepage": "https://github.com/ant-tinyjs/tinyjs-plugin-DragonBones#readme",
+  "dependencies": {
+    "pixi-gl-core": "^1.1.0"
+  }
+}
