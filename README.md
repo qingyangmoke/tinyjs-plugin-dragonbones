@@ -1,4 +1,4 @@
-# tinyjs-plugin-DragonBones
+# tinyjs-plugin-dragonbones
 
 > 骨骼动画
 
