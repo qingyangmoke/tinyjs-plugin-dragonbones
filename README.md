@@ -58,6 +58,11 @@
 ``` javascript
 
 
+//设置别名
+var dragonBones = Tiny.DragonBones;
+var resources = Tiny.Loader.resources;
+
+
 function initDragon1() {
 
      // 将骨骼数据添加到骨架系统中
