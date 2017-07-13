@@ -54,20 +54,58 @@
 
     var armatureDisplay;
 
+    function createBox(name, x, y, width, height, color) {
+      let graphics = new Tiny.Graphics();
+      graphics.beginFill(color);
+      graphics.drawRect(0, 0, width, height);
+      graphics.bounds = new Tiny.Rectangle(0, 0, width, height);
+      var rt = Tiny.RenderTexture.create(width, height);
+      app.renderer.render(graphics, rt);
+      let sprite = new Tiny.Sprite(rt);
+      var title = new Tiny.Text(name, {
+        fontSize: '18px',
+        fill: 'white',
+      });
+      title.position.set(sprite.width / 2, sprite.height / 2);
+      title.anchor.set(0.5, 0.5);
+      sprite.addChild(title);
+      sprite.position.set(x, y);
+
+      sprite.setEventEnabled(true);
+
+      sprite.mousedown = sprite.touchstart = function (data) {
+        data.stopPropagation();
+        console.log(title);
+        armatureDisplay.play(name);
+      };
+
+      return sprite;
+    }
+
     function initDragon1() {
       dragonBones.addDragonBonesData(resources["dragonBonesData"].data);
       dragonBones.addTextureAtlasData(resources["textureDataA"].data, resources["textureA"].texture);
 
       armatureDisplay = dragonBones.buildArmatureDisplay('Dragon');
       armatureDisplay.x = app.renderer.width * 0.5;
-      armatureDisplay.y = app.renderer.height * 0.5 - 50;
-      armatureDisplay.scale.set(-0.3, 0.3);
+      armatureDisplay.y = app.renderer.height * 0.5 + 50;
+      armatureDisplay.scale.set(0.3, 0.3);
 
       // //DragonBones Pro 默认生成四个动作 fall、jump、stand、walk
       // armatureDisplay.animation.play("walk");
       var animationState = armatureDisplay.play('walk');
 
       container.addChild(armatureDisplay);
+
+      var top = 60;
+      var btnFall = createBox('fall', 0, top + 0, 100, 30, 0xff0000);
+      container.addChild(btnFall);
+      var btnJump = createBox('jump', 0, top + 40, 100, 30, 0xff0000);
+      container.addChild(btnJump);
+      var btnStand = createBox('stand', 0, top + 80, 100, 30, 0xff0000);
+      container.addChild(btnStand);
+      var btnWalk = createBox('walk', 0, top + 120, 100, 30, 0xff0000);
+      container.addChild(btnWalk);
     }
 
 

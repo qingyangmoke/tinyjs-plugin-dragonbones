@@ -134,3 +134,14 @@ armatureDisplay.animation.fadeIn("fall",0,-1,0,0,"LOWER_BODY_GROUP",dragonBones.
 ```
 
 参考demo/mixed.html
+
+
+### 调试骨骼
+
+``` javascript
+
+ armatureDisplay.debugDraw = true;
+
+```
+
+参考demo/debugdraw.html
