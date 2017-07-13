@@ -17,22 +17,11 @@
   - https://a.alipayobjects.com/g/tiny-plugins/tinyjs-plugin-dragonbones/0.0.1/index.js
   - https://a.alipayobjects.com/g/tiny-plugins/tinyjs-plugin-dragonbones/0.0.1/index.debug.js
 
-## 起步
-首先当然是要引入，推荐`NPM`方式，当然你也可以使用`CDN`或下载独立版本，先从几个例子入手吧！
+## 示例
 
-##### 1、最简单的例子
+ 参考 ./demo/index.html
 
-引用 Tiny.js 源码
-``` html
-<script src="http://tinyjs.net/libs/tiny.debug.js"></script>
-```
-``` js
-var dragonBones = require('tinyjs-plugin-dragonbones');
-// 或者
-// import dragonBones from 'tinyjs-plugin-dragonbones';
-```
-
-## 第三方类库
+## 第三方库
 - [Tiny.js](http://tinyjs.net/#/docs/api)
 - [DragonBonesJS](https://github.com/DragonBones/DragonBonesJS)
 

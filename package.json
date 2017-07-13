@@ -1,11 +1,12 @@
 {
   "name": "tinyjs-plugin-dragonbones",
   "version": "0.0.1",
-  "author": "fusheng.sfs",
-  "description": "骨骼动画",
+  "author": "采东",
+  "description": "Tiny 骨骼动画",
   "keywords": [
     "tinyjs",
-    "plugin"
+    "plugin",
+    "dragonbones"
   ],
   "repository": {
     "type": "git",
@@ -47,9 +48,9 @@
     "webpack-merge": "~0.15.0"
   },
   "bugs": {
-    "url": "https://github.com/ant-tinyjs/tinyjs-plugin-DragonBones/issues"
+    "url": "https://github.com/ant-tinyjs/tinyjs-plugin-dragonbones/issues"
   },
-  "homepage": "https://github.com/ant-tinyjs/tinyjs-plugin-DragonBones#readme",
+  "homepage": "https://github.com/ant-tinyjs/tinyjs-plugin-dragonbones#readme",
   "dependencies": {
     "pixi-gl-core": "^1.1.0"
   }
