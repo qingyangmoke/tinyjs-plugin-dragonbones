@@ -67,10 +67,11 @@
       // armatureDisplay.animation.play("walk");
       var animationState = armatureDisplay.play('walk');
 
+      // 改变动画速度 速度慢x1
+      armatureDisplay.animation.timeScale = .5;
+
       container.addChild(armatureDisplay);
     }
-
-
     Tiny.Loader
       .add("dragonBonesData", "./resource/Dragon/Dragon_ske.json")
       .add("textureDataA", "./resource/Dragon/Dragon_tex.json")

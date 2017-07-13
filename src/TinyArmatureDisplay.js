@@ -213,7 +213,7 @@ export default class TinyArmatureDisplay extends Tiny.Container {
    * @version DragonBones 3.0
    */
   play(animationName = null, playTimes = -1) {
-    this.animation.play(animationName, playTimes);
+    return this.animation.play(animationName, playTimes);
   }
 
   /**

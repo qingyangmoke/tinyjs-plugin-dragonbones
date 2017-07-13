@@ -11,7 +11,7 @@ const factory = TinyFactory.factory;
  * @param {Tiny.BaseTexture} texture
  */
 export function addDragonBonesData(dragonBonesData) {
-  factory.parseDragonBonesData(dragonBonesData);
+  return factory.parseDragonBonesData(dragonBonesData);
 }
 /**
  *
@@ -20,7 +20,7 @@ export function addDragonBonesData(dragonBonesData) {
  * @param {Tiny.BaseTexture} texture
  */
 export function addTextureAtlasData(textureAtlasData, texture) {
-  factory.parseTextureAtlasData(textureAtlasData, texture);
+  return factory.parseTextureAtlasData(textureAtlasData, texture);
 }
 
 /**

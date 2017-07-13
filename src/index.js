@@ -1,5 +1,5 @@
 import { default as dragonBones } from './dragonBones';
-const { BaseObject, BaseFactory, WorldClock, Armature } = dragonBones;
+const { BaseObject, BaseFactory, WorldClock, Armature, Animation, AnimationState, Bone } = dragonBones;
 
 import { default as TinyArmatureDisplay } from './TinyArmatureDisplay';
 import { default as TinyTextureAtlasData } from './TinyTextureAtlasData';
@@ -26,8 +26,11 @@ export {
   addTextureAtlasData,
   buildArmatureDisplay,
 
+  Bone,
   BaseObject,
   BaseFactory,
   WorldClock,
   Armature,
+  Animation,
+  AnimationState,
 };

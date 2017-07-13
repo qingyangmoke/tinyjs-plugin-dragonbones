@@ -60,7 +60,7 @@
 
       armatureDisplay = dragonBones.buildArmatureDisplay('Dragon');
       armatureDisplay.x = app.renderer.width * 0.5;
-      armatureDisplay.y = app.renderer.height * 0.5 - 50;
+      armatureDisplay.y = app.renderer.height * 0.5 + 150;
       armatureDisplay.scale.set(-0.3, 0.3);
 
       // //DragonBones Pro 默认生成四个动作 fall、jump、stand、walk
@@ -70,13 +70,32 @@
       container.addChild(armatureDisplay);
     }
 
+    var armatureDisplay2;
+    function initDragon2() {
+      dragonBones.addDragonBonesData(resources["dragonBonesData2"].data);
+      dragonBones.addTextureAtlasData(resources["textureDataA2"].data, resources["textureA2"].texture);
+
+      armatureDisplay2 = dragonBones.buildArmatureDisplay('DragonBoy');
+
+      armatureDisplay2.x = app.renderer.width * 0.5;
+      armatureDisplay2.y = armatureDisplay2.height / 2 + 150;
+
+      // 播放指定动画 动画的名字 在DragonBones Pro中定义
+      animationState2 = armatureDisplay2.play('walk');
+
+      container.addChild(armatureDisplay2);
+    }
 
     Tiny.Loader
       .add("dragonBonesData", "./resource/Dragon/Dragon_ske.json")
       .add("textureDataA", "./resource/Dragon/Dragon_tex.json")
       .add("textureA", "./resource/Dragon/Dragon_tex.png")
+      .add("dragonBonesData2", "./resource/DragonBoy/DragonBoy.json")
+      .add("textureDataA2", "./resource/DragonBoy/DragonBoy_texture_1.json")
+      .add("textureA2", "./resource/DragonBoy/DragonBoy_texture_1.png")
       .load(function () {
         initDragon1();
+        initDragon2();
       });
   </script>
 </body>

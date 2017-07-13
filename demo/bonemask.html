@@ -67,9 +67,12 @@
       // armatureDisplay.animation.play("walk");
       var animationState = armatureDisplay.play('walk');
 
+      // 动画遮罩  就是只将动画的一部分呈现出来，例如下面的代码，将只播放head和body两个骨头的跑步动画，其他骨头将维持原姿势不动。
+      animationState.addBoneMask("head");
+      // animationState.addBoneMask("body");
+
       container.addChild(armatureDisplay);
     }
-
 
     Tiny.Loader
       .add("dragonBonesData", "./resource/Dragon/Dragon_ske.json")

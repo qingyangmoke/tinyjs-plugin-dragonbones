@@ -1,7 +1,7 @@
 /*!
  * tinyjs-plugin-dragonbones
- * Description: 骨骼动画
- * Author: fusheng.sfs
+ * Description: Tiny 骨骼动画
+ * Author: 采东
  * Version: v0.0.1
  */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -72,7 +72,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.Armature = exports.WorldClock = exports.BaseFactory = exports.BaseObject = exports.buildArmatureDisplay = exports.addTextureAtlasData = exports.addDragonBonesData = exports.TinyFactory = exports.BoundingBoxType = exports.BlendMode = exports.DisplayType = exports.TinySlot = exports.TinyTextureAtlasData = exports.TinyTextureData = exports.TinyArmatureDisplay = undefined;
+	exports.AnimationState = exports.Animation = exports.Armature = exports.WorldClock = exports.BaseFactory = exports.BaseObject = exports.Bone = exports.buildArmatureDisplay = exports.addTextureAtlasData = exports.addDragonBonesData = exports.TinyFactory = exports.BoundingBoxType = exports.BlendMode = exports.DisplayType = exports.TinySlot = exports.TinyTextureAtlasData = exports.TinyTextureData = exports.TinyArmatureDisplay = undefined;
 
 	var _dragonBones = __webpack_require__(2);
 
@@ -117,7 +117,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	var BaseObject = _dragonBones2.default.BaseObject,
 	    BaseFactory = _dragonBones2.default.BaseFactory,
 	    WorldClock = _dragonBones2.default.WorldClock,
-	    Armature = _dragonBones2.default.Armature;
+	    Armature = _dragonBones2.default.Armature,
+	    Animation = _dragonBones2.default.Animation,
+	    AnimationState = _dragonBones2.default.AnimationState,
+	    Bone = _dragonBones2.default.Bone;
 	exports.TinyArmatureDisplay = _TinyArmatureDisplay2.default;
 	exports.TinyTextureData = _TinyTextureData2.default;
 	exports.TinyTextureAtlasData = _TinyTextureAtlasData2.default;
@@ -129,10 +132,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.addDragonBonesData = _GloabalMethods.addDragonBonesData;
 	exports.addTextureAtlasData = _GloabalMethods.addTextureAtlasData;
 	exports.buildArmatureDisplay = _GloabalMethods.buildArmatureDisplay;
+	exports.Bone = Bone;
 	exports.BaseObject = BaseObject;
 	exports.BaseFactory = BaseFactory;
 	exports.WorldClock = WorldClock;
 	exports.Armature = Armature;
+	exports.Animation = Animation;
+	exports.AnimationState = AnimationState;
 
 /***/ }),
 /* 2 */
@@ -10110,7 +10116,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var animationName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
 	      var playTimes = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : -1;
 
-	      this.animation.play(animationName, playTimes);
+	      return this.animation.play(animationName, playTimes);
 	    }
 
 	    /**
@@ -11738,7 +11744,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * 增加一些静态方法 简化操作
 	 */
 	function addDragonBonesData(dragonBonesData) {
-	  factory.parseDragonBonesData(dragonBonesData);
+	  return factory.parseDragonBonesData(dragonBonesData);
 	}
 	/**
 	 *
@@ -11747,7 +11753,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @param {Tiny.BaseTexture} texture
 	 */
 	function addTextureAtlasData(textureAtlasData, texture) {
-	  factory.parseTextureAtlasData(textureAtlasData, texture);
+	  return factory.parseTextureAtlasData(textureAtlasData, texture);
 	}
 
 	/**
