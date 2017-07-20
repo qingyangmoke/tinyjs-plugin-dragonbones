@@ -20,84 +20,84 @@
 
 <body>
 
-  <script>
-    var config = {
-      showFPS: true, // 显示帧频
-      dpi: 1, // 分辨率
-      renderOptions: {
-        backgroundColor: 0x2a3145 // 画布背景色
-      }
-    };
-
-    var app = new Tiny.Application(config);
-
-    function setTitle(title, container) {
-      var title = new Tiny.Text(title, {
-        fontSize: '18px',
-        fill: 'white',
-      });
-
-      title.position.set(Tiny.WIN_SIZE.width / 2, 30);
-      title.anchor.set(0.5, 0);
-      container.addChild(title);
+<script>
+  var config = {
+    showFPS: true, // 显示帧频
+    dpi: 1, // 分辨率
+    renderOptions: {
+      backgroundColor: 0x2a3145 // 画布背景色
     }
+  };
 
-    var container = new Tiny.Container();
+  var app = new Tiny.Application(config);
 
-    setTitle('Tiny骨骼动画演示-多人物动画', container);
+  function setTitle(title, container) {
+    var title = new Tiny.Text(title, {
+      fontSize: '18px',
+      fill: 'white',
+    });
 
-    app.run(container);
+    title.position.set(Tiny.WIN_SIZE.width / 2, 30);
+    title.anchor.set(0.5, 0);
+    container.addChild(title);
+  }
 
-    //设置别名
-    var dragonBones = Tiny.DragonBones;
-    var resources = Tiny.Loader.resources;
+  var container = new Tiny.Container();
 
-    var armatureDisplay;
+  setTitle('Tiny骨骼动画演示-多人物动画', container);
 
-    function initDragon1() {
-      dragonBones.addDragonBonesData(resources["dragonBonesData"].data);
-      dragonBones.addTextureAtlasData(resources["textureDataA"].data, resources["textureA"].texture);
+  app.run(container);
 
-      armatureDisplay = dragonBones.buildArmatureDisplay('Dragon');
-      armatureDisplay.x = app.renderer.width * 0.5;
-      armatureDisplay.y = app.renderer.height * 0.5 + 150;
-      armatureDisplay.scale.set(-0.3, 0.3);
+  //设置别名
+  var dragonBones = Tiny.DragonBones;
+  var resources = Tiny.Loader.resources;
 
-      // //DragonBones Pro 默认生成四个动作 fall、jump、stand、walk
-      // armatureDisplay.animation.play("walk");
-      var animationState = armatureDisplay.play('walk');
+  var armatureDisplay;
 
-      container.addChild(armatureDisplay);
-    }
+  function initDragon1() {
+    dragonBones.addDragonBonesData(resources["dragonBonesData"].data);
+    dragonBones.addTextureAtlasData(resources["textureDataA"].data, resources["textureA"].texture);
 
-    var armatureDisplay2;
-    function initDragon2() {
-      dragonBones.addDragonBonesData(resources["dragonBonesData2"].data);
-      dragonBones.addTextureAtlasData(resources["textureDataA2"].data, resources["textureA2"].texture);
+    armatureDisplay = dragonBones.buildArmatureDisplay('Dragon');
+    armatureDisplay.x = app.renderer.width * 0.5;
+    armatureDisplay.y = app.renderer.height * 0.5 + 150;
+    armatureDisplay.scale.set(-0.3, 0.3);
 
-      armatureDisplay2 = dragonBones.buildArmatureDisplay('DragonBoy');
+    // //DragonBones Pro 默认生成四个动作 fall、jump、stand、walk
+    // armatureDisplay.animation.play("walk");
+    var animationState = armatureDisplay.play('walk');
 
-      armatureDisplay2.x = app.renderer.width * 0.5;
-      armatureDisplay2.y = armatureDisplay2.height / 2 + 150;
+    container.addChild(armatureDisplay);
+  }
 
-      // 播放指定动画 动画的名字 在DragonBones Pro中定义
-      animationState2 = armatureDisplay2.play('walk');
+  var armatureDisplay2;
+  function initDragon2() {
+    dragonBones.addDragonBonesData(resources["dragonBonesData2"].data);
+    dragonBones.addTextureAtlasData(resources["textureDataA2"].data, resources["textureA2"].texture);
 
-      container.addChild(armatureDisplay2);
-    }
+    armatureDisplay2 = dragonBones.buildArmatureDisplay('DragonBoy');
 
-    Tiny.Loader
-      .add("dragonBonesData", "./resource/Dragon/Dragon_ske.json")
-      .add("textureDataA", "./resource/Dragon/Dragon_tex.json")
-      .add("textureA", "./resource/Dragon/Dragon_tex.png")
-      .add("dragonBonesData2", "./resource/DragonBoy/DragonBoy.json")
-      .add("textureDataA2", "./resource/DragonBoy/DragonBoy_texture_1.json")
-      .add("textureA2", "./resource/DragonBoy/DragonBoy_texture_1.png")
-      .load(function () {
-        initDragon1();
-        initDragon2();
-      });
-  </script>
+    armatureDisplay2.x = app.renderer.width * 0.5;
+    armatureDisplay2.y = armatureDisplay2.height / 2 + 150;
+
+    // 播放指定动画 动画的名字 在DragonBones Pro中定义
+    animationState2 = armatureDisplay2.play('walk');
+
+    container.addChild(armatureDisplay2);
+  }
+
+  Tiny.Loader
+    .add("dragonBonesData", "./resource/Dragon/Dragon_ske.json")
+    .add("textureDataA", "./resource/Dragon/Dragon_tex.json")
+    .add("textureA", "./resource/Dragon/Dragon_tex.png")
+    .add("dragonBonesData2", "./resource/DragonBoy/DragonBoy.json")
+    .add("textureDataA2", "./resource/DragonBoy/DragonBoy_texture_1.json")
+    .add("textureA2", "./resource/DragonBoy/DragonBoy_texture_1.png")
+    .load(function () {
+      initDragon1();
+      initDragon2();
+    });
+</script>
 </body>
 
 </html>

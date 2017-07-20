@@ -1,29 +1,33 @@
-import { default as dragonBones } from './dragonBones';
-import { default as TinyTextureData } from './TinyTextureData';
-const { BaseObject, TextureAtlasData } = dragonBones;
+import {default as dragonBones} from '../libs/dragonBones';
+import {default as TinyTextureData} from './TinyTextureData';
+const {BaseObject, TextureAtlasData} = dragonBones;
 /**
  * @language zh_CN
  * Tiny 贴图集数据。
+ *
+ * @class TinyTextureAtlasData
+ * @memberof Tiny.DragonBones
  * @version DragonBones 3.0
  */
-export default class TinyTextureAtlasData extends TextureAtlasData {
+class TinyTextureAtlasData extends TextureAtlasData {
   /**
    * @private
    */
   static toString() {
     return '[class TinyTextureAtlasData]';
   }
+
   /**
    * @private
    */
   constructor() {
     super();
     /**
-   * @language zh_CN
-   * Tiny 贴图。
-   * {Tiny.BaseTexture}
-   * @version DragonBones 3.0
-   */
+     * @language zh_CN
+     * Tiny 贴图。
+     * {Tiny.BaseTexture}
+     * @version DragonBones 3.0
+     */
     this.texture = null;
   }
 
@@ -48,3 +52,5 @@ export default class TinyTextureAtlasData extends TextureAtlasData {
     return BaseObject.borrowObject(TinyTextureData);
   }
 }
+
+export default TinyTextureAtlasData;

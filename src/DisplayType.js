@@ -1,4 +1,3 @@
-
 const DisplayType = {
   None: -1,
   Image: 0,

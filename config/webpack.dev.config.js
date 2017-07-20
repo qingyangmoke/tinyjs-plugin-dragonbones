@@ -1,7 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
 const pkg = require('../package.json');
-const merge = require('webpack-merge');
 
 const banner = `${pkg.name}
 Description: ${pkg.description}
@@ -18,7 +17,6 @@ const config = {
     filename: 'index.debug.js',
     libraryTarget: 'umd',
     library: ['Tiny', '[name]'],
-    // library: ['dragonBones'],
   },
   plugins: [
     new webpack.BannerPlugin(banner),

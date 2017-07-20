@@ -1,10 +1,9 @@
-import { default as TinyFactory } from './TinyFactory';
-import { default as BoundingBoxType } from './BoundingBoxType';
+import {default as BoundingBoxType} from './BoundingBoxType';
 
 /**
  * @inheritDoc
  */
-export default class TinyArmatureDisplay extends Tiny.Container {
+class TinyArmatureDisplay extends Tiny.Container {
   /**
    * @internal
    * @private
@@ -12,13 +11,9 @@ export default class TinyArmatureDisplay extends Tiny.Container {
   constructor() {
     super();
     this._armature = null;
-    /**
-     * {Tiny.Sprite}
-     * @internal
-     * @private
-     */
     this._debugDrawer = null;
   }
+
   /**
    * @private
    */
@@ -32,6 +27,7 @@ export default class TinyArmatureDisplay extends Tiny.Container {
 
     this.destroy();
   }
+
   /**
    * @private
    * @param {EventStringType} type
@@ -40,6 +36,7 @@ export default class TinyArmatureDisplay extends Tiny.Container {
   _dispatchEvent(type, eventObject) {
     this.emit(type, eventObject);
   }
+
   /**
    * @private
    * @param {boolean} isEnabled -
@@ -150,7 +147,7 @@ export default class TinyArmatureDisplay extends Tiny.Container {
   /**
    *
    * @param {EventStringType} type
-   * @param {(event: EventObject) => void} listener
+   * @param {EventObject} listener
    * @param {any} target
    */
   addEvent(type, listener, target) {
@@ -160,7 +157,7 @@ export default class TinyArmatureDisplay extends Tiny.Container {
   /**
    *
    * @param {EventStringType} type
-   * @param {(event: EventObject) => void} listener
+   * @param {EventObject} listener
    * @param {any} target
    */
   removeEvent(type, listener, target) {
@@ -232,3 +229,5 @@ export default class TinyArmatureDisplay extends Tiny.Container {
   //   }
   // }
 }
+
+export default TinyArmatureDisplay;

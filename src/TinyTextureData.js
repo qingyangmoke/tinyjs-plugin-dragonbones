@@ -1,12 +1,14 @@
-import { default as dragonBones } from './dragonBones';
-const { TextureData } = dragonBones;
+import {default as dragonBones} from '../libs/dragonBones';
+const {TextureData} = dragonBones;
+
 /**
  * @private
  */
-export default class TinyTextureData extends TextureData {
+class TinyTextureData extends TextureData {
   static toString() {
     return '[class TinyTextureData]';
   }
+
   constructor() {
     super();
     /**
@@ -25,3 +27,5 @@ export default class TinyTextureData extends TextureData {
     this.texture = null;
   }
 }
+
+export default TinyTextureData;

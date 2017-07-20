@@ -1,7 +1,7 @@
 /*!
  * tinyjs-plugin-dragonbones
  * Description: Tiny 骨骼动画
- * Author: 采东
+ * Author: 采东 <qingyangmoke@qq.com>
  * Version: v0.0.1
  */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -17,41 +17,41 @@
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
-
+/******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
-
+/******/
 /******/ 		// Check if module is in cache
 /******/ 		if(installedModules[moduleId])
 /******/ 			return installedModules[moduleId].exports;
-
+/******/
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = installedModules[moduleId] = {
 /******/ 			exports: {},
 /******/ 			id: moduleId,
 /******/ 			loaded: false
 /******/ 		};
-
+/******/
 /******/ 		// Execute the module function
 /******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-
+/******/
 /******/ 		// Flag the module as loaded
 /******/ 		module.loaded = true;
-
+/******/
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-
-
+/******/
+/******/
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = modules;
-
+/******/
 /******/ 	// expose the module cache
 /******/ 	__webpack_require__.c = installedModules;
-
+/******/
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "/dist";
-
+/******/
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(0);
 /******/ })
@@ -68,52 +68,52 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
-
+	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 	exports.AnimationState = exports.Animation = exports.Armature = exports.WorldClock = exports.BaseFactory = exports.BaseObject = exports.Bone = exports.buildArmatureDisplay = exports.addTextureAtlasData = exports.addDragonBonesData = exports.TinyFactory = exports.BoundingBoxType = exports.BlendMode = exports.DisplayType = exports.TinySlot = exports.TinyTextureAtlasData = exports.TinyTextureData = exports.TinyArmatureDisplay = undefined;
-
+	
 	var _dragonBones = __webpack_require__(2);
-
+	
 	var _dragonBones2 = _interopRequireDefault(_dragonBones);
-
+	
 	var _TinyArmatureDisplay = __webpack_require__(3);
-
+	
 	var _TinyArmatureDisplay2 = _interopRequireDefault(_TinyArmatureDisplay);
-
+	
 	var _TinyTextureAtlasData = __webpack_require__(5);
-
+	
 	var _TinyTextureAtlasData2 = _interopRequireDefault(_TinyTextureAtlasData);
-
+	
 	var _TinyTextureData = __webpack_require__(6);
-
+	
 	var _TinyTextureData2 = _interopRequireDefault(_TinyTextureData);
-
+	
 	var _TinySlot = __webpack_require__(7);
-
+	
 	var _TinySlot2 = _interopRequireDefault(_TinySlot);
-
+	
 	var _DisplayType = __webpack_require__(9);
-
+	
 	var _DisplayType2 = _interopRequireDefault(_DisplayType);
-
+	
 	var _BlendMode = __webpack_require__(8);
-
+	
 	var _BlendMode2 = _interopRequireDefault(_BlendMode);
-
+	
 	var _BoundingBoxType = __webpack_require__(12);
-
+	
 	var _BoundingBoxType2 = _interopRequireDefault(_BoundingBoxType);
-
+	
 	var _TinyFactory = __webpack_require__(4);
-
+	
 	var _TinyFactory2 = _interopRequireDefault(_TinyFactory);
-
+	
 	var _GloabalMethods = __webpack_require__(13);
-
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
+	
 	var BaseObject = _dragonBones2.default.BaseObject,
 	    BaseFactory = _dragonBones2.default.BaseFactory,
 	    WorldClock = _dragonBones2.default.WorldClock,
@@ -145,13 +145,13 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports) {
 
 	"use strict";
-
+	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-
+	
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
+	
 	var __extends = undefined && undefined.__extends || function () {
 	  var extendStatics = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function (d, b) {
 	    d.__proto__ = b;
@@ -9865,7 +9865,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  BaseFactory._defaultParser = null;
 	  dragonBones.BaseFactory = BaseFactory;
 	})(dragonBones || (dragonBones = {}));
-
+	
 	// 支持模块import
 	exports.default = dragonBones;
 
@@ -9874,44 +9874,44 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
-
+	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-
+	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
+	
 	var _TinyFactory = __webpack_require__(4);
-
+	
 	var _TinyFactory2 = _interopRequireDefault(_TinyFactory);
-
+	
 	var _BoundingBoxType = __webpack_require__(12);
-
+	
 	var _BoundingBoxType2 = _interopRequireDefault(_BoundingBoxType);
-
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
+	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
+	
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
+	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
+	
 	/**
 	 * @inheritDoc
 	 */
 	var TinyArmatureDisplay = function (_Tiny$Container) {
 	  _inherits(TinyArmatureDisplay, _Tiny$Container);
-
+	
 	  /**
 	   * @internal
 	   * @private
 	   */
 	  function TinyArmatureDisplay() {
 	    _classCallCheck(this, TinyArmatureDisplay);
-
+	
 	    var _this = _possibleConstructorReturn(this, (TinyArmatureDisplay.__proto__ || Object.getPrototypeOf(TinyArmatureDisplay)).call(this));
-
+	
 	    _this._armature = null;
 	    /**
 	     * {Tiny.Sprite}
@@ -9924,18 +9924,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @private
 	   */
-
-
+	
+	
 	  _createClass(TinyArmatureDisplay, [{
 	    key: '_onClear',
 	    value: function _onClear() {
 	      if (this._debugDrawer) {
 	        this._debugDrawer.destroy(true);
 	      }
-
+	
 	      this._armature = null;
 	      this._debugDrawer = null;
-
+	
 	      this.destroy();
 	    }
 	    /**
@@ -9943,7 +9943,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * @param {EventStringType} type
 	     * @param {EventObject} eventObject
 	     */
-
+	
 	  }, {
 	    key: '_dispatchEvent',
 	    value: function _dispatchEvent(type, eventObject) {
@@ -9953,7 +9953,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * @private
 	     * @param {boolean} isEnabled -
 	     */
-
+	
 	  }, {
 	    key: '_debugDraw',
 	    value: function _debugDraw(isEnabled) {
@@ -9962,13 +9962,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var boneDrawer = new Tiny.Graphics();
 	        this._debugDrawer.addChild(boneDrawer);
 	      }
-
+	
 	      if (isEnabled) {
 	        this.addChild(this._debugDrawer);
 	        // Tiny.Graphics
 	        var _boneDrawer = this._debugDrawer.getChildAt(0);
 	        _boneDrawer.clear();
-
+	
 	        var bones = this._armature.getBones();
 	        for (var i = 0, l = bones.length; i < l; ++i) {
 	          var bone = bones[i];
@@ -9977,7 +9977,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          var startY = bone.globalTransformMatrix.ty;
 	          var endX = startX + bone.globalTransformMatrix.a * boneLength;
 	          var endY = startY + bone.globalTransformMatrix.b * boneLength;
-
+	
 	          _boneDrawer.lineStyle(2, bone.ik ? 0xFF0000 : 0x00FFFF, 0.7);
 	          _boneDrawer.moveTo(startX, startY);
 	          _boneDrawer.lineTo(endX, endY);
@@ -9986,12 +9986,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	          _boneDrawer.drawCircle(startX, startY, 3);
 	          _boneDrawer.endFill();
 	        }
-
+	
 	        var slots = this._armature.getSlots();
 	        for (var _i = 0, _l = slots.length; _i < _l; ++_i) {
 	          var slot = slots[_i];
 	          var boundingBoxData = slot.boundingBoxData;
-
+	
 	          if (boundingBoxData) {
 	            //as Tiny.Graphics
 	            var child = this._debugDrawer.getChildByName(slot.name);
@@ -10000,10 +10000,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	              child.name = slot.name;
 	              this._debugDrawer.addChild(child);
 	            }
-
+	
 	            child.clear();
 	            child.beginFill(0xFF00FF, 0.3);
-
+	
 	            switch (boundingBoxData.type) {
 	              case _BoundingBoxType2.default.Rectangle:
 	                child.drawRect(-boundingBoxData.width * 0.5, -boundingBoxData.height * 0.5, boundingBoxData.width, boundingBoxData.height);
@@ -10021,16 +10021,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	                  }
 	                }
 	                break;
-
+	
 	              default:
 	                break;
 	            }
-
+	
 	            child.endFill();
-
+	
 	            slot._updateTransformAndMatrix();
 	            slot.updateGlobalTransform();
-
+	
 	            var transform = slot.global;
 	            child.setTransform(transform.x, transform.y, transform.scaleX, transform.scaleY, transform.skewX, 0.0, transform.skewY - transform.skewX, slot._pivotX, slot._pivotY);
 	          } else {
@@ -10044,48 +10044,48 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this.removeChild(this._debugDrawer);
 	      }
 	    }
-
+	
 	    /**
 	     * @inheritDoc
 	     * @param {EventStringType} type -
 	     */
-
+	
 	  }, {
 	    key: 'hasEvent',
 	    value: function hasEvent(type) {
 	      return this.listeners(type, true);
 	    }
-
+	
 	    /**
 	     *
 	     * @param {EventStringType} type
 	     * @param {(event: EventObject) => void} listener
 	     * @param {any} target
 	     */
-
+	
 	  }, {
 	    key: 'addEvent',
 	    value: function addEvent(type, listener, target) {
 	      this.addListener(type, listener, target);
 	    }
-
+	
 	    /**
 	     *
 	     * @param {EventStringType} type
 	     * @param {(event: EventObject) => void} listener
 	     * @param {any} target
 	     */
-
+	
 	  }, {
 	    key: 'removeEvent',
 	    value: function removeEvent(type, listener, target) {
 	      this.removeListener(type, listener, target);
 	    }
-
+	
 	    /**
 	     * @inheritDoc
 	     */
-
+	
 	  }, {
 	    key: 'dispose',
 	    value: function dispose(disposeProxy) {
@@ -10094,16 +10094,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this._armature = null;
 	      }
 	    }
-
+	
 	    /**
 	     * @inheritDoc
 	     * @return {dragonBones.Armature}
 	     */
-
+	
 	  }, {
 	    key: 'play',
-
-
+	
+	
 	    /**
 	     * 增加播放动画快捷方式 参考dragonBones.Animation
 	     * @param animationName 动画数据名称，如果未设置，则播放默认动画，或将暂停状态切换为播放状态，或重新播放上一个正在播放的动画。
@@ -10115,10 +10115,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: function play() {
 	      var animationName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
 	      var playTimes = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : -1;
-
+	
 	      return this.animation.play(animationName, playTimes);
 	    }
-
+	
 	    /**
 	     * @deprecated
 	     * @param {boolean} on
@@ -10134,28 +10134,28 @@ return /******/ (function(modules) { // webpackBootstrap
 	    //     this._armature.clock = null;
 	    //   }
 	    // }
-
+	
 	  }, {
 	    key: 'armature',
 	    get: function get() {
 	      return this._armature;
 	    }
-
+	
 	    /**
 	     * @inheritDoc
 	     * @return {dragonBones.Animation}
 	     */
-
+	
 	  }, {
 	    key: 'animation',
 	    get: function get() {
 	      return this._armature.animation;
 	    }
-
+	
 	    /**
 	     * 增加调试模式快捷方式
 	     */
-
+	
 	  }, {
 	    key: 'debugDraw',
 	    get: function get() {
@@ -10165,10 +10165,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	      this.armature.debugDraw = value;
 	    }
 	  }]);
-
+	
 	  return TinyArmatureDisplay;
 	}(Tiny.Container);
-
+	
 	exports.default = TinyArmatureDisplay;
 
 /***/ }),
@@ -10176,45 +10176,45 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
-
+	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-
+	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
+	
 	var _dragonBones = __webpack_require__(2);
-
+	
 	var _dragonBones2 = _interopRequireDefault(_dragonBones);
-
+	
 	var _TinyArmatureDisplay = __webpack_require__(3);
-
+	
 	var _TinyArmatureDisplay2 = _interopRequireDefault(_TinyArmatureDisplay);
-
+	
 	var _TinyTextureAtlasData = __webpack_require__(5);
-
+	
 	var _TinyTextureAtlasData2 = _interopRequireDefault(_TinyTextureAtlasData);
-
+	
 	var _TinySlot = __webpack_require__(7);
-
+	
 	var _TinySlot2 = _interopRequireDefault(_TinySlot);
-
+	
 	var _DisplayType = __webpack_require__(9);
-
+	
 	var _DisplayType2 = _interopRequireDefault(_DisplayType);
-
+	
 	var _Mesh = __webpack_require__(10);
-
+	
 	var _Mesh2 = _interopRequireDefault(_Mesh);
-
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
+	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
+	
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
+	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
+	
 	var BaseObject = _dragonBones2.default.BaseObject,
 	    BaseFactory = _dragonBones2.default.BaseFactory,
 	    WorldClock = _dragonBones2.default.WorldClock,
@@ -10224,13 +10224,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * Tiny 工厂。
 	 * @version DragonBones 3.0
 	 */
-
+	
 	var TinyFactory = function (_BaseFactory) {
 	  _inherits(TinyFactory, _BaseFactory);
-
+	
 	  _createClass(TinyFactory, null, [{
 	    key: '_clockHandler',
-
+	
 	    /**
 	     *
 	     * @private
@@ -10240,14 +10240,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: function _clockHandler(passedTime) {
 	      TinyFactory._clock.advanceTime(-1); // passedTime !?
 	    }
-
+	
 	    /**
 	     * @language zh_CN
 	     * 一个可以直接使用的全局工厂实例。
 	     * @version DragonBones 4.7
 	     * @return {TinyFactory}
 	     */
-
+	
 	  }, {
 	    key: 'factory',
 	    get: function get() {
@@ -10256,36 +10256,36 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 	      return TinyFactory._factory;
 	    }
-
+	
 	    /**
 	     * @language zh_CN
 	     * 一个可以直接使用的全局 WorldClock 实例.
 	     * @version DragonBones 5.0
 	     * @return {dragonBones.WorldClock}
 	     */
-
+	
 	  }, {
 	    key: 'clock',
 	    get: function get() {
 	      return TinyFactory._clock;
 	    }
-
+	
 	    /**
 	     * @language zh_CN
 	     * 创建一个工厂。 (通常只需要一个全局工厂实例)
 	     * @param {DataParser} dataParser - 龙骨数据解析器，如果不设置，则使用默认解析器。
 	     * @version DragonBones 3.0
 	     */
-
+	
 	  }]);
-
+	
 	  function TinyFactory() {
 	    var dataParser = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-
+	
 	    _classCallCheck(this, TinyFactory);
-
+	
 	    var _this = _possibleConstructorReturn(this, (TinyFactory.__proto__ || Object.getPrototypeOf(TinyFactory)).call(this, dataParser));
-
+	
 	    if (!TinyFactory._eventManager) {
 	      TinyFactory._eventManager = new _TinyArmatureDisplay2.default();
 	      TinyFactory._clock = new WorldClock();
@@ -10299,8 +10299,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @param {Tiny.BaseTexture} textureAtlas
 	   * @return {TinyTextureAtlasData}
 	   */
-
-
+	
+	
 	  _createClass(TinyFactory, [{
 	    key: '_generateTextureAtlasData',
 	    value: function _generateTextureAtlasData(textureAtlasData, textureAtlas) {
@@ -10309,25 +10309,25 @@ return /******/ (function(modules) { // webpackBootstrap
 	      } else {
 	        textureAtlasData = BaseObject.borrowObject(_TinyTextureAtlasData2.default);
 	      }
-
+	
 	      return textureAtlasData;
 	    }
-
+	
 	    /**
 	     * @private
 	     * @param {BuildArmaturePackage} dataPackage -
 	     * @return {Armatures}
 	     */
-
+	
 	  }, {
 	    key: '_generateArmature',
 	    value: function _generateArmature(dataPackage) {
 	      var armature = BaseObject.borrowObject(Armature);
 	      var armatureDisplay = new _TinyArmatureDisplay2.default();
 	      armatureDisplay._armature = armature;
-
+	
 	      armature._init(dataPackage.armature, dataPackage.skin, armatureDisplay, armatureDisplay, TinyFactory._eventManager);
-
+	
 	      return armature;
 	    }
 	    /**
@@ -10338,16 +10338,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * @param {Armature} armature -
 	     * @return {Slot}
 	     */
-
+	
 	  }, {
 	    key: '_generateSlot',
 	    value: function _generateSlot(dataPackage, skinSlotData, armature) {
 	      var slotData = skinSlotData.slot;
 	      var slot = BaseObject.borrowObject(_TinySlot2.default);
 	      var displayList = [];
-
+	
 	      slot._init(skinSlotData, new Tiny.Sprite(), new _Mesh2.default(null, null, null, null, _Mesh2.default.DRAW_MODES.TRIANGLES));
-
+	
 	      for (var i = 0, l = skinSlotData.displays.length; i < l; ++i) {
 	        var displayData = skinSlotData.displays[i];
 	        switch (displayData.type) {
@@ -10355,30 +10355,30 @@ return /******/ (function(modules) { // webpackBootstrap
 	            if (!displayData.texture) {
 	              displayData.texture = this._getTextureData(dataPackage.dataName, displayData.path);
 	            }
-
+	
 	            if (dataPackage.textureAtlasName) {
 	              slot._textureDatas[i] = this._getTextureData(dataPackage.textureAtlasName, displayData.path);
 	            }
-
+	
 	            displayList[i] = slot.rawDisplay;
 	            break;
-
+	
 	          case _DisplayType2.default.Mesh:
 	            if (!displayData.texture) {
 	              displayData.texture = this._getTextureData(dataPackage.dataName, displayData.path);
 	            }
-
+	
 	            if (dataPackage.textureAtlasName) {
 	              slot._textureDatas[i] = this._getTextureData(dataPackage.textureAtlasName, displayData.path);
 	            }
-
+	
 	            if (!displayData.mesh && displayData.share) {
 	              displayData.mesh = skinSlotData.getMesh(displayData.share);
 	            }
-
+	
 	            displayList[i] = slot.meshDisplay;
 	            break;
-
+	
 	          case _DisplayType2.default.Armature:
 	            var childArmature = this.buildArmature(displayData.path, dataPackage.dataName, null, dataPackage.textureAtlasName);
 	            if (childArmature) {
@@ -10393,21 +10393,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	                  childArmature.animation.play();
 	                }
 	              }
-
+	
 	              displayData.armature = childArmature.armatureData; //
 	            }
-
+	
 	            displayList[i] = childArmature;
 	            break;
-
+	
 	          default:
 	            displayList[i] = null;
 	            break;
 	        }
 	      }
-
+	
 	      slot._setDisplayList(displayList);
-
+	
 	      return slot;
 	    }
 	    /**
@@ -10421,7 +10421,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * @see TinyArmatureDisplay
 	     * @version DragonBones 4.5
 	     */
-
+	
 	  }, {
 	    key: 'buildArmatureDisplay',
 	    value: function buildArmatureDisplay(armatureName, dragonBonesName, skinName, textureAtlasName) {
@@ -10430,10 +10430,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	        // armatureDisplay:TinyArmatureDisplay
 	        var armatureDisplay = armature.display;
 	        TinyFactory._clock.add(armature);
-
+	
 	        return armatureDisplay;
 	      }
-
+	
 	      return null;
 	    }
 	    /**
@@ -10444,7 +10444,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * @version DragonBones 3.0
 	     * @return {Tiny.Sprite}
 	     */
-
+	
 	  }, {
 	    key: 'getTextureDisplay',
 	    value: function getTextureDisplay(textureName, dragonBonesName) {
@@ -10460,36 +10460,36 @@ return /******/ (function(modules) { // webpackBootstrap
 	          originSize, textureData.rotated // as any // .d.ts bug
 	          );
 	        }
-
+	
 	        return new Tiny.Sprite(textureData.texture);
 	      }
-
+	
 	      return null;
 	    }
-
+	
 	    /**
 	     * @language zh_CN
 	     * 获取全局声音事件管理器。
 	     * @version DragonBones 4.5
 	     * @return {TinyArmatureDisplay}
 	     */
-
+	
 	  }, {
 	    key: 'soundEventManater',
 	    get: function get() {
 	      return TinyFactory._eventManager;
 	    }
 	  }]);
-
+	
 	  return TinyFactory;
 	}(BaseFactory);
-
+	
 	/**
 	  * {TinyFactory}
 	  * @private
 	  */
-
-
+	
+	
 	TinyFactory._factory = null;
 	/**
 	 * {TinyArmatureDisplay}
@@ -10501,7 +10501,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	* @private
 	*/
 	TinyFactory._clock = null;
-
+	
 	exports.default = TinyFactory;
 
 /***/ }),
@@ -10509,31 +10509,31 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
-
+	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-
+	
 	var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
-
+	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
+	
 	var _dragonBones = __webpack_require__(2);
-
+	
 	var _dragonBones2 = _interopRequireDefault(_dragonBones);
-
+	
 	var _TinyTextureData = __webpack_require__(6);
-
+	
 	var _TinyTextureData2 = _interopRequireDefault(_TinyTextureData);
-
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
+	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
+	
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
+	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
+	
 	var BaseObject = _dragonBones2.default.BaseObject,
 	    TextureAtlasData = _dragonBones2.default.TextureAtlasData;
 	/**
@@ -10541,13 +10541,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * Tiny 贴图集数据。
 	 * @version DragonBones 3.0
 	 */
-
+	
 	var TinyTextureAtlasData = function (_TextureAtlasData) {
 	  _inherits(TinyTextureAtlasData, _TextureAtlasData);
-
+	
 	  _createClass(TinyTextureAtlasData, null, [{
 	    key: 'toString',
-
+	
 	    /**
 	     * @private
 	     */
@@ -10557,12 +10557,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	    /**
 	     * @private
 	     */
-
+	
 	  }]);
-
+	
 	  function TinyTextureAtlasData() {
 	    _classCallCheck(this, TinyTextureAtlasData);
-
+	
 	    /**
 	    * @language zh_CN
 	    * Tiny 贴图。
@@ -10570,43 +10570,43 @@ return /******/ (function(modules) { // webpackBootstrap
 	    * @version DragonBones 3.0
 	    */
 	    var _this = _possibleConstructorReturn(this, (TinyTextureAtlasData.__proto__ || Object.getPrototypeOf(TinyTextureAtlasData)).call(this));
-
+	
 	    _this.texture = null;
 	    return _this;
 	  }
-
+	
 	  /**
 	   * @private
 	   */
-
-
+	
+	
 	  _createClass(TinyTextureAtlasData, [{
 	    key: '_onClear',
 	    value: function _onClear() {
 	      _get(TinyTextureAtlasData.prototype.__proto__ || Object.getPrototypeOf(TinyTextureAtlasData.prototype), '_onClear', this).call(this);
-
+	
 	      if (this.texture) {
 	        //this.texture.dispose();
 	      }
-
+	
 	      this.texture = null;
 	    }
-
+	
 	    /**
 	     * @private
 	     * @return {TextureData}
 	     */
-
+	
 	  }, {
 	    key: 'generateTexture',
 	    value: function generateTexture() {
 	      return BaseObject.borrowObject(_TinyTextureData2.default);
 	    }
 	  }]);
-
+	
 	  return TinyTextureAtlasData;
 	}(TextureAtlasData);
-
+	
 	exports.default = TinyTextureAtlasData;
 
 /***/ }),
@@ -10614,70 +10614,70 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
-
+	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-
+	
 	var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
-
+	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
+	
 	var _dragonBones = __webpack_require__(2);
-
+	
 	var _dragonBones2 = _interopRequireDefault(_dragonBones);
-
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
+	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
+	
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
+	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
+	
 	var TextureData = _dragonBones2.default.TextureData;
 	/**
 	 * @private
 	 */
-
+	
 	var TinyTextureData = function (_TextureData) {
 	  _inherits(TinyTextureData, _TextureData);
-
+	
 	  _createClass(TinyTextureData, null, [{
 	    key: 'toString',
 	    value: function toString() {
 	      return '[class TinyTextureData]';
 	    }
 	  }]);
-
+	
 	  function TinyTextureData() {
 	    _classCallCheck(this, TinyTextureData);
-
+	
 	    /**
 	     * {Tiny.Texture}
 	     */
 	    var _this = _possibleConstructorReturn(this, (TinyTextureData.__proto__ || Object.getPrototypeOf(TinyTextureData)).call(this));
-
+	
 	    _this.texture = null;
 	    return _this;
 	  }
-
+	
 	  _createClass(TinyTextureData, [{
 	    key: '_onClear',
 	    value: function _onClear() {
 	      _get(TinyTextureData.prototype.__proto__ || Object.getPrototypeOf(TinyTextureData.prototype), '_onClear', this).call(this);
-
+	
 	      if (this.texture) {
 	        this.texture.destroy();
 	      }
-
+	
 	      this.texture = null;
 	    }
 	  }]);
-
+	
 	  return TinyTextureData;
 	}(TextureData);
-
+	
 	exports.default = TinyTextureData;
 
 /***/ }),
@@ -10685,35 +10685,35 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
-
+	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-
+	
 	var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
-
+	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
+	
 	var _dragonBones = __webpack_require__(2);
-
+	
 	var _dragonBones2 = _interopRequireDefault(_dragonBones);
-
+	
 	var _BlendMode = __webpack_require__(8);
-
+	
 	var _BlendMode2 = _interopRequireDefault(_BlendMode);
-
+	
 	var _TinyTextureAtlasData = __webpack_require__(5);
-
+	
 	var _TinyTextureAtlasData2 = _interopRequireDefault(_TinyTextureAtlasData);
-
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
+	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
+	
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
+	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
+	
 	var BaseObject = _dragonBones2.default.BaseObject,
 	    Slot = _dragonBones2.default.Slot;
 	/**
@@ -10721,99 +10721,99 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * Tiny 插槽。
 	 * @version DragonBones 3.0
 	 */
-
+	
 	var TinySlot = function (_Slot) {
 	  _inherits(TinySlot, _Slot);
-
+	
 	  _createClass(TinySlot, null, [{
 	    key: 'toString',
-
+	
 	    /**
 	     * @private
 	     */
 	    value: function toString() {
 	      return '[class TinySlot]';
 	    }
-
+	
 	    /**
 	     * @internal
 	     * @private
 	     */
-
+	
 	  }]);
-
+	
 	  function TinySlot() {
 	    _classCallCheck(this, TinySlot);
-
+	
 	    /**
 	     * { Tiny.DisplayObject }
 	     * @private
 	     */
 	    var _this = _possibleConstructorReturn(this, (TinySlot.__proto__ || Object.getPrototypeOf(TinySlot)).call(this));
-
+	
 	    _this._renderDisplay = null;
 	    _this._updateTransform = Tiny.VERSION[0] === '3' ? _this._updateTransformV3 : _this._updateTransformV4;
 	    return _this;
 	  }
-
+	
 	  /**
 	   * @private
 	   */
-
-
+	
+	
 	  _createClass(TinySlot, [{
 	    key: '_onClear',
 	    value: function _onClear() {
 	      _get(TinySlot.prototype.__proto__ || Object.getPrototypeOf(TinySlot.prototype), '_onClear', this).call(this);
 	      this._renderDisplay = null;
 	    }
-
+	
 	    /**
 	     * @private
 	     */
-
+	
 	  }, {
 	    key: '_initDisplay',
 	    value: function _initDisplay(value) {}
-
+	
 	    /**
 	     * @private
 	     * @param {Tiny.DisplayObject} value
 	     */
-
+	
 	  }, {
 	    key: '_disposeDisplay',
 	    value: function _disposeDisplay(value) {
 	      // Tiny.DisplayObject
 	      value.destroy();
 	    }
-
+	
 	    /**
 	     * @private
 	     */
-
+	
 	  }, {
 	    key: '_onUpdateDisplay',
 	    value: function _onUpdateDisplay() {
 	      this._renderDisplay = this._display ? this._display : this._rawDisplay; // as Tiny.DisplayObject;
 	    }
-
+	
 	    /**
 	     * @private
 	     */
-
+	
 	  }, {
 	    key: '_addDisplay',
 	    value: function _addDisplay() {
 	      var container = this._armature.display; //as TinyArmatureDisplay;
 	      container.addChild(this._renderDisplay);
 	    }
-
+	
 	    /**
 	     * @private
 	     * @param {any} value
 	     */
-
+	
 	  }, {
 	    key: '_replaceDisplay',
 	    value: function _replaceDisplay(value) {
@@ -10823,21 +10823,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	      container.swapChildren(this._renderDisplay, prevDisplay);
 	      container.removeChild(prevDisplay);
 	    }
-
+	
 	    /**
 	     * @private
 	     */
-
+	
 	  }, {
 	    key: '_removeDisplay',
 	    value: function _removeDisplay() {
 	      this._renderDisplay.parent.removeChild(this._renderDisplay);
 	    }
-
+	
 	    /**
 	     * @private
 	     */
-
+	
 	  }, {
 	    key: '_updateZOrder',
 	    value: function _updateZOrder() {
@@ -10848,22 +10848,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 	      container.addChildAt(this._renderDisplay, this._zOrder);
 	    }
-
+	
 	    /**
 	     * @internal
 	     * @private
 	     */
-
+	
 	  }, {
 	    key: '_updateVisible',
 	    value: function _updateVisible() {
 	      this._renderDisplay.visible = this._parent.visible;
 	    }
-
+	
 	    /**
 	     * @private
 	     */
-
+	
 	  }, {
 	    key: '_updateBlendMode',
 	    value: function _updateBlendMode() {
@@ -10872,39 +10872,39 @@ return /******/ (function(modules) { // webpackBootstrap
 	          //this._renderDisplay as Tiny.Sprite
 	          this._renderDisplay.blendMode = Tiny.BLEND_MODES.NORMAL;
 	          break;
-
+	
 	        case _BlendMode2.default.Add:
 	          this._renderDisplay.blendMode = Tiny.BLEND_MODES.ADD;
 	          break;
-
+	
 	        case _BlendMode2.default.Darken:
 	          this._renderDisplay.blendMode = Tiny.BLEND_MODES.DARKEN;
 	          break;
-
+	
 	        case _BlendMode2.default.Difference:
 	          this._renderDisplay.blendMode = Tiny.BLEND_MODES.DIFFERENCE;
 	          break;
-
+	
 	        case _BlendMode2.default.HardLight:
 	          this._renderDisplay.blendMode = Tiny.BLEND_MODES.HARD_LIGHT;
 	          break;
-
+	
 	        case _BlendMode2.default.Lighten:
 	          this._renderDisplay.blendMode = Tiny.BLEND_MODES.LIGHTEN;
 	          break;
-
+	
 	        case _BlendMode2.default.Multiply:
 	          this._renderDisplay.blendMode = Tiny.BLEND_MODES.MULTIPLY;
 	          break;
-
+	
 	        case _BlendMode2.default.Overlay:
 	          this._renderDisplay.blendMode = Tiny.BLEND_MODES.OVERLAY;
 	          break;
-
+	
 	        case _BlendMode2.default.Screen:
 	          this._renderDisplay.blendMode = Tiny.BLEND_MODES.SCREEN;
 	          break;
-
+	
 	        default:
 	          break;
 	      }
@@ -10912,7 +10912,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    /**
 	     * @private
 	     */
-
+	
 	  }, {
 	    key: '_updateColor',
 	    value: function _updateColor() {
@@ -10921,16 +10921,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	    /**
 	     * @private
 	     */
-
+	
 	  }, {
 	    key: '_updateFrame',
 	    value: function _updateFrame() {
 	      var isMeshDisplay = this._meshData && this._display === this._meshDisplay;
 	      var currentTextureData = this._textureData; //as TinyTextureData;
-
+	
 	      if (this._displayIndex >= 0 && this._display && currentTextureData) {
 	        var currentTextureAtlasData = currentTextureData.parent; // as TinyTextureAtlasData;
-
+	
 	        // Update replaced texture atlas.
 	        if (this._armature.replacedTexture && this._displayData && currentTextureAtlasData === this._displayData.texture.parent) {
 	          currentTextureAtlasData = this._armature._replaceTextureAtlasData; // as TinyTextureAtlasData;
@@ -10940,10 +10940,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	            currentTextureAtlasData.texture = this._armature.replacedTexture;
 	            this._armature._replaceTextureAtlasData = currentTextureAtlasData;
 	          }
-
+	
 	          currentTextureData = currentTextureAtlasData.getTexture(currentTextureData.name); // as PixiTextureData;
 	        }
-
+	
 	        var currentTextureAtlas = currentTextureAtlasData.texture;
 	        if (currentTextureAtlas) {
 	          if (!currentTextureData.texture) {
@@ -10952,24 +10952,24 @@ return /******/ (function(modules) { // webpackBootstrap
 	            new Tiny.Rectangle(0, 0, currentTextureData.region.width, currentTextureData.region.height), currentTextureData.rotated // as any // .d.ts bug
 	            );
 	          }
-
+	
 	          if (isMeshDisplay) {
 	            // Mesh.
 	            var meshDisplay = this._renderDisplay; // as Tiny.mesh.Mesh;
 	            var textureAtlasWidth = currentTextureAtlasData.width > 0.0 ? currentTextureAtlasData.width : currentTextureAtlas.width;
 	            var textureAtlasHeight = currentTextureAtlasData.height > 0.0 ? currentTextureAtlasData.height : currentTextureAtlas.height;
-
+	
 	            meshDisplay.uvs = new Float32Array(this._meshData.uvs);
 	            meshDisplay.vertices = new Float32Array(this._meshData.vertices);
 	            meshDisplay.indices = new Uint16Array(this._meshData.vertexIndices);
-
+	
 	            for (var i = 0, l = meshDisplay.uvs.length; i < l; i += 2) {
 	              var u = meshDisplay.uvs[i];
 	              var v = meshDisplay.uvs[i + 1];
 	              meshDisplay.uvs[i] = (currentTextureData.region.x + u * currentTextureData.region.width) / textureAtlasWidth;
 	              meshDisplay.uvs[i + 1] = (currentTextureData.region.y + v * currentTextureData.region.height) / textureAtlasHeight;
 	            }
-
+	
 	            meshDisplay.texture = currentTextureData.texture;
 	            //meshDisplay.dirty = true; // Pixi 3.x
 	            meshDisplay.dirty++; // Pixi 4.x Can not support change mesh vertice count.
@@ -10978,12 +10978,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	            var normalDisplay = this._renderDisplay; // as Tiny.Sprite;
 	            normalDisplay.texture = currentTextureData.texture;
 	          }
-
+	
 	          this._updateVisible();
 	          return;
 	        }
 	      }
-
+	
 	      if (isMeshDisplay) {
 	        var _meshDisplay = this._renderDisplay; // as Tiny.mesh.Mesh;
 	        _meshDisplay.texture = null;
@@ -11001,29 +11001,29 @@ return /******/ (function(modules) { // webpackBootstrap
 	    /**
 	     * @private
 	     */
-
+	
 	  }, {
 	    key: '_updateMesh',
 	    value: function _updateMesh() {
 	      var meshDisplay = this._renderDisplay; // as Tiny.mesh.Mesh;
 	      var hasFFD = this._ffdVertices.length > 0;
-
+	
 	      if (this._meshData.skinned) {
 	        for (var i = 0, iF = 0, l = this._meshData.vertices.length; i < l; i += 2) {
 	          var iH = i / 2;
-
+	
 	          var boneIndices = this._meshData.boneIndices[iH];
 	          var boneVertices = this._meshData.boneVertices[iH];
 	          var weights = this._meshData.weights[iH];
-
+	
 	          var xG = 0.0;
 	          var yG = 0.0;
-
+	
 	          for (var iB = 0, lB = boneIndices.length; iB < lB; ++iB) {
 	            var bone = this._meshBones[boneIndices[iB]];
 	            var matrix = bone.globalTransformMatrix;
 	            var weight = weights[iB];
-
+	
 	            var xL = 0.0;
 	            var yL = 0.0;
 	            if (hasFFD) {
@@ -11033,13 +11033,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	              xL = boneVertices[iB * 2];
 	              yL = boneVertices[iB * 2 + 1];
 	            }
-
+	
 	            xG += (matrix.a * xL + matrix.c * yL + matrix.tx) * weight;
 	            yG += (matrix.b * xL + matrix.d * yL + matrix.ty) * weight;
-
+	
 	            iF += 2;
 	          }
-
+	
 	          meshDisplay.vertices[i] = xG;
 	          meshDisplay.vertices[i + 1] = yG;
 	        }
@@ -11053,23 +11053,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	      }
 	    }
-
+	
 	    /**
 	     *
 	     * @param {boolean} isSkinnedMesh
 	     */
-
+	
 	  }, {
 	    key: '_updateTransform',
 	    value: function _updateTransform(isSkinnedMesh) {
 	      throw new Error();
 	    }
-
+	
 	    /**
 	     * @private
 	     *  @param {boolean} isSkinnedMesh
 	     */
-
+	
 	  }, {
 	    key: '_updateTransformV3',
 	    value: function _updateTransformV3(isSkinnedMesh) {
@@ -11078,7 +11078,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this._renderDisplay.setTransform(0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0);
 	      } else {
 	        this.updateGlobalTransform(); // Update transform.
-
+	
 	        var x = this.globalTransformMatrix.tx - (this.globalTransformMatrix.a * this._pivotX + this.globalTransformMatrix.c * this._pivotY); // Pixi pivot do not work.
 	        var y = this.globalTransformMatrix.ty - (this.globalTransformMatrix.b * this._pivotX + this.globalTransformMatrix.d * this._pivotY); // Pixi pivot do not work.
 	        var transform = this.global;
@@ -11089,7 +11089,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * @private
 	     * @param {boolean} isSkinnedMesh
 	     */
-
+	
 	  }, {
 	    key: '_updateTransformV4',
 	    value: function _updateTransformV4(isSkinnedMesh) {
@@ -11098,16 +11098,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this._renderDisplay.setTransform(0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0);
 	      } else {
 	        this.updateGlobalTransform(); // Update transform.
-
+	
 	        var transform = this.global;
 	        this._renderDisplay.setTransform(transform.x, transform.y, transform.scaleX, transform.scaleY, transform.skewX, 0.0, transform.skewY - transform.skewX, this._pivotX, this._pivotY);
 	      }
 	    }
 	  }]);
-
+	
 	  return TinySlot;
 	}(Slot);
-
+	
 	exports.default = TinySlot;
 
 /***/ }),
@@ -11115,7 +11115,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports) {
 
 	"use strict";
-
+	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
@@ -11139,7 +11139,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  Screen: 12,
 	  Subtract: 13
 	};
-
+	
 	exports.default = BlendMode;
 
 /***/ }),
@@ -11147,11 +11147,11 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports) {
 
 	"use strict";
-
+	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-
+	
 	var DisplayType = {
 	  None: -1,
 	  Image: 0,
@@ -11166,37 +11166,37 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
-
+	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-
+	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
+	
 	var _TextureTransform = __webpack_require__(11);
-
+	
 	var _TextureTransform2 = _interopRequireDefault(_TextureTransform);
-
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
+	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
+	
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
+	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
+	
 	var tempPoint = new Tiny.Point();
 	var tempPolygon = new Tiny.Polygon();
-
+	
 	/**
 	 * Base mesh class
 	 * @class
 	 * @extends Tiny.Container
 	 */
-
+	
 	var Mesh = function (_Tiny$Container) {
 	  _inherits(Mesh, _Tiny$Container);
-
+	
 	  /**
 	   * @param {Tiny.Texture} texture - The texture to use
 	   * @param {Float32Array} [vertices] - if you want to specify the vertices
@@ -11206,7 +11206,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   */
 	  function Mesh(texture, vertices, uvs, indices, drawMode) {
 	    _classCallCheck(this, Mesh);
-
+	
 	    /**
 	     * The texture of the Mesh
 	     *
@@ -11214,23 +11214,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * @private
 	     */
 	    var _this = _possibleConstructorReturn(this, (Mesh.__proto__ || Object.getPrototypeOf(Mesh)).call(this));
-
+	
 	    _this._texture = texture;
-
+	
 	    /**
 	     * The Uvs of the Mesh
 	     *
 	     * @member {Float32Array}
 	     */
 	    _this.uvs = uvs || new Float32Array([0, 0, 1, 0, 1, 1, 0, 1]);
-
+	
 	    /**
 	     * An array of vertices
 	     *
 	     * @member {Float32Array}
 	     */
 	    _this.vertices = vertices || new Float32Array([0, 0, 100, 0, 100, 100, 0, 100]);
-
+	
 	    /**
 	     * An array containing the indices of the vertices
 	     *
@@ -11238,21 +11238,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	     */
 	    //  TODO auto generate this based on draw mode!
 	    _this.indices = indices || new Uint16Array([0, 1, 3, 2]);
-
+	
 	    /**
 	     * Version of mesh uvs are dirty or not
 	     *
 	     * @member {number}
 	     */
 	    _this.dirty = 0;
-
+	
 	    /**
 	     * Version of mesh indices
 	     *
 	     * @member {number}
 	     */
 	    _this.indexDirty = 0;
-
+	
 	    /**
 	     * The blend mode to be applied to the sprite. Set to `Tiny.BLEND_MODES.NORMAL` to remove
 	     * any blend mode.
@@ -11262,7 +11262,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * @see Tiny.BLEND_MODES
 	     */
 	    _this.blendMode = Tiny.BLEND_MODES.NORMAL;
-
+	
 	    /**
 	     * Triangles in canvas mode are automatically antialiased, use this value to force triangles
 	     * to overlap a bit with each other.
@@ -11270,7 +11270,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * @member {number}
 	     */
 	    _this.canvasPadding = 0;
-
+	
 	    /**
 	     * The way the Mesh should be drawn, can be any of the {@link Mesh.DRAW_MODES} consts
 	     *
@@ -11278,14 +11278,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * @see Tiny.mesh.Mesh.DRAW_MODES
 	     */
 	    _this.drawMode = drawMode || Mesh.DRAW_MODES.TRIANGLE_MESH;
-
+	
 	    /**
 	     * The default shader that is used if a mesh doesn't have a more specific one.
 	     *
 	     * @member {Tiny.Shader}
 	     */
 	    _this.shader = null;
-
+	
 	    /**
 	     * The tint applied to the mesh. This is a [r,g,b] value. A value of [1,1,1] will remove any
 	     * tint effect.
@@ -11293,7 +11293,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * @member {number}
 	     */
 	    _this.tintRgb = new Float32Array([1, 1, 1]);
-
+	
 	    /**
 	     * A map of renderer IDs to webgl render data
 	     *
@@ -11301,7 +11301,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * @member {object<number, object>}
 	     */
 	    _this._glDatas = {};
-
+	
 	    /**
 	     * transform that is applied to UV to get the texture coords
 	     * its updated independently from texture uvTransform
@@ -11311,7 +11311,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * @private
 	     */
 	    _this._uvTransform = new _TextureTransform2.default(texture);
-
+	
 	    /**
 	     * whether or not upload uvTransform to shader
 	     * if its false, then uvs should be pre-multiplied
@@ -11320,7 +11320,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * @default false
 	     */
 	    _this.uploadUvTransform = false;
-
+	
 	    /**
 	     * Plugin that is responsible for rendering this element.
 	     * Allows to customize the rendering process without overriding '_renderWebGL' & '_renderCanvas' methods.
@@ -11330,15 +11330,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	    _this.pluginName = 'mesh';
 	    return _this;
 	  }
-
+	
 	  /**
 	   * Renders the object using the WebGL renderer
 	   *
 	   * @private
 	   * @param {Tiny.WebGLRenderer} renderer - a reference to the WebGL renderer
 	   */
-
-
+	
+	
 	  _createClass(Mesh, [{
 	    key: '_renderWebGL',
 	    value: function _renderWebGL(renderer) {
@@ -11346,40 +11346,40 @@ return /******/ (function(modules) { // webpackBootstrap
 	      renderer.setObjectRenderer(renderer.plugins[this.pluginName]);
 	      renderer.plugins[this.pluginName].render(this);
 	    }
-
+	
 	    /**
 	     * Renders the object using the Canvas renderer
 	     *
 	     * @private
 	     * @param {Tiny.CanvasRenderer} renderer - The canvas renderer.
 	     */
-
+	
 	  }, {
 	    key: '_renderCanvas',
 	    value: function _renderCanvas(renderer) {
 	      this.refresh();
 	      renderer.plugins[this.pluginName].render(this);
 	    }
-
+	
 	    /**
 	     * When the texture is updated, this event will fire to update the scale and frame
 	     *
 	     * @private
 	     */
-
+	
 	  }, {
 	    key: '_onTextureUpdate',
 	    value: function _onTextureUpdate() {
 	      this._uvTransform.texture = this._texture;
 	      this.refresh();
 	    }
-
+	
 	    /**
 	     * multiplies uvs only if uploadUvTransform is false
 	     * call it after you change uvs manually
 	     * make sure that texture is valid
 	     */
-
+	
 	  }, {
 	    key: 'multiplyUvs',
 	    value: function multiplyUvs() {
@@ -11387,14 +11387,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this._uvTransform.multiplyUvs(this.uvs);
 	      }
 	    }
-
+	
 	    /**
 	     * Refreshes uvs for generated meshes (rope, plane)
 	     * sometimes refreshes vertices too
 	     *
 	     * @param {boolean} [forceUpdate=false] if true, matrices will be updated any case
 	     */
-
+	
 	  }, {
 	    key: 'refresh',
 	    value: function refresh(forceUpdate) {
@@ -11402,78 +11402,78 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this._refresh();
 	      }
 	    }
-
+	
 	    /**
 	     * re-calculates mesh coords
 	     * @protected
 	     */
-
+	
 	  }, {
 	    key: '_refresh',
 	    value: function _refresh() {}
 	    /* empty */
-
-
+	
+	
 	    /**
 	     * Returns the bounds of the mesh as a rectangle. The bounds calculation takes the worldTransform into account.
 	     *
 	     */
-
+	
 	  }, {
 	    key: '_calculateBounds',
 	    value: function _calculateBounds() {
 	      // TODO - we can cache local bounds and use them if they are dirty (like graphics)
 	      this._bounds.addVertices(this.transform, this.vertices, 0, this.vertices.length);
 	    }
-
+	
 	    /**
 	     * Tests if a point is inside this mesh. Works only for TRIANGLE_MESH
 	     *
 	     * @param {Tiny.Point} point - the point to test
 	     * @return {boolean} the result of the test
 	     */
-
+	
 	  }, {
 	    key: 'containsPoint',
 	    value: function containsPoint(point) {
 	      if (!this.getBounds().contains(point.x, point.y)) {
 	        return false;
 	      }
-
+	
 	      this.worldTransform.applyInverse(point, tempPoint);
-
+	
 	      var vertices = this.vertices;
 	      var points = tempPolygon.points;
 	      var indices = this.indices;
 	      var len = this.indices.length;
 	      var step = this.drawMode === Mesh.DRAW_MODES.TRIANGLES ? 3 : 1;
-
+	
 	      for (var i = 0; i + 2 < len; i += step) {
 	        var ind0 = indices[i] * 2;
 	        var ind1 = indices[i + 1] * 2;
 	        var ind2 = indices[i + 2] * 2;
-
+	
 	        points[0] = vertices[ind0];
 	        points[1] = vertices[ind0 + 1];
 	        points[2] = vertices[ind1];
 	        points[3] = vertices[ind1 + 1];
 	        points[4] = vertices[ind2];
 	        points[5] = vertices[ind2 + 1];
-
+	
 	        if (tempPolygon.contains(tempPoint.x, tempPoint.y)) {
 	          return true;
 	        }
 	      }
-
+	
 	      return false;
 	    }
-
+	
 	    /**
 	     * The texture that the mesh uses.
 	     *
 	     * @member {Tiny.Texture}
 	     */
-
+	
 	  }, {
 	    key: 'texture',
 	    get: function get() {
@@ -11484,9 +11484,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	      if (this._texture === value) {
 	        return;
 	      }
-
+	
 	      this._texture = value;
-
+	
 	      if (value) {
 	        // wait for the texture to load
 	        if (value.baseTexture.hasLoaded) {
@@ -11496,14 +11496,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	      }
 	    }
-
+	
 	    /**
 	     * The tint applied to the mesh. This is a hex value. A value of 0xFFFFFF will remove any tint effect.
 	     *
 	     * @member {number}
 	     * @default 0xFFFFFF
 	     */
-
+	
 	  }, {
 	    key: 'tint',
 	    get: function get() {
@@ -11514,10 +11514,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	      this.tintRgb = Tiny.utils.hex2rgb(value, this.tintRgb);
 	    }
 	  }]);
-
+	
 	  return Mesh;
 	}(Tiny.Container);
-
+	
 	/**
 	 * Different drawing buffer modes supported
 	 *
@@ -11527,13 +11527,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @property {number} TRIANGLE_MESH
 	 * @property {number} TRIANGLES
 	 */
-
-
+	
+	
 	Mesh.DRAW_MODES = {
 	  TRIANGLE_MESH: 0,
 	  TRIANGLES: 1
 	};
-
+	
 	exports.default = Mesh;
 
 /***/ }),
@@ -11541,15 +11541,15 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports) {
 
 	'use strict';
-
+	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-
+	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
+	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
+	
 	/**
 	 * class controls uv transform and frame clamp for texture
 	 *
@@ -11564,19 +11564,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	   */
 	  function TextureTransform(texture, clampMargin) {
 	    _classCallCheck(this, TextureTransform);
-
+	
 	    this._texture = texture;
-
+	
 	    this.tempMat = new Tiny.Matrix();
-
+	
 	    this.mapCoord = new Tiny.Matrix();
-
+	
 	    this.uClampFrame = new Float32Array(4);
-
+	
 	    this.uClampOffset = new Float32Array(2);
-
+	
 	    this._lastTextureID = -1;
-
+	
 	    /**
 	     * Changes frame clamping
 	     * Works with TilingSprite and Mesh
@@ -11586,7 +11586,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * @member {number}
 	     */
 	    this.clampOffset = 0;
-
+	
 	    /**
 	     * Changes frame clamping
 	     * Works with TilingSprite and Mesh
@@ -11597,17 +11597,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	     */
 	    this.clampMargin = typeof clampMargin === 'undefined' ? 0.5 : clampMargin;
 	  }
-
+	
 	  /**
 	   * texture property
 	   * @member {Tiny.Texture}
 	   */
-
-
+	
+	
 	  _createClass(TextureTransform, [{
 	    key: 'multiplyUvs',
-
-
+	
+	
 	    /**
 	     * Multiplies uvs array to transform
 	     * @param {Float32Array} uvs mesh uvs
@@ -11618,65 +11618,65 @@ return /******/ (function(modules) { // webpackBootstrap
 	      if (out === undefined) {
 	        out = uvs;
 	      }
-
+	
 	      var mat = this.mapCoord;
-
+	
 	      for (var i = 0; i < uvs.length; i += 2) {
 	        var x = uvs[i];
 	        var y = uvs[i + 1];
-
+	
 	        out[i] = x * mat.a + y * mat.c + mat.tx;
 	        out[i + 1] = x * mat.b + y * mat.d + mat.ty;
 	      }
-
+	
 	      return out;
 	    }
-
+	
 	    /**
 	     * updates matrices if texture was changed
 	     * @param {boolean} forceUpdate if true, matrices will be updated any case
 	     * @returns {boolean} whether or not it was updated
 	     */
-
+	
 	  }, {
 	    key: 'update',
 	    value: function update(forceUpdate) {
 	      var tex = this._texture;
-
+	
 	      if (!tex || !tex.valid) {
 	        return false;
 	      }
-
+	
 	      if (!forceUpdate && this._lastTextureID === tex._updateID) {
 	        return false;
 	      }
-
+	
 	      this._lastTextureID = tex._updateID;
-
+	
 	      var uvs = tex._uvs;
-
+	
 	      this.mapCoord.set(uvs.x1 - uvs.x0, uvs.y1 - uvs.y0, uvs.x3 - uvs.x0, uvs.y3 - uvs.y0, uvs.x0, uvs.y0);
-
+	
 	      var orig = tex.orig;
 	      var trim = tex.trim;
-
+	
 	      if (trim) {
 	        this.tempMat.set(orig.width / trim.width, 0, 0, orig.height / trim.height, -trim.x / trim.width, -trim.y / trim.height);
 	        this.mapCoord.append(this.tempMat);
 	      }
-
+	
 	      var texBase = tex.baseTexture;
 	      var frame = this.uClampFrame;
 	      var margin = this.clampMargin / texBase.resolution;
 	      var offset = this.clampOffset;
-
+	
 	      frame[0] = (tex._frame.x + margin + offset) / texBase.width;
 	      frame[1] = (tex._frame.y + margin + offset) / texBase.height;
 	      frame[2] = (tex._frame.x + tex._frame.width - margin + offset) / texBase.width;
 	      frame[3] = (tex._frame.y + tex._frame.height - margin + offset) / texBase.height;
 	      this.uClampOffset[0] = offset / texBase.realWidth;
 	      this.uClampOffset[1] = offset / texBase.realHeight;
-
+	
 	      return true;
 	    }
 	  }, {
@@ -11690,10 +11690,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	      this._lastTextureID = -1;
 	    }
 	  }]);
-
+	
 	  return TextureTransform;
 	}();
-
+	
 	exports.default = TextureTransform;
 
 /***/ }),
@@ -11701,7 +11701,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports) {
 
 	"use strict";
-
+	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
@@ -11718,20 +11718,20 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
-
+	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 	exports.addDragonBonesData = addDragonBonesData;
 	exports.addTextureAtlasData = addTextureAtlasData;
 	exports.buildArmatureDisplay = buildArmatureDisplay;
-
+	
 	var _TinyFactory = __webpack_require__(4);
-
+	
 	var _TinyFactory2 = _interopRequireDefault(_TinyFactory);
-
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
+	
 	var factory = _TinyFactory2.default.factory;
 	/**
 	 *
@@ -11755,7 +11755,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	function addTextureAtlasData(textureAtlasData, texture) {
 	  return factory.parseTextureAtlasData(textureAtlasData, texture);
 	}
-
+	
 	/**
 	* @language zh_CN
 	* 创建一个指定名称的骨架，并使用骨架的显示容器来更新骨架动画。
@@ -11775,3 +11775,4 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ ])
 });
 ;
+//# sourceMappingURL=index.debug.js.map

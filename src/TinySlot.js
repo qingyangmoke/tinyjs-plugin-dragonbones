@@ -1,20 +1,16 @@
-import { default as dragonBones } from './dragonBones';
-import { default as BlendMode } from './BlendMode';
-import { default as TinyTextureAtlasData } from './TinyTextureAtlasData';
-const { BaseObject, Slot } = dragonBones;
+import {default as dragonBones} from '../libs/dragonBones';
+import {default as BlendMode} from './BlendMode';
+import {default as TinyTextureAtlasData} from './TinyTextureAtlasData';
+const {BaseObject, Slot} = dragonBones;
 /**
  * @language zh_CN
  * Tiny 插槽。
+ *
+ * @class TinySlot
+ * @memberof Tiny.DragonBones
  * @version DragonBones 3.0
  */
-export default class TinySlot extends Slot {
-  /**
-   * @private
-   */
-  static toString() {
-    return '[class TinySlot]';
-  }
-
+class TinySlot extends Slot {
   /**
    * @internal
    * @private
@@ -27,6 +23,13 @@ export default class TinySlot extends Slot {
      */
     this._renderDisplay = null;
     this._updateTransform = Tiny.VERSION[0] === '3' ? this._updateTransformV3 : this._updateTransformV4;
+  }
+
+  /**
+   * @private
+   */
+  static toString() {
+    return '[class TinySlot]';
   }
 
   /**
@@ -152,12 +155,14 @@ export default class TinySlot extends Slot {
         break;
     }
   }
+
   /**
    * @private
    */
   _updateColor() {
     this._renderDisplay.alpha = this._colorTransform.alphaMultiplier;
   }
+
   /**
    * @private
    */
@@ -236,6 +241,7 @@ export default class TinySlot extends Slot {
       normalDisplay.visible = false;
     }
   }
+
   /**
    * @private
    */
@@ -291,6 +297,7 @@ export default class TinySlot extends Slot {
 
   /**
    *
+   * @method Tiny.DragonBones.TinySlot#_updateTransform
    * @param {boolean} isSkinnedMesh
    */
   _updateTransform(isSkinnedMesh) {
@@ -299,7 +306,7 @@ export default class TinySlot extends Slot {
 
   /**
    * @private
-   *  @param {boolean} isSkinnedMesh
+   * @param {boolean} isSkinnedMesh
    */
   _updateTransformV3(isSkinnedMesh) {
     if (isSkinnedMesh) { // Identity transform.
@@ -318,6 +325,7 @@ export default class TinySlot extends Slot {
       );
     }
   }
+
   /**
    * @private
    * @param {boolean} isSkinnedMesh
@@ -339,3 +347,5 @@ export default class TinySlot extends Slot {
     }
   }
 }
+
+export default TinySlot;
