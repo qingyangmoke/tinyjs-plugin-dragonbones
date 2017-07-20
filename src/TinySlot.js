@@ -3,18 +3,14 @@ import {default as BlendMode} from './BlendMode';
 import {default as TinyTextureAtlasData} from './TinyTextureAtlasData';
 const {BaseObject, Slot} = dragonBones;
 /**
- * @language zh_CN
  * Tiny 插槽。
  *
  * @class TinySlot
  * @memberof Tiny.DragonBones
+ * @extends {dragonBones.Slot}
  * @version DragonBones 3.0
  */
 class TinySlot extends Slot {
-  /**
-   * @internal
-   * @private
-   */
   constructor() {
     super();
     /**
@@ -296,7 +292,7 @@ class TinySlot extends Slot {
   }
 
   /**
-   *
+   * @private
    * @method Tiny.DragonBones.TinySlot#_updateTransform
    * @param {boolean} isSkinnedMesh
    */

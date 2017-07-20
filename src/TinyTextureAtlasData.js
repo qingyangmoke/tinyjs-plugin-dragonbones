@@ -6,27 +6,28 @@ const {BaseObject, TextureAtlasData} = dragonBones;
  * Tiny 贴图集数据。
  *
  * @class TinyTextureAtlasData
+ * @extends {dragonBones.TextureAtlasData}
  * @memberof Tiny.DragonBones
+ * @constructor
  * @version DragonBones 3.0
  */
 class TinyTextureAtlasData extends TextureAtlasData {
   /**
-   * @private
+   * toString
    */
   static toString() {
     return '[class TinyTextureAtlasData]';
   }
 
   /**
-   * @private
+   * @constructor
    */
   constructor() {
     super();
     /**
-     * @language zh_CN
-     * Tiny 贴图。
-     * {Tiny.BaseTexture}
-     * @version DragonBones 3.0
+     * @property texture
+     * @default null
+     * @type {dragonBones.BaseTexture}
      */
     this.texture = null;
   }
@@ -45,8 +46,9 @@ class TinyTextureAtlasData extends TextureAtlasData {
   }
 
   /**
-   * @private
-   * @return {TextureData}
+   * 生成一个Tiny.DragonBones.TinyTextureData对象
+   * @method Tiny.DragonBones.TinyTextureAtlasData#generateTexture
+   * @return {Tiny.DragonBones.TinyTextureData}
    */
   generateTexture() {
     return BaseObject.borrowObject(TinyTextureData);

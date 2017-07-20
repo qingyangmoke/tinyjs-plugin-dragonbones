@@ -11,7 +11,7 @@
  */
 
 /**
- * @class DragonBones
+ * @namespace Tiny.DragonBones
  * @memberof Tiny
  */
 import {default as dragonBones} from '../libs/dragonBones';

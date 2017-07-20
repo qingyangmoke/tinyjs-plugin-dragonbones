@@ -54,7 +54,6 @@
   },
   "homepage": "https://github.com/ant-tinyjs/tinyjs-plugin-dragonbones#readme",
   "dependencies": {
-    "pixi-gl-core": "^1.1.0",
     "tinyjs-plugin-mesh": "^0.0.1"
   }
 }

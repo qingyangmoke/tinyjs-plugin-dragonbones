@@ -1,23 +1,29 @@
-import {default as dragonBones} from '../libs/dragonBones';
-import {default as TinyArmatureDisplay} from './TinyArmatureDisplay';
-import {default as TinyTextureAtlasData} from './TinyTextureAtlasData';
-import {default as TinySlot} from './TinySlot';
-import {default as DisplayType} from './DisplayType';
-import {Mesh} from 'tinyjs-plugin-mesh';
-const {BaseObject, BaseFactory, WorldClock, Armature} = dragonBones;
 /**
- * @language zh_CN
- * Tiny 工厂
- *
+ * @file        Tiny.DragonBone.TinyFactory
+ * @author      清扬陌客 <qingyangmoke@qq.com>
+ */
+
+import { default as dragonBones } from '../libs/dragonBones';
+import { default as TinyArmatureDisplay } from './TinyArmatureDisplay';
+import { default as TinyTextureAtlasData } from './TinyTextureAtlasData';
+import { default as TinySlot } from './TinySlot';
+import { default as DisplayType } from './DisplayType';
+import { Mesh } from 'tinyjs-plugin-mesh';
+const { BaseObject, BaseFactory, WorldClock, Armature } = dragonBones;
+
+/**
+ * Tiny.DragonBone.TinyFactory
  * @class TinyFactory
+ * @constructor
  * @memberof Tiny.DragonBones
+ * @extends {dragonBones.BaseFactory}
  * @version DragonBones 3.0
  */
 class TinyFactory extends BaseFactory {
   /**
-   * @language zh_CN
    * 创建一个工厂。 (通常只需要一个全局工厂实例)
-   * @param {DataParser} dataParser - 龙骨数据解析器，如果不设置，则使用默认解析器。
+   * @constructor
+   * @param {dragonBones.DataParser} dataParser - 龙骨数据解析器，如果不设置，则使用默认解析器。
    * @version DragonBones 3.0
    */
   constructor(dataParser = null) {
@@ -41,7 +47,6 @@ class TinyFactory extends BaseFactory {
   }
 
   /**
-   * @language zh_CN
    * 一个可以直接使用的全局工厂实例。
    *
    * @static
@@ -60,7 +65,7 @@ class TinyFactory extends BaseFactory {
    * 一个可以直接使用的全局 WorldClock 实例.
    *
    * @static
-   * @member {Tiny.DragonBones.WorldClock} Tiny.DragonBones.TinyFactory#clock
+   * @member {dragonBones.WorldClock} Tiny.DragonBones.TinyFactory#clock
    * @version DragonBones 5.0
    */
   static get clock() {
@@ -68,7 +73,7 @@ class TinyFactory extends BaseFactory {
   }
 
   /**
-   *
+   * @private
    * @method Tiny.DragonBones.TinyFactory#_generateTextureAtlasData
    * @param {TinyTextureAtlasData} textureAtlasData
    * @param {Tiny.BaseTexture} textureAtlas
@@ -185,7 +190,6 @@ class TinyFactory extends BaseFactory {
   }
 
   /**
-   * @language zh_CN
    * 创建一个指定名称的骨架，并使用骨架的显示容器来更新骨架动画。
    *
    * @method Tiny.DragonBones.TinyFactory#buildArmatureDisplay
@@ -211,7 +215,6 @@ class TinyFactory extends BaseFactory {
   }
 
   /**
-   * @language zh_CN
    * 获取带有指定贴图的显示对象。
    *
    * @method Tiny.DragonBones.TinyFactory#getTextureDisplay
@@ -244,14 +247,13 @@ class TinyFactory extends BaseFactory {
   }
 
   /**
-   * @language zh_CN
    * 获取全局声音事件管理器。
    *
    * @static
-   * @member {Tiny.DragonBones.TinyArmatureDisplay} Tiny.DragonBones.TinyFactory#soundEventManater
+   * @member {Tiny.DragonBones.TinyArmatureDisplay} Tiny.DragonBones.TinyFactory#eventManater
    * @version DragonBones 4.5
    */
-  get soundEventManater() {
+  get eventManater() {
     return TinyFactory._eventManager;
   }
 }
