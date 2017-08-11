@@ -2,7 +2,7 @@
  * Name: tiny
  * Description: The Tiny engine is an HTML5 game engine designed to be lightweight and concise JavaScript-friendly syntax, it will only for mobile.
  * Author: yiqi
- * Version: v0.3.1
+ * Version: v1.0.1
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -79,7 +79,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "/dist";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 147);
+/******/ 	return __webpack_require__(__webpack_require__.s = 148);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -101,7 +101,7 @@ Object.defineProperty(exports, "__esModule", {
  * @name VERSION
  * @type {string}
  */
-var VERSION = exports.VERSION = '0.3.1';
+var VERSION = exports.VERSION = '1.0.1';
 
 /**
  * Math.PI * 2
@@ -155,7 +155,7 @@ var RENDERER_TYPE = exports.RENDERER_TYPE = {
 };
 
 /**
- * Various blend modes supported by Tiny.
+ * Various blend modes supported.
  * <br>
  * IMPORTANT - The WebGL renderer only supports the NORMAL, ADD, MULTIPLY and SCREEN blend modes.
  * Anything else will silently act like NORMAL.
@@ -231,7 +231,7 @@ var DRAW_MODES = exports.DRAW_MODES = {
 };
 
 /**
- * The scale modes that are supported by Tiny.
+ * The scale modes that are supported.
  *
  * The {@link Tiny.settings.SCALE_MODE} scale mode affects the default scaling mode of future operations.
  * It can be re-assigned to either LINEAR or NEAREST, depending upon suitability.
@@ -250,7 +250,7 @@ var SCALE_MODES = exports.SCALE_MODES = {
 };
 
 /**
- * The wrap modes that are supported by Tiny.
+ * The wrap modes that are supported.
  *
  * The {@link Tiny.settings.WRAP_MODE} wrap mode affects the default wraping mode of future operations.
  * It can be re-assigned to either CLAMP or REPEAT, depending upon suitability.
@@ -417,11 +417,11 @@ var TEXT_GRADIENT = exports.TEXT_GRADIENT = {
  * @name UPDATE_PRIORITY
  * @memberof Tiny
  * @type {object}
- * @property {number} INTERACTION=50 Highest priority, used for {@link Tiny.interaction.InteractionManager}
- * @property {number} HIGH=25 High priority updating, {@link Tiny.VideoBaseTexture} and {@link Tiny.AnimatedSprite}
- * @property {number} NORMAL=0 Default priority for ticker events, see {@link Tiny.ticker.Ticker#add}.
- * @property {number} LOW=-25 Low priority used for {@link Tiny.Application} rendering.
- * @property {number} UTILITY=-50 Lowest priority used for {@link Tiny.prepare.BasePrepare} utility.
+ * @property {number} INTERACTION=50  Highest priority, used for {@link Tiny.interaction.InteractionManager}
+ * @property {number} HIGH=25         High priority updating, {@link Tiny.VideoBaseTexture} and {@link Tiny.AnimatedSprite}
+ * @property {number} NORMAL=0        Default priority for ticker events, see {@link Tiny.ticker.Ticker#add}.
+ * @property {number} LOW=-25         Low priority used for {@link Tiny.Application} rendering.
+ * @property {number} UTILITY=-50     Lowest priority used for {@link Tiny.prepare.BasePrepare} utility.
  */
 var UPDATE_PRIORITY = exports.UPDATE_PRIORITY = {
   INTERACTION: 50,
@@ -459,7 +459,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.BaseTextureCache = exports.TextureCache = exports.isArray = exports.mixins = exports.pluginTarget = exports.EventEmitter = exports.removeItems = exports.isMobile = exports.TWEEN = undefined;
 
-var _decide = __webpack_require__(126);
+var _decide = __webpack_require__(127);
 
 Object.keys(_decide).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
@@ -475,6 +475,7 @@ exports.isFunction = isFunction;
 exports.isNumber = isNumber;
 exports.isString = isString;
 exports.isUndefined = isUndefined;
+exports.isObject = isObject;
 exports.getTime = getTime;
 exports.random = random;
 exports.randomInt = randomInt;
@@ -486,6 +487,7 @@ exports.hex2rgb = hex2rgb;
 exports.hex2string = hex2string;
 exports.rgb2hex = rgb2hex;
 exports.deg2radian = deg2radian;
+exports.radian2deg = radian2deg;
 exports.getXMLHttpRequest = getXMLHttpRequest;
 exports.getResolutionOfUrl = getResolutionOfUrl;
 exports.decomposeDataUri = decomposeDataUri;
@@ -497,6 +499,7 @@ exports.arrayRemoveObject = arrayRemoveObject;
 exports.detect = detect;
 exports.point = point;
 exports.scale = scale;
+exports.color = color;
 exports.destroyTextureCache = destroyTextureCache;
 exports.clearTextureCache = clearTextureCache;
 
@@ -514,11 +517,11 @@ var _tween = __webpack_require__(20);
 
 var _tween2 = _interopRequireDefault(_tween);
 
-var _pluginTarget = __webpack_require__(130);
+var _pluginTarget = __webpack_require__(131);
 
 var _pluginTarget2 = _interopRequireDefault(_pluginTarget);
 
-var _mixin = __webpack_require__(129);
+var _mixin = __webpack_require__(130);
 
 var mixins = _interopRequireWildcard(_mixin);
 
@@ -546,6 +549,7 @@ exports.mixins = mixins;
 /**
  * Gets the next unique identifier
  *
+ * @static
  * @memberof Tiny
  * @function uid
  * @return {number} The next unique identifier to use.
@@ -556,11 +560,11 @@ function uid() {
 }
 
 /**
- * 判断对象是否是`String`类型
+ * 判断对象是否是`Array`类型
  *
  * @static
  * @memberof Tiny
- * @function isString
+ * @function isArray
  * @param {Object} obj 要判断的对象
  * @return {Boolean}
  */
@@ -608,29 +612,59 @@ function isString(obj) {
 }
 
 /**
+ * 判断对象是否是`Undefined`类型
+ *
+ * @static
  * @memberof Tiny
  * @function isUndefined
  * @param obj
+ * @return {boolean}
  */
 function isUndefined(obj) {
   return obj === void 0;
 }
 
 /**
+ * 判断对象是否是`Object`类型
+ *
+ * @static
+ * @memberof Tiny
+ * @function isObject
+ * @param {Object} obj 要判断的对象
+ * @return {boolean}
+ */
+function isObject(obj) {
+  return Object.prototype.toString.call(obj) === '[object Object]';
+}
+
+/**
+ * 高精度获取当前时间，比 `Date.now()` 的精度高1000倍，为考虑不同性能场景下的时间获取，建议使用此方法来替代 `Date.now()`。
+ *
+ * @static
  * @memberof Tiny
  * @function getTime
- * @return {*}
+ * @return {number}
  */
 function getTime() {
   return window.performance.timing.navigationStart + window.performance.now();
 }
 
 /**
+ * 生成数字区间内的随机整型数据
+ *
+ * @example
+ *
+ *  ``` js
+ *  Tiny.random(10, 18);
+ *  //=> 15
+ *  ```
+ *
+ * @static
  * @memberof Tiny
  * @function random
  * @param min
  * @param max
- * @return {*}
+ * @return {number}
  */
 function random(min, max) {
   if (isArray(min)) {
@@ -641,29 +675,38 @@ function random(min, max) {
 }
 
 /**
+ * `Tiny.random` 的别名
+ *
+ * @static
  * @memberof Tiny
  * @function randomInt
- * @return {*}
+ * @return {boolean}
  */
 function randomInt() {
   return random.call.apply(random, [this].concat(Array.prototype.slice.call(arguments)));
 }
 
 /**
+ * 返回区间内的随机浮点类型数字
+ *
+ * @static
  * @memberof Tiny
  * @function randomFloat
  * @param min
  * @param max
- * @return {*}
+ * @return {number}
  */
 function randomFloat(min, max) {
   return min + Math.random() * (max - min);
 }
 
 /**
+ * 生成随机的`Boolean`类型数据
+ *
+ * @static
  * @memberof Tiny
  * @function randomBool
- * @param chance
+ * @param {number} chance 生成 true 的几率，默认值：0.5
  * @return {boolean}
  */
 function randomBool(chance) {
@@ -672,9 +715,19 @@ function randomBool(chance) {
 }
 
 /**
+ * 随机生成 {-1, 1} 两个值
+ *
+ * @example
+ *
+ *  ``` js
+ *  Tiny.randomPM(0.8);
+ *  //=> -1
+ *  ```
+ *
+ * @static
  * @memberof Tiny
  * @function randomPM
- * @param chance
+ * @param {number} chance 生成 -1 的几率，默认值：0.5
  * @return {number}
  */
 function randomPM(chance) {
@@ -683,10 +736,12 @@ function randomPM(chance) {
 }
 
 /**
+ * 随机返回数组中的任意对象
+ *
  * @memberof Tiny
  * @function randomFromArray
- * @param arr
- * @return {*}
+ * @param {array<object>}  arr
+ * @return {object}
  */
 function randomFromArray(arr) {
   return arr[random(0, arr.length - 1)];
@@ -739,6 +794,8 @@ function rgb2hex(rgb) {
 }
 
 /**
+ * 角度值转弧度
+ *
  * @memberof Tiny
  * @function deg2radian
  * @param deg
@@ -748,6 +805,25 @@ function deg2radian(deg) {
   return _const.PI_2 * deg / 360;
 }
 
+/**
+ * 弧度值转角度
+ *
+ * @memberof Tiny
+ * @function radian2deg
+ * @param radian
+ * @return {number}
+ */
+function radian2deg(radian) {
+  return 360 * radian / _const.PI_2;
+}
+
+/**
+ * 获取 XMLHttpRequest 对象，如果 Tiny._XMLHttpRequest 存在，则取之，如果没有，则创建一个 XMLHttpRequest 对象，并存之。
+ * 如果 Tiny._XMLHttpRequest 正在使用中，则返回一个新建的 XMLHttpRequest
+ *
+ * @static
+ * @return {XMLHttpRequest}
+ */
 function getXMLHttpRequest() {
   var xhr = this._XMLHttpRequest;
   if (!xhr) {
@@ -792,8 +868,7 @@ function getResolutionOfUrl(url, defaultValue) {
  */
 
 /**
- * Split a data URI into components. Returns undefined if
- * parameter `dataUri` is not a valid data URI.
+ * Split a data URI into components. Returns undefined if parameter `dataUri` is not a valid data URI.
  *
  * @memberof Tiny
  * @function decomposeDataUri
@@ -912,10 +987,12 @@ function sign(n) {
 }
 
 /**
+ * 从数组中移除某个对象
+ *
  * @memberof Tiny
  * @function arrayRemoveObject
- * @param arr
- * @param delObj
+ * @param {array<object>}  arr
+ * @param {object}         delObj
  */
 function arrayRemoveObject(arr, delObj) {
   for (var i = 0, l = arr.length; i < l; i++) {
@@ -927,14 +1004,24 @@ function arrayRemoveObject(arr, delObj) {
 }
 
 /**
+ * Looks through each value in the list, returning the first one that passes a truth test (**predicate**), or `undefined` if no value passes the test. The function returns as soon as it finds an acceptable element, and doesn't traverse the entire list.
+ *
+ * @example
+ *
+ *  ``` js
+ *  var even = Tiny.detect([1, 2, 3, 4, 5, 6], function(num){ return num % 2 == 0; });
+ *  //=> 2
+ *  ```
+ *
+ * @static
  * @memberof Tiny
  * @function detect
- * @param obj
- * @param iterator
- * @param context
+ * @param {object}    obj
+ * @param {function}  iterator
+ * @param {object}    context
  * @param arg1
  * @param arg2
- * @return {*}
+ * @return {boolean}
  */
 function detect(obj, iterator, context, arg1, arg2) {
   var result = void 0;
@@ -961,11 +1048,21 @@ function detect(obj, iterator, context, arg1, arg2) {
 }
 
 /**
+ * 转化坐标值
+ *
+ * @example
+ *
+ *  ``` js
+ *  Tiny.point(100, 200);
+ *  //=> {x: 100, y: 200}
+ *  ```
+ *
+ * @static
  * @memberof Tiny
  * @function point
- * @param x
- * @param y
- * @return {{x: *, y: *}}
+ * @param {number}  x
+ * @param {number}  y - 如果不传，则等于 x
+ * @return {object}
  */
 function point(x, y) {
   return {
@@ -975,11 +1072,20 @@ function point(x, y) {
 }
 
 /**
+ * 转化缩放值
+ *
+ * @example
+ *
+ *  ```js
+ *  Tiny.scale(2, 1.5);
+ *  //=> {scaleX: 2, scaleY: 1.5}
+ *  ```
+ *
  * @memberof Tiny
  * @function scale
- * @param x
- * @param y
- * @return {{scaleX: *, scaleY: *}}
+ * @param {number}  x
+ * @param {number}  y - 如果不传，则等于 x
+ * @return {object}
  */
 function scale(x, y) {
   return {
@@ -989,6 +1095,32 @@ function scale(x, y) {
 }
 
 /**
+ * 转化RGB颜色值
+ *
+ * @example
+ *
+ * ``` js
+ * Tiny.color(0, 255, 255);
+ * //=> {r: 0, g: 255, b: 255}
+ * ```
+ *
+ * @param {number} red
+ * @param {number} green
+ * @param {number} blue
+ * @param {number} alpha
+ * @returns {object}
+ */
+function color(red, green, blue, alpha) {
+  return {
+    r: Tiny.isUndefined(red) ? 255 : red,
+    g: Tiny.isUndefined(green) ? 255 : green,
+    b: Tiny.isUndefined(blue) ? 255 : blue,
+    a: Tiny.isUndefined(alpha) ? 1 : alpha
+  };
+}
+
+/**
+ * texture 缓存，用于存储已加载的图片 texture
  *
  * @name TextureCache
  * @memberof Tiny
@@ -1009,7 +1141,8 @@ var BaseTextureCache = exports.BaseTextureCache = Object.create(null);
 /**
  * Destroys all texture in the cache
  *
- * @memberof Tiny.utils
+ * @static
+ * @memberof Tiny
  * @function destroyTextureCache
  */
 function destroyTextureCache() {
@@ -1026,7 +1159,8 @@ function destroyTextureCache() {
 /**
  * Removes all textures from cache, but does not destroy them
  *
- * @memberof Tiny.utils
+ * @static
+ * @memberof Tiny
  * @function clearTextureCache
  */
 function clearTextureCache() {
@@ -1051,7 +1185,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _Point = __webpack_require__(24);
+var _Point = __webpack_require__(25);
 
 Object.defineProperty(exports, 'Point', {
   enumerable: true,
@@ -1069,7 +1203,7 @@ Object.defineProperty(exports, 'ObservablePoint', {
   }
 });
 
-var _Matrix = __webpack_require__(50);
+var _Matrix = __webpack_require__(24);
 
 Object.defineProperty(exports, 'Matrix', {
   enumerable: true,
@@ -1078,7 +1212,7 @@ Object.defineProperty(exports, 'Matrix', {
   }
 });
 
-var _GroupD = __webpack_require__(49);
+var _GroupD = __webpack_require__(50);
 
 Object.defineProperty(exports, 'GroupD8', {
   enumerable: true,
@@ -1114,7 +1248,7 @@ Object.defineProperty(exports, 'Polygon', {
   }
 });
 
-var _Rectangle = __webpack_require__(25);
+var _Rectangle = __webpack_require__(26);
 
 Object.defineProperty(exports, 'Rectangle', {
   enumerable: true,
@@ -1146,11 +1280,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.config = undefined;
 
-var _maxRecommendedTextures = __webpack_require__(128);
+var _maxRecommendedTextures = __webpack_require__(129);
 
 var _maxRecommendedTextures2 = _interopRequireDefault(_maxRecommendedTextures);
 
-var _canUploadSameBuffer = __webpack_require__(125);
+var _canUploadSameBuffer = __webpack_require__(126);
 
 var _canUploadSameBuffer2 = _interopRequireDefault(_canUploadSameBuffer);
 
@@ -1159,11 +1293,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 /**
  * User's customizable globals for overriding the default Tiny settings, such
  * as a renderer's default resolution, framerate, float percision, etc.
- * @example
- * // Use the native window resolution as the default resolution
- * // will support high-density displays when rendering
- * Tiny.settings.RESOLUTION = window.devicePixelRatio.
  *
+ * @example
  * // Disable interpolation when scaling, will make texture be pixelated
  * Tiny.settings.SCALE_MODE = Tiny.SCALE_MODES.NEAREST;
  * @namespace Tiny.settings
@@ -1201,16 +1332,6 @@ exports.default = {
   RESOLUTION: 1,
 
   /**
-   * Default filter resolution.
-   *
-   * @static
-   * @memberof Tiny.settings
-   * @type {number}
-   * @default 1
-   */
-  FILTER_RESOLUTION: 1,
-
-  /**
    * The maximum textures that this device supports.
    *
    * @static
@@ -1242,11 +1363,10 @@ exports.default = {
    * @example `@2x`
    * @default /@([0-9\.]+)x/
    */
-  RETINA_PREFIX: /@([0-9\.]+)x/,
+  RETINA_PREFIX: /@([0-9\.]+)x/, // eslint-disable-line
 
   /**
-   * The default render options if none are supplied to {@link Tiny.WebGLRenderer}
-   * or {@link Tiny.CanvasRenderer}.
+   * 默认渲染参数
    *
    * @static
    * @constant
@@ -1379,7 +1499,7 @@ exports.default = {
  * @property {number}   dpi=1                   分辨率
  * @property {boolean}  showFPS=false           是否显示帧频
  * @property {number}   renderType=0            渲染类型 [0: 自动识别, 1: WEBGL, 2: CANVAS]
- * @property {object}   renderOptions           渲染参数，见{@link Tiny.RENDER_OPTIONS}
+ * @property {object}   renderOptions           渲染参数，见{@link Tiny.settings.RENDER_OPTIONS}
  * @property {number}   autoRender=1            是否自动渲染 [0: 手动, 1: 自动]
  */
 
@@ -1404,11 +1524,11 @@ var config = exports.config = {
 
 var gl = {
     createContext: __webpack_require__(81),
-    setVertexAttribArrays: __webpack_require__(34),
+    setVertexAttribArrays: __webpack_require__(35),
     GLBuffer: __webpack_require__(77),
     GLFramebuffer: __webpack_require__(78),
     GLShader: __webpack_require__(79),
-    GLTexture: __webpack_require__(33),
+    GLTexture: __webpack_require__(34),
     VertexArrayObject: __webpack_require__(80),
     shader: __webpack_require__(82)
 };
@@ -1436,7 +1556,7 @@ if (typeof window !== 'undefined') {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Application = exports.Filter = exports.SpriteMaskFilter = exports.Quad = exports.RenderTarget = exports.ObjectRenderer = exports.WebGLManager = exports.Shader = exports.CanvasRenderTarget = exports.TextureUvs = exports.VideoBaseTexture = exports.BaseRenderTexture = exports.RenderTexture = exports.BaseTexture = exports.Texture = exports.Spritesheet = exports.CanvasGraphicsRenderer = exports.GraphicsRenderer = exports.GraphicsData = exports.Graphics = exports.TextMetrics = exports.TextStyle = exports.Text = exports.SpriteRenderer = exports.CanvasTinter = exports.CanvasSpriteRenderer = exports.AnimatedSprite = exports.Sprite = exports.TransformBase = exports.TransformStatic = exports.Transform = exports.Container = exports.DisplayObject = exports.Bounds = exports.glCore = exports.WebGLRenderer = exports.CanvasRenderer = exports.ticker = exports.settings = undefined;
+exports.Application = exports.Filter = exports.SpriteMaskFilter = exports.Quad = exports.RenderTarget = exports.ObjectRenderer = exports.WebGLManager = exports.Shader = exports.CanvasRenderTarget = exports.TextureTransform = exports.TextureUvs = exports.VideoBaseTexture = exports.BaseRenderTexture = exports.RenderTexture = exports.BaseTexture = exports.Texture = exports.Spritesheet = exports.CanvasGraphicsRenderer = exports.GraphicsRenderer = exports.GraphicsData = exports.Graphics = exports.TextMetrics = exports.TextStyle = exports.Text = exports.SpriteRenderer = exports.CanvasTinter = exports.CanvasSpriteRenderer = exports.AnimatedSprite = exports.Sprite = exports.TransformBase = exports.TransformStatic = exports.Transform = exports.Container = exports.DisplayObject = exports.Bounds = exports.glCore = exports.WebGLRenderer = exports.CanvasRenderer = exports.ticker = exports.settings = exports.config = undefined;
 
 var _const = __webpack_require__(0);
 
@@ -1476,19 +1596,10 @@ Object.keys(_utils).forEach(function (key) {
 
 var _settings = __webpack_require__(3);
 
-Object.keys(_settings).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _settings[key];
-    }
-  });
-});
-Object.defineProperty(exports, 'settings', {
+Object.defineProperty(exports, 'config', {
   enumerable: true,
   get: function get() {
-    return _interopRequireDefault(_settings).default;
+    return _settings.config;
   }
 });
 
@@ -1510,7 +1621,7 @@ Object.defineProperty(exports, 'Bounds', {
   }
 });
 
-var _DisplayObject = __webpack_require__(45);
+var _DisplayObject = __webpack_require__(46);
 
 Object.defineProperty(exports, 'DisplayObject', {
   enumerable: true,
@@ -1528,7 +1639,7 @@ Object.defineProperty(exports, 'Container', {
   }
 });
 
-var _Transform = __webpack_require__(46);
+var _Transform = __webpack_require__(47);
 
 Object.defineProperty(exports, 'Transform', {
   enumerable: true,
@@ -1537,7 +1648,7 @@ Object.defineProperty(exports, 'Transform', {
   }
 });
 
-var _TransformStatic = __webpack_require__(47);
+var _TransformStatic = __webpack_require__(48);
 
 Object.defineProperty(exports, 'TransformStatic', {
   enumerable: true,
@@ -1555,7 +1666,7 @@ Object.defineProperty(exports, 'TransformBase', {
   }
 });
 
-var _Sprite = __webpack_require__(26);
+var _Sprite = __webpack_require__(27);
 
 Object.defineProperty(exports, 'Sprite', {
   enumerable: true,
@@ -1636,7 +1747,7 @@ Object.defineProperty(exports, 'Graphics', {
   }
 });
 
-var _GraphicsData = __webpack_require__(48);
+var _GraphicsData = __webpack_require__(49);
 
 Object.defineProperty(exports, 'GraphicsData', {
   enumerable: true,
@@ -1690,7 +1801,7 @@ Object.defineProperty(exports, 'BaseTexture', {
   }
 });
 
-var _RenderTexture = __webpack_require__(27);
+var _RenderTexture = __webpack_require__(28);
 
 Object.defineProperty(exports, 'RenderTexture', {
   enumerable: true,
@@ -1723,6 +1834,15 @@ Object.defineProperty(exports, 'TextureUvs', {
   enumerable: true,
   get: function get() {
     return _interopRequireDefault(_TextureUvs).default;
+  }
+});
+
+var _TextureTransform = __webpack_require__(123);
+
+Object.defineProperty(exports, 'TextureTransform', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_TextureTransform).default;
   }
 });
 
@@ -1807,9 +1927,11 @@ Object.defineProperty(exports, 'Application', {
   }
 });
 
-var _ticker = __webpack_require__(28);
+var _ticker = __webpack_require__(29);
 
 var ticker = _interopRequireWildcard(_ticker);
+
+var _settings2 = _interopRequireDefault(_settings);
 
 var _CanvasRenderer = __webpack_require__(9);
 
@@ -1823,6 +1945,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+exports.settings = _settings2.default;
 exports.ticker = ticker;
 exports.CanvasRenderer = _CanvasRenderer2.default;
 exports.WebGLRenderer = _WebGLRenderer2.default;
@@ -2848,7 +2971,7 @@ var _get = function get(object, property, receiver) { if (object === null) objec
 
 var _utils = __webpack_require__(1);
 
-var _DisplayObject2 = __webpack_require__(45);
+var _DisplayObject2 = __webpack_require__(46);
 
 var _DisplayObject3 = _interopRequireDefault(_DisplayObject2);
 
@@ -2885,13 +3008,18 @@ var Container = function (_DisplayObject) {
     /**
      * The array of children of this container.
      *
-     * @member {Tiny.DisplayObject[]}
+     * @member {Array<Tiny.DisplayObject>}
      * @readonly
      */
     var _this = _possibleConstructorReturn(this, (Container.__proto__ || Object.getPrototypeOf(Container)).call(this));
 
     _this.children = [];
 
+    /**
+     * 该对象上绑定的所有 Action
+     *
+     * @member {Array<Tiny.Action>}
+     */
     _this.actions = [];
     return _this;
   }
@@ -3242,6 +3370,7 @@ var Container = function (_DisplayObject) {
      * Recalculates the bounds of the object. Override this to
      * calculate the bounds of the specific object (not including children).
      *
+     * @private
      */
 
   }, {
@@ -3392,14 +3521,10 @@ var Container = function (_DisplayObject) {
      * Removes all internal references and listeners as well as removes children from the display list.
      * Do not use a Container after calling `destroy`.
      *
-     * @param {object|boolean} [options] - Options parameter. A boolean will act as if all options
-     *  have been set to that value
-     * @param {boolean} [options.children=false] - if set to true, all the children will have their destroy
-     *  method called as well. 'options' will be passed on to those calls.
-     * @param {boolean} [options.texture=false] - Only used for child Sprites if options.children is set to true
-     *  Should it destroy the texture of the child sprite
-     * @param {boolean} [options.baseTexture=false] - Only used for child Sprites if options.children is set to true
-     *  Should it destroy the base texture of the child sprite
+     * @param {object|boolean} [options] - Options parameter. A boolean will act as if all options have been set to that value
+     * @param {boolean} [options.children=false] - if set to true, all the children will have their destroy method called as well. 'options' will be passed on to those calls.
+     * @param {boolean} [options.texture=false] - Only used for child Sprites if options.children is set to true Should it destroy the texture of the child sprite
+     * @param {boolean} [options.baseTexture=false] - Only used for child Sprites if options.children is set to true Should it destroy the base texture of the child sprite
      */
 
   }, {
@@ -3536,26 +3661,22 @@ var CanvasRenderer = function (_SystemRenderer) {
   _inherits(CanvasRenderer, _SystemRenderer);
 
   /**
-   * @param {object} [options] - The optional renderer parameters
-   * @param {number} [options.width=800] - the width of the screen
-   * @param {number} [options.height=600] - the height of the screen
-   * @param {HTMLCanvasElement} [options.view] - the canvas to use as a view, optional
-   * @param {boolean} [options.transparent=false] - If the render view is transparent, default false
-   * @param {boolean} [options.autoResize=false] - If the render view is automatically resized, default false
-   * @param {boolean} [options.antialias=false] - sets antialias (only applicable in chrome at the moment)
-   * @param {number} [options.resolution=1] - The resolution / device pixel ratio of the renderer. The
-   *  resolution of the renderer retina would be 2.
-   * @param {boolean} [options.clearBeforeRender=true] - This sets if the CanvasRenderer will clear the canvas or
-   *      not before the new render pass.
-   * @param {number} [options.backgroundColor=0x000000] - The background color of the rendered area
-   *  (shown if not transparent).
-   * @param {boolean} [options.roundPixels=false] - If true Tiny will Math.floor() x/y values when rendering,
-   *  stopping pixel interpolation.
+   * @param {number}            width                             - the width of the screen
+   * @param {number}            height                            - the height of the screen
+   * @param {object}            options                           - The optional renderer parameters
+   * @param {HTMLCanvasElement} options.view                      - the canvas to use as a view, optional
+   * @param {boolean}           options.antialias=false           - sets antialias (only applicable in chrome at the moment)
+   * @param {boolean}           options.autoResize=false          - If the render view is automatically resized, default false
+   * @param {number}            options.backgroundColor=0x000000  - The background color of the rendered area (shown if not transparent).
+   * @param {boolean}           options.clearBeforeRender=true    - This sets if the CanvasRenderer will clear the canvas or not before the new render pass.
+   * @param {number}            options.resolution=1              - The resolution / device pixel ratio of the renderer. The resolution of the renderer retina would be 2.
+   * @param {boolean}           options.roundPixels=false         - If true Tiny will Math.floor() x/y values when rendering, stopping pixel interpolation.
+   * @param {boolean}           options.transparent=false         - If the render view is transparent, default false
    */
-  function CanvasRenderer(options, arg2, arg3) {
+  function CanvasRenderer(width, height, options) {
     _classCallCheck(this, CanvasRenderer);
 
-    var _this = _possibleConstructorReturn(this, (CanvasRenderer.__proto__ || Object.getPrototypeOf(CanvasRenderer)).call(this, 'Canvas', options, arg2, arg3));
+    var _this = _possibleConstructorReturn(this, (CanvasRenderer.__proto__ || Object.getPrototypeOf(CanvasRenderer)).call(this, 'Canvas', width, height, options));
 
     _this.type = _const.RENDERER_TYPE.CANVAS;
 
@@ -3926,7 +4047,7 @@ var _eventemitter = __webpack_require__(6);
 
 var _eventemitter2 = _interopRequireDefault(_eventemitter);
 
-var _determineCrossOrigin = __webpack_require__(127);
+var _determineCrossOrigin = __webpack_require__(128);
 
 var _determineCrossOrigin2 = _interopRequireDefault(_determineCrossOrigin);
 
@@ -3953,9 +4074,9 @@ var BaseTexture = function (_EventEmitter) {
   _inherits(BaseTexture, _EventEmitter);
 
   /**
-   * @param {HTMLImageElement|HTMLCanvasElement} [source] - the source object of the texture.
-   * @param {number} [scaleMode=Tiny.settings.SCALE_MODE] - See {@link Tiny.SCALE_MODES} for possible values
-   * @param {number} [resolution=1] - The resolution / device pixel ratio of the texture
+   * @param {HTMLImageElement|HTMLCanvasElement}  source  - the source object of the texture.
+   * @param {number}                              scaleMode=Tiny.settings.SCALE_MODE  - See {@link Tiny.SCALE_MODES} for possible values
+   * @param {number}                              resolution=1  - The resolution / device pixel ratio of the texture
    */
   function BaseTexture(source, scaleMode, resolution) {
     _classCallCheck(this, BaseTexture);
@@ -4812,7 +4933,7 @@ function checkPrecision(src, def) {
 }
 
 /**
- * Wrapper class, webGL Shader for Tiny.
+ * Wrapper class, WebGL Shader.
  * Adds precision string if vertexSrc or fragmentSrc have no mention of it.
  *
  * @class
@@ -5214,32 +5335,23 @@ var WebGLRenderer = function (_SystemRenderer) {
 
   /**
    *
-   * @param {object} [options] - The optional renderer parameters
-   * @param {number} [options.width=800] - the width of the screen
-   * @param {number} [options.height=600] - the height of the screen
-   * @param {HTMLCanvasElement} [options.view] - the canvas to use as a view, optional
-   * @param {boolean} [options.transparent=false] - If the render view is transparent, default false
-   * @param {boolean} [options.autoResize=false] - If the render view is automatically resized, default false
-   * @param {boolean} [options.antialias=false] - sets antialias. If not available natively then FXAA
-   *  antialiasing is used
-   * @param {boolean} [options.forceFXAA=false] - forces FXAA antialiasing to be used over native.
-   *  FXAA is faster, but may not always look as great
-   * @param {number} [options.resolution=1] - The resolution / device pixel ratio of the renderer.
-   *  The resolution of the renderer retina would be 2.
-   * @param {boolean} [options.clearBeforeRender=true] - This sets if the CanvasRenderer will clear
-   *  the canvas or not before the new render pass. If you wish to set this to false, you *must* set
-   *  preserveDrawingBuffer to `true`.
-   * @param {boolean} [options.preserveDrawingBuffer=false] - enables drawing buffer preservation,
-   *  enable this if you need to call toDataUrl on the webgl context.
-   * @param {boolean} [options.roundPixels=false] - If true Tiny will Math.floor() x/y values when
-   *  rendering, stopping pixel interpolation.
-   *  @param {boolean} [options.legacy=false] - If true Tiny will aim to ensure compatibility
-   * with older / less advanced devices. If you experiance unexplained flickering try setting this to true.
+   * @param {number}            width                               - the width of the screen
+   * @param {number}            height                              - the height of the screen
+   * @param {object}            options                             - The optional renderer parameters
+   * @param {HTMLCanvasElement} options.view                        - the canvas to use as a view, optional
+   * @param {boolean}           options.antialias=false             - sets antialias. If not available natively then FXAA antialiasing is used
+   * @param {boolean}           options.autoResize=false            - If the render view is automatically resized, default false
+   * @param {boolean}           options.clearBeforeRender=true      - This sets if the CanvasRenderer will clear the canvas or not before the new render pass. If you wish to set this to false, you *must* set preserveDrawingBuffer to `true`.
+   * @param {boolean}           options.legacy=false                - If true Tiny will aim to ensure compatibility with older / less advanced devices. If you experiance unexplained flickering try setting this to true.
+   * @param {boolean}           options.preserveDrawingBuffer=false - enables drawing buffer preservation, enable this if you need to call toDataUrl on the webgl context.
+   * @param {number}            options.resolution=1                - The resolution / device pixel ratio of the renderer. The resolution of the renderer retina would be 2.
+   * @param {boolean}           options.roundPixels=false           - If true Tiny will Math.floor() x/y values when rendering, stopping pixel interpolation.
+   * @param {boolean}           options.transparent=false           - If the render view is transparent, default false
    */
-  function WebGLRenderer(options, arg2, arg3) {
+  function WebGLRenderer(width, height, options) {
     _classCallCheck(this, WebGLRenderer);
 
-    var _this = _possibleConstructorReturn(this, (WebGLRenderer.__proto__ || Object.getPrototypeOf(WebGLRenderer)).call(this, 'WebGL', options, arg2, arg3));
+    var _this = _possibleConstructorReturn(this, (WebGLRenderer.__proto__ || Object.getPrototypeOf(WebGLRenderer)).call(this, 'WebGL', width, height, options));
 
     _this.legacy = _this.options.legacy;
 
@@ -7593,7 +7705,7 @@ TWEEN.Interpolation = {
 		root.TWEEN = TWEEN;
 	}
 })(undefined);
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(32)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
 
 /***/ }),
 /* 21 */
@@ -7625,7 +7737,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /**
  * 动作类
  *
- * 对`Tween.js`做了一层封装，你可以通过`new Tiny.TWEEN.Tween(..)`来直接使用`Tween.js`原生方法
+ * `Action`是对`Tween.js`做的一层封装，你可以很方便的制作动画；你也可以通过`new Tiny.TWEEN.Tween(..)`来直接使用`Tween.js`原生方法
  *
  * @example
  *
@@ -7704,7 +7816,7 @@ var Action = function () {
      * @member {number}
      * @default 1
      */
-    this.repeatTimes = 1;
+    this.repeatTimes = 0;
 
     /**
      * 重复的延迟时间
@@ -7739,13 +7851,13 @@ var Action = function () {
       var self = this;
       return function (object) {
         var tween = new _tween2.default.Tween(object.getNature()).to(self.to, self.duration).repeat(self.repeatTimes).repeatDelay(self.repeatDelayTime).delay(self.delay).easing(self.easing).yoyo(self.yoyo).interpolation(self.interpolation).onStart(function () {
-          self._onStart(this, object);
+          self.onStart(this, object);
         }).onUpdate(function () {
-          self._onUpdate(this, object);
+          self.onUpdate(this, object);
         }).onComplete(function () {
-          self._onComplete(this, object);
+          self.onComplete(this, object);
         }).onStop(function () {
-          self._onStop(this, object);
+          self.onStop(this, object);
         });
 
         tween.name = self.name;
@@ -7763,26 +7875,6 @@ var Action = function () {
     value: function setName(name) {
       this.name = name;
     }
-  }, {
-    key: '_onStart',
-    value: function _onStart(tween, object) {
-      this.onStart(tween, object);
-    }
-  }, {
-    key: '_onUpdate',
-    value: function _onUpdate(tween, object) {
-      this.onUpdate(tween, object);
-    }
-  }, {
-    key: '_onComplete',
-    value: function _onComplete(tween, object) {
-      this.onComplete(tween, object);
-    }
-  }, {
-    key: '_onStop',
-    value: function _onStop(tween, object) {
-      this.onStop(tween, object);
-    }
 
     /**
      * 动画开始时的回调
@@ -7793,13 +7885,22 @@ var Action = function () {
 
   }, {
     key: 'onStart',
-    value: function onStart(tween, object) {}
-    //OVERRIDE
-
+    value: function onStart(tween, object) {
+      this._onStart(tween, object);
+    }
 
     /**
      * 动画更新时的回调
-     * > 注意：如果使用 Tiny 提供的静态 actions(eg: MoveBy, ScaleTo..) 同时又要使用 `onUpdate`，需要自己重写 action。
+     * > 注意：如果使用 Tiny 提供的静态 actions(eg: MoveBy, ScaleTo..) 同时又要使用`onUpdate`，需要调用`_onUpdate`来还原原 action，也可以自己重写 action。
+     *
+     * @example
+     *
+     * var moveByAction = Tiny.MoveBy(1000, Tiny.point(100, -200));
+     * moveByAction.onUpdate = function (tween, object) {
+     *  console.log('update');
+     *  // 还原 MoveBy 行为
+     *  this._onUpdate.call(this, tween, object);
+     * };
      *
      * @param tween
      * @param object
@@ -7807,12 +7908,22 @@ var Action = function () {
 
   }, {
     key: 'onUpdate',
-    value: function onUpdate(tween, object) {}
-    //OVERRIDE
-
+    value: function onUpdate(tween, object) {
+      this._onUpdate(tween, object);
+    }
 
     /**
      * 动画完成的回调
+     *
+     * @example
+     *
+     * var moveByAction = Tiny.MoveBy(1000, Tiny.point(2));
+     * moveByAction.onComplete = function (tween, object) {
+     *  console.log('completed!');
+     *  // 还原 MoveBy 行为，一般用在 Repeat/RepeatForever 的情况
+     *  this._onComplete.call(this, tween, object);
+     * };
+     * sprite.runAction(Tiny.RepeatForever(moveByAction));
      *
      * @param tween
      * @param object
@@ -7820,9 +7931,9 @@ var Action = function () {
 
   }, {
     key: 'onComplete',
-    value: function onComplete(tween, object) {}
-    //OVERRIDE
-
+    value: function onComplete(tween, object) {
+      this._onComplete(tween, object);
+    }
 
     /**
      * 动画停止的回调
@@ -7833,7 +7944,27 @@ var Action = function () {
 
   }, {
     key: 'onStop',
-    value: function onStop(tween, object) {}
+    value: function onStop(tween, object) {
+      this._onStop(tween, object);
+    }
+  }, {
+    key: '_onStart',
+    value: function _onStart(tween, object) {
+      //OVERRIDE
+    }
+  }, {
+    key: '_onUpdate',
+    value: function _onUpdate(tween, object) {
+      //OVERRIDE
+    }
+  }, {
+    key: '_onComplete',
+    value: function _onComplete(tween, object) {
+      //OVERRIDE
+    }
+  }, {
+    key: '_onStop',
+    value: function _onStop(tween, object) {}
     //OVERRIDE
 
 
@@ -7912,6 +8043,56 @@ Action.cleanup = function (sprite) {
 };
 
 /**
+ * 克隆某个 Action
+ * 如果要让某个 Action 被多个精灵使用，请使用 clone 方法以避免因为精灵的初始状态不一导致的动画冲突
+ *
+ * @example
+ *
+ * var action = Tiny.MoveBy(1000, Tiny.point(10));
+ * sprite1.runAction(action);
+ * sprite2.runAction(Tiny.Action.clone(action));
+ * sprite3.runAction(Tiny.Repeat(5, Tiny.Action.clone(action)));
+ *
+ * @example
+ *
+ * var action1 = Tiny.ScaleTo(500, Tiny.scale(0.5));
+ * var action2 = var action = Tiny.RotateBy(1000, {rotation: Tiny.deg2radian(-75)});
+ * sprite1.runAction(action1);
+ * sprite2.runSequenceAction(Tiny.Action.clone(action1), action2);
+ *
+ * @param {Tiny.Action}  action
+ * @return {Tiny.Action} obj
+ */
+Action.clone = function (action) {
+  if (action === null || !core.isObject(action)) {
+    return action;
+  }
+  var type = action._type;
+  var to = core.isUndefined(action._to) ? action.to : action._to;
+  if (core.isObject(to)) {
+    to = Object.assign(Object.create(Object.prototype), to);
+  }
+  var clone = void 0;
+  switch (type) {
+    case 'Blink':
+    case 'TintBy':
+    case 'TintTo':
+      clone = Tiny[type](action._arg[0], action._arg[1]);
+      break;
+    case 'JumpTo':
+      clone = Tiny[type](action.duration, to, action._arg[0], action._arg[1]);
+      break;
+    default:
+      clone = Tiny[type](action.duration, to);
+  }
+  clone.setDelay(action.delay);
+  clone.setEasing(action.easing);
+  clone.setInterpolation(action.interpolation);
+  clone.setRepeatDelay(action.repeatDelayTime);
+  return clone;
+};
+
+/**
  * 让 action 们动起来吧
  *
  * > Tips: 多组action同时：`runAction([action1, action2], action3)`
@@ -7929,6 +8110,7 @@ Action.cleanup = function (sprite) {
 core.Container.prototype.runAction = function (actions) {
   var actionArray = core.isArray(actions) ? actions : arguments;
   for (var i = 0; i < actionArray.length; i++) {
+    actionArray[i]._caller = 'runAction';
     var action = actionArray[i].create()(this).start();
     this.actions.push(action);
   }
@@ -7995,7 +8177,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * It is not a shape! Its mutable thing, no 'EMPTY' or that kind of problems
  *
  * @class
- * @memberOf Tiny
+ * @memberof Tiny
  */
 var Bounds = function () {
   /**
@@ -8447,6 +8629,559 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _Point = __webpack_require__(25);
+
+var _Point2 = _interopRequireDefault(_Point);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
+ * Matrix class as an object, which makes it a lot faster,
+ * here is a representation of it :
+ * | a | b | tx|
+ * | c | d | ty|
+ * | 0 | 0 | 1 |
+ *
+ * @class
+ * @memberof Tiny
+ */
+var Matrix = function () {
+  /**
+   * @param {number} [a=1] - x scale
+   * @param {number} [b=0] - y skew
+   * @param {number} [c=0] - x skew
+   * @param {number} [d=1] - y scale
+   * @param {number} [tx=0] - x translation
+   * @param {number} [ty=0] - y translation
+   */
+  function Matrix() {
+    var a = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+    var b = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+    var c = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+    var d = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 1;
+    var tx = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 0;
+    var ty = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 0;
+
+    _classCallCheck(this, Matrix);
+
+    /**
+     * @member {number}
+     * @default 1
+     */
+    this.a = a;
+
+    /**
+     * @member {number}
+     * @default 0
+     */
+    this.b = b;
+
+    /**
+     * @member {number}
+     * @default 0
+     */
+    this.c = c;
+
+    /**
+     * @member {number}
+     * @default 1
+     */
+    this.d = d;
+
+    /**
+     * @member {number}
+     * @default 0
+     */
+    this.tx = tx;
+
+    /**
+     * @member {number}
+     * @default 0
+     */
+    this.ty = ty;
+
+    this.array = null;
+  }
+
+  /**
+   * Creates a Matrix object based on the given array. The Element to Matrix mapping order is as follows:
+   *
+   * a = array[0]
+   * b = array[1]
+   * c = array[3]
+   * d = array[4]
+   * tx = array[2]
+   * ty = array[5]
+   *
+   * @param {number[]} array - The array that the matrix will be populated from.
+   */
+
+
+  _createClass(Matrix, [{
+    key: 'fromArray',
+    value: function fromArray(array) {
+      this.a = array[0];
+      this.b = array[1];
+      this.c = array[3];
+      this.d = array[4];
+      this.tx = array[2];
+      this.ty = array[5];
+    }
+
+    /**
+     * sets the matrix properties
+     *
+     * @param {number} a - Matrix component
+     * @param {number} b - Matrix component
+     * @param {number} c - Matrix component
+     * @param {number} d - Matrix component
+     * @param {number} tx - Matrix component
+     * @param {number} ty - Matrix component
+     *
+     * @return {Tiny.Matrix} This matrix. Good for chaining method calls.
+     */
+
+  }, {
+    key: 'set',
+    value: function set(a, b, c, d, tx, ty) {
+      this.a = a;
+      this.b = b;
+      this.c = c;
+      this.d = d;
+      this.tx = tx;
+      this.ty = ty;
+
+      return this;
+    }
+
+    /**
+     * Creates an array from the current Matrix object.
+     *
+     * @param {boolean} transpose - Whether we need to transpose the matrix or not
+     * @param {Float32Array} [out=new Float32Array(9)] - If provided the array will be assigned to out
+     * @return {number[]} the newly created array which contains the matrix
+     */
+
+  }, {
+    key: 'toArray',
+    value: function toArray(transpose, out) {
+      if (!this.array) {
+        this.array = new Float32Array(9);
+      }
+
+      var array = out || this.array;
+
+      if (transpose) {
+        array[0] = this.a;
+        array[1] = this.b;
+        array[2] = 0;
+        array[3] = this.c;
+        array[4] = this.d;
+        array[5] = 0;
+        array[6] = this.tx;
+        array[7] = this.ty;
+        array[8] = 1;
+      } else {
+        array[0] = this.a;
+        array[1] = this.c;
+        array[2] = this.tx;
+        array[3] = this.b;
+        array[4] = this.d;
+        array[5] = this.ty;
+        array[6] = 0;
+        array[7] = 0;
+        array[8] = 1;
+      }
+
+      return array;
+    }
+
+    /**
+     * Get a new position with the current transformation applied.
+     * Can be used to go from a child's coordinate space to the world coordinate space. (e.g. rendering)
+     *
+     * @param {Tiny.Point} pos - The origin
+     * @param {Tiny.Point} [newPos] - The point that the new position is assigned to (allowed to be same as input)
+     * @return {Tiny.Point} The new point, transformed through this matrix
+     */
+
+  }, {
+    key: 'apply',
+    value: function apply(pos, newPos) {
+      newPos = newPos || new _Point2.default();
+
+      var x = pos.x;
+      var y = pos.y;
+
+      newPos.x = this.a * x + this.c * y + this.tx;
+      newPos.y = this.b * x + this.d * y + this.ty;
+
+      return newPos;
+    }
+
+    /**
+     * Get a new position with the inverse of the current transformation applied.
+     * Can be used to go from the world coordinate space to a child's coordinate space. (e.g. input)
+     *
+     * @param {Tiny.Point} pos - The origin
+     * @param {Tiny.Point} [newPos] - The point that the new position is assigned to (allowed to be same as input)
+     * @return {Tiny.Point} The new point, inverse-transformed through this matrix
+     */
+
+  }, {
+    key: 'applyInverse',
+    value: function applyInverse(pos, newPos) {
+      newPos = newPos || new _Point2.default();
+
+      var id = 1 / (this.a * this.d + this.c * -this.b);
+
+      var x = pos.x;
+      var y = pos.y;
+
+      newPos.x = this.d * id * x + -this.c * id * y + (this.ty * this.c - this.tx * this.d) * id;
+      newPos.y = this.a * id * y + -this.b * id * x + (-this.ty * this.a + this.tx * this.b) * id;
+
+      return newPos;
+    }
+
+    /**
+     * Translates the matrix on the x and y.
+     *
+     * @param {number} x How much to translate x by
+     * @param {number} y How much to translate y by
+     * @return {Tiny.Matrix} This matrix. Good for chaining method calls.
+     */
+
+  }, {
+    key: 'translate',
+    value: function translate(x, y) {
+      this.tx += x;
+      this.ty += y;
+
+      return this;
+    }
+
+    /**
+     * Applies a scale transformation to the matrix.
+     *
+     * @param {number} x The amount to scale horizontally
+     * @param {number} y The amount to scale vertically
+     * @return {Tiny.Matrix} This matrix. Good for chaining method calls.
+     */
+
+  }, {
+    key: 'scale',
+    value: function scale(x, y) {
+      this.a *= x;
+      this.d *= y;
+      this.c *= x;
+      this.b *= y;
+      this.tx *= x;
+      this.ty *= y;
+
+      return this;
+    }
+
+    /**
+     * Applies a rotation transformation to the matrix.
+     *
+     * @param {number} angle - The angle in radians.
+     * @return {Tiny.Matrix} This matrix. Good for chaining method calls.
+     */
+
+  }, {
+    key: 'rotate',
+    value: function rotate(angle) {
+      var cos = Math.cos(angle);
+      var sin = Math.sin(angle);
+
+      var a1 = this.a;
+      var c1 = this.c;
+      var tx1 = this.tx;
+
+      this.a = a1 * cos - this.b * sin;
+      this.b = a1 * sin + this.b * cos;
+      this.c = c1 * cos - this.d * sin;
+      this.d = c1 * sin + this.d * cos;
+      this.tx = tx1 * cos - this.ty * sin;
+      this.ty = tx1 * sin + this.ty * cos;
+
+      return this;
+    }
+
+    /**
+     * Appends the given Matrix to this Matrix.
+     *
+     * @param {Tiny.Matrix} matrix - The matrix to append.
+     * @return {Tiny.Matrix} This matrix. Good for chaining method calls.
+     */
+
+  }, {
+    key: 'append',
+    value: function append(matrix) {
+      var a1 = this.a;
+      var b1 = this.b;
+      var c1 = this.c;
+      var d1 = this.d;
+
+      this.a = matrix.a * a1 + matrix.b * c1;
+      this.b = matrix.a * b1 + matrix.b * d1;
+      this.c = matrix.c * a1 + matrix.d * c1;
+      this.d = matrix.c * b1 + matrix.d * d1;
+
+      this.tx = matrix.tx * a1 + matrix.ty * c1 + this.tx;
+      this.ty = matrix.tx * b1 + matrix.ty * d1 + this.ty;
+
+      return this;
+    }
+
+    /**
+     * Sets the matrix based on all the available properties
+     *
+     * @param {number} x - Position on the x axis
+     * @param {number} y - Position on the y axis
+     * @param {number} pivotX - Pivot on the x axis
+     * @param {number} pivotY - Pivot on the y axis
+     * @param {number} scaleX - Scale on the x axis
+     * @param {number} scaleY - Scale on the y axis
+     * @param {number} rotation - Rotation in radians
+     * @param {number} skewX - Skew on the x axis
+     * @param {number} skewY - Skew on the y axis
+     * @return {Tiny.Matrix} This matrix. Good for chaining method calls.
+     */
+
+  }, {
+    key: 'setTransform',
+    value: function setTransform(x, y, pivotX, pivotY, scaleX, scaleY, rotation, skewX, skewY) {
+      var sr = Math.sin(rotation);
+      var cr = Math.cos(rotation);
+      var cy = Math.cos(skewY);
+      var sy = Math.sin(skewY);
+      var nsx = -Math.sin(skewX);
+      var cx = Math.cos(skewX);
+
+      var a = cr * scaleX;
+      var b = sr * scaleX;
+      var c = -sr * scaleY;
+      var d = cr * scaleY;
+
+      this.a = cy * a + sy * c;
+      this.b = cy * b + sy * d;
+      this.c = nsx * a + cx * c;
+      this.d = nsx * b + cx * d;
+
+      this.tx = x + (pivotX * a + pivotY * c);
+      this.ty = y + (pivotX * b + pivotY * d);
+
+      return this;
+    }
+
+    /**
+     * Prepends the given Matrix to this Matrix.
+     *
+     * @param {Tiny.Matrix} matrix - The matrix to prepend
+     * @return {Tiny.Matrix} This matrix. Good for chaining method calls.
+     */
+
+  }, {
+    key: 'prepend',
+    value: function prepend(matrix) {
+      var tx1 = this.tx;
+
+      if (matrix.a !== 1 || matrix.b !== 0 || matrix.c !== 0 || matrix.d !== 1) {
+        var a1 = this.a;
+        var c1 = this.c;
+
+        this.a = a1 * matrix.a + this.b * matrix.c;
+        this.b = a1 * matrix.b + this.b * matrix.d;
+        this.c = c1 * matrix.a + this.d * matrix.c;
+        this.d = c1 * matrix.b + this.d * matrix.d;
+      }
+
+      this.tx = tx1 * matrix.a + this.ty * matrix.c + matrix.tx;
+      this.ty = tx1 * matrix.b + this.ty * matrix.d + matrix.ty;
+
+      return this;
+    }
+
+    /**
+     * Decomposes the matrix (x, y, scaleX, scaleY, and rotation) and sets the properties on to a transform.
+     *
+     * @param {Tiny.Transform|Tiny.TransformStatic} transform - The transform to apply the properties to.
+     * @return {Tiny.Transform|Tiny.TransformStatic} The transform with the newly applied properties
+     */
+
+  }, {
+    key: 'decompose',
+    value: function decompose(transform) {
+      // sort out rotation / skew..
+      var a = this.a;
+      var b = this.b;
+      var c = this.c;
+      var d = this.d;
+
+      var skewX = -Math.atan2(-c, d);
+      var skewY = Math.atan2(b, a);
+
+      var delta = Math.abs(skewX + skewY);
+
+      if (delta < 0.00001) {
+        transform.rotation = skewY;
+
+        if (a < 0 && d >= 0) {
+          transform.rotation += transform.rotation <= 0 ? Math.PI : -Math.PI;
+        }
+
+        transform.skew.x = transform.skew.y = 0;
+      } else {
+        transform.skew.x = skewX;
+        transform.skew.y = skewY;
+      }
+
+      // next set scale
+      transform.scale.x = Math.sqrt(a * a + b * b);
+      transform.scale.y = Math.sqrt(c * c + d * d);
+
+      // next set position
+      transform.position.x = this.tx;
+      transform.position.y = this.ty;
+
+      return transform;
+    }
+
+    /**
+     * Inverts this matrix
+     *
+     * @return {Tiny.Matrix} This matrix. Good for chaining method calls.
+     */
+
+  }, {
+    key: 'invert',
+    value: function invert() {
+      var a1 = this.a;
+      var b1 = this.b;
+      var c1 = this.c;
+      var d1 = this.d;
+      var tx1 = this.tx;
+      var n = a1 * d1 - b1 * c1;
+
+      this.a = d1 / n;
+      this.b = -b1 / n;
+      this.c = -c1 / n;
+      this.d = a1 / n;
+      this.tx = (c1 * this.ty - d1 * tx1) / n;
+      this.ty = -(a1 * this.ty - b1 * tx1) / n;
+
+      return this;
+    }
+
+    /**
+     * Resets this Matix to an identity (default) matrix.
+     *
+     * @return {Tiny.Matrix} This matrix. Good for chaining method calls.
+     */
+
+  }, {
+    key: 'identity',
+    value: function identity() {
+      this.a = 1;
+      this.b = 0;
+      this.c = 0;
+      this.d = 1;
+      this.tx = 0;
+      this.ty = 0;
+
+      return this;
+    }
+
+    /**
+     * Creates a new Matrix object with the same values as this one.
+     *
+     * @return {Tiny.Matrix} A copy of this matrix. Good for chaining method calls.
+     */
+
+  }, {
+    key: 'clone',
+    value: function clone() {
+      var matrix = new Matrix();
+
+      matrix.a = this.a;
+      matrix.b = this.b;
+      matrix.c = this.c;
+      matrix.d = this.d;
+      matrix.tx = this.tx;
+      matrix.ty = this.ty;
+
+      return matrix;
+    }
+
+    /**
+     * Changes the values of the given matrix to be the same as the ones in this matrix
+     *
+     * @param {Tiny.Matrix} matrix - The matrix to copy from.
+     * @return {Tiny.Matrix} The matrix given in parameter with its values updated.
+     */
+
+  }, {
+    key: 'copy',
+    value: function copy(matrix) {
+      matrix.a = this.a;
+      matrix.b = this.b;
+      matrix.c = this.c;
+      matrix.d = this.d;
+      matrix.tx = this.tx;
+      matrix.ty = this.ty;
+
+      return matrix;
+    }
+
+    /**
+     * A default (identity) matrix
+     *
+     * @static
+     * @const
+     */
+
+  }], [{
+    key: 'IDENTITY',
+    get: function get() {
+      return new Matrix();
+    }
+
+    /**
+     * A temp matrix
+     *
+     * @static
+     * @const
+     */
+
+  }, {
+    key: 'TEMP_MATRIX',
+    get: function get() {
+      return new Matrix();
+    }
+  }]);
+
+  return Matrix;
+}();
+
+exports.default = Matrix;
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /**
@@ -8540,7 +9275,7 @@ var Point = function () {
 exports.default = Point;
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8817,7 +9552,7 @@ var Rectangle = function () {
 exports.default = Rectangle;
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8860,9 +9595,9 @@ var tempPoint = new _math.Point();
  *
  * A sprite can be created directly from an image like this:
  *
- * ```js
- * let sprite = new Tiny.Sprite.fromImage('assets/image.png');
- * ```
+ *  ```js
+ *  let sprite = new Tiny.Sprite.fromImage('assets/image.png');
+ *  ```
  *
  * @class
  * @extends Tiny.Container
@@ -9301,9 +10036,22 @@ var Sprite = function (_Container) {
 
   }, {
     key: 'setAnchor',
+
+
+    /**
+     *
+     * @param x
+     * @param y
+     */
     value: function setAnchor(x, y) {
       this.anchor.set(x, y === void 0 ? x : y);
     }
+
+    /**
+     *
+     * @return {object}
+     */
+
   }, {
     key: 'getAnchor',
     value: function getAnchor() {
@@ -9465,7 +10213,7 @@ var Sprite = function (_Container) {
 exports.default = Sprite;
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9502,9 +10250,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
  * A RenderTexture takes a snapshot of any Display Object given to its render method. For example:
  *
  * ```js
- * let renderer = (new Tiny.Application(..)).renderer;
+ * let renderer = (new Tiny.Application()).renderer;
  * let renderTexture = Tiny.RenderTexture.create(800, 600);
- * let sprite = Tiny.Sprite.fromImage("spinObj_01.png");
+ * let sprite = Tiny.Sprite.fromImage('spinObj_01.png');
  *
  * sprite.position.x = 800/2;
  * sprite.position.y = 600/2;
@@ -9628,7 +10376,7 @@ var RenderTexture = function (_Texture) {
 exports.default = RenderTexture;
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9639,7 +10387,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Ticker = exports.shared = undefined;
 
-var _Ticker = __webpack_require__(123);
+var _Ticker = __webpack_require__(124);
 
 var _Ticker2 = _interopRequireDefault(_Ticker);
 
@@ -9665,9 +10413,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @example
  * // You may use the shared ticker to render...
- * let renderer = Tiny.autoDetectRenderer(800, 600);
+ * let renderer = new Tiny.CanvasRenderer(800, 600);
  * let stage = new Tiny.Container();
- * let interactionManager = Tiny.interaction.InteractionManager(renderer);
  * document.body.appendChild(renderer.view);
  * ticker.add(function (time) {
  *     renderer.render(stage);
@@ -9714,7 +10461,7 @@ exports.shared = shared;
 exports.Ticker = _Ticker2.default;
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9730,7 +10477,7 @@ var _core = __webpack_require__(5);
 
 var core = _interopRequireWildcard(_core);
 
-var _ActionInterval = __webpack_require__(44);
+var _ActionInterval = __webpack_require__(45);
 
 var ActionInterval = _interopRequireWildcard(_ActionInterval);
 
@@ -10167,7 +10914,7 @@ var Transition = function () {
 exports.default = Transition;
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports) {
 
 /* WEBPACK VAR INJECTION */(function(__webpack_amd_options__) {/* globals __webpack_amd_options__ */
@@ -10176,7 +10923,7 @@ module.exports = __webpack_amd_options__;
 /* WEBPACK VAR INJECTION */}.call(exports, {}))
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10401,10 +11148,10 @@ var substr = 'ab'.substr(-1) === 'b' ? function (str, start, len) {
   if (start < 0) start = str.length + start;
   return str.substr(start, len);
 };
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(32)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10597,7 +11344,7 @@ process.umask = function () {
 };
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10893,7 +11640,7 @@ Texture.fromData = function (gl, data, width, height) {
 module.exports = Texture;
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10943,7 +11690,7 @@ var setVertexAttribArrays = function setVertexAttribArrays(gl, attribs, state) {
 module.exports = setVertexAttribArrays;
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11022,7 +11769,7 @@ var compileShader = function compileShader(gl, type, src) {
 module.exports = compileProgram;
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11098,14 +11845,14 @@ var booleanArray = function booleanArray(size) {
 module.exports = defaultValue;
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var mapType = __webpack_require__(19);
-var mapSize = __webpack_require__(40);
+var mapSize = __webpack_require__(41);
 
 /**
  * Extracts the attributes
@@ -11144,14 +11891,14 @@ var pointer = function pointer(type, normalized, stride, start) {
 module.exports = extractAttributes;
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var mapType = __webpack_require__(19);
-var defaultValue = __webpack_require__(36);
+var defaultValue = __webpack_require__(37);
 
 /**
  * Extracts the uniforms
@@ -11185,7 +11932,7 @@ var extractUniforms = function extractUniforms(gl, program) {
 module.exports = extractUniforms;
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11317,7 +12064,7 @@ var GLSL_TO_ARRAY_SETTERS = {
 module.exports = generateUniformAccessObject;
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11359,7 +12106,7 @@ var GLSL_TO_SIZE = {
 module.exports = mapSize;
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11383,7 +12130,7 @@ var setPrecision = function setPrecision(src, precision) {
 module.exports = setPrecision;
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12029,7 +12776,7 @@ earcut.flatten = function (data) {
 };
 
 /***/ }),
-/* 43 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12059,7 +12806,7 @@ try {
 module.exports = g;
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12083,6 +12830,7 @@ exports.TintBy = TintBy;
 exports.TintTo = TintTo;
 exports.RepeatForever = RepeatForever;
 exports.Repeat = Repeat;
+exports.Back = Back;
 
 var _Action = __webpack_require__(21);
 
@@ -12096,14 +12844,23 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @function MoveBy
  * @param {number}  duration
  * @param {object}  to
+ * @param {number}  to.x
+ * @param {number}  to.y
  * @return {Tiny.Action}
  */
 function MoveBy(duration, to) {
-  var action = new _Action2.default(duration, to);
-  action.yoyo = true;
-  action.onUpdate = function (tween, object) {
+  var _to = {};
+  Object.assign(_to, to);
+  var action = new _Action2.default(duration, _to);
+  action._to = to;
+  action._onStart = function (tween, object) {
+    action.to.x = object.x + to.x;
+    action.to.y = object.y + to.y;
+  };
+  action._onUpdate = function (tween, object) {
     object.setPosition(tween.x, tween.y);
   };
+  action._type = 'MoveBy';
   return action;
 }
 
@@ -12113,13 +12870,16 @@ function MoveBy(duration, to) {
  * @function MoveTo
  * @param {number}  duration
  * @param {object}  to
+ * @param {number}  to.x
+ * @param {number}  to.y
  * @return {Tiny.Action}
  */
 function MoveTo(duration, to) {
-  var action = MoveBy(duration, to);
-  action.yoyo = false;
-  action.repeatTimes = 0;
-
+  var action = new _Action2.default(duration, to);
+  action._onUpdate = function (tween, object) {
+    object.setPosition(tween.x, tween.y);
+  };
+  action._type = 'MoveTo';
   return action;
 }
 
@@ -12129,14 +12889,23 @@ function MoveTo(duration, to) {
  * @function ScaleBy
  * @param {number}  duration
  * @param {object}  to
+ * @param {object}  to.scaleX
+ * @param {object}  to.scaleY
  * @return {Tiny.Action}
  */
 function ScaleBy(duration, to) {
-  var action = new _Action2.default(duration, to);
-  action.yoyo = true;
-  action.onUpdate = function (tween, object) {
+  var _to = {};
+  Object.assign(_to, to);
+  var action = new _Action2.default(duration, _to);
+  action._to = to;
+  action._onStart = function (tween, object) {
+    action.to.scaleX = object.scale.x * to.scaleX;
+    action.to.scaleY = object.scale.y * to.scaleY;
+  };
+  action._onUpdate = function (tween, object) {
     object.setScale(tween.scaleX, tween.scaleY);
   };
+  action._type = 'ScaleBy';
   return action;
 }
 
@@ -12146,13 +12915,16 @@ function ScaleBy(duration, to) {
  * @function ScaleTo
  * @param {number}  duration
  * @param {object}  to
+ * @param {object}  to.scaleX
+ * @param {object}  to.scaleY
  * @return {Tiny.Action}
  */
 function ScaleTo(duration, to) {
-  var action = ScaleBy(duration, to);
-  action.yoyo = false;
-  action.repeatTimes = 0;
-
+  var action = new _Action2.default(duration, to);
+  action._onUpdate = function (tween, object) {
+    object.setScale(tween.scaleX, tween.scaleY);
+  };
+  action._type = 'ScaleTo';
   return action;
 }
 
@@ -12162,14 +12934,21 @@ function ScaleTo(duration, to) {
  * @function RotateBy
  * @param {number}  duration
  * @param {object}  to
+ * @param {number}  to.rotation
  * @return {Tiny.Action}
  */
 function RotateBy(duration, to) {
-  var action = new _Action2.default(duration, to);
-  action.yoyo = true;
-  action.onUpdate = function (tween, object) {
+  var _to = {};
+  Object.assign(_to, to);
+  var action = new _Action2.default(duration, _to);
+  action._to = to;
+  action._onStart = function (tween, object) {
+    action.to.rotation = Tiny.deg2radian(Tiny.radian2deg(object.rotation) + Tiny.radian2deg(to.rotation));
+  };
+  action._onUpdate = function (tween, object) {
     object.rotation = tween.rotation;
   };
+  action._type = 'RotateBy';
   return action;
 }
 
@@ -12179,13 +12958,15 @@ function RotateBy(duration, to) {
  * @function RotateTo
  * @param {number}  duration
  * @param {object}  to
+ * @param {number}  to.rotation
  * @return {Tiny.Action}
  */
 function RotateTo(duration, to) {
-  var action = RotateBy(duration, to);
-  action.yoyo = false;
-  action.repeatTimes = 0;
-
+  var action = new _Action2.default(duration, to);
+  action._onUpdate = function (tween, object) {
+    object.rotation = tween.rotation;
+  };
+  action._type = 'RotateTo';
   return action;
 }
 
@@ -12200,23 +12981,29 @@ function RotateTo(duration, to) {
  * @return {Tiny.Action}
  */
 function JumpTo(duration, to, height, times) {
+  var _to = {};
+  Object.assign(_to, to);
+
   var newY = [];
   for (var i = 0; i < times * 2; i++) {
     if (i % 2 === 0) {
-      newY.push(to.y - height);
+      newY.push(_to.y - height);
     } else {
-      newY.push(to.y);
+      newY.push(_to.y);
     }
   }
 
-  to.y = newY;
+  _to.y = newY;
 
-  var action = new _Action2.default(duration, to);
+  var action = new _Action2.default(duration, _to);
+  action._to = to;
   action.yoyo = false;
   action.repeatTimes = 0;
-  action.onUpdate = function (tween, object) {
+  action._onUpdate = function (tween, object) {
     object.setPosition(tween.x, tween.y);
   };
+  action._type = 'JumpTo';
+  action._arg = [height, times];
   return action;
 }
 
@@ -12242,9 +13029,11 @@ function Blink(hideDuration, showDuration) {
   });
   action.yoyo = false;
   action.repeatTimes = 0;
-  action.onUpdate = function (tween, object) {
+  action._onUpdate = function (tween, object) {
     object.visible = ~~tween.visible;
   };
+  action._type = 'Blink';
+  action._arg = [hideDuration, showDuration];
   return action;
 }
 
@@ -12260,11 +13049,13 @@ function FadeTo(duration, to) {
   var action = new _Action2.default(duration, {
     alpha: to
   });
+  action._to = to;
   action.yoyo = false;
   action.repeatTimes = 0;
-  action.onUpdate = function (tween, object) {
+  action._onUpdate = function (tween, object) {
     object.setOpacity(tween.alpha);
   };
+  action._type = 'FadeTo';
   return action;
 }
 
@@ -12294,18 +13085,29 @@ function FadeOut(duration) {
  * @static
  * @memberof Tiny
  * @function TintBy
- * @param {number}  duration
- * @param {number}  color
+ * @param {number}              duration
+ * @param {number|Tiny.color}   color
  * @return {Tiny.Action}
  */
 function TintBy(duration, color) {
-  var action = new _Action2.default(duration, {
-    tint: color
-  });
-  action.yoyo = true;
-  action.onUpdate = function (tween, object) {
-    object.tint = ~~tween.tint;
+  if (Tiny.isNumber(color)) {
+    var c = Tiny.hex2rgb(color);
+    color = Tiny.color(c[0] * 255, c[1] * 255, c[2] * 255, c[3]);
+  }
+  var action = TintTo(duration, color);
+  action._onStart = function (tween, object) {
+    !object.__tmp_tintby_color && (object.__tmp_tintby_color = Object.assign({}, color));
+    var oc = Tiny.hex2rgb(object.tint);
+    action.to.colorR = oc[0] * 255 - object.__tmp_tintby_color.r;
+    action.to.colorG = oc[1] * 255 - object.__tmp_tintby_color.g;
+    action.to.colorB = oc[2] * 255 - object.__tmp_tintby_color.b;
+    action.to.colorR < 0 && (action.to.colorR = 0);
+    action.to.colorG < 0 && (action.to.colorG = 0);
+    action.to.colorB < 0 && (action.to.colorB = 0);
+    action.to.colorA = object.__tmp_tintby_color.a;
   };
+  action._type = 'TintBy';
+  action._arg = [duration, color];
   return action;
 }
 
@@ -12313,15 +13115,26 @@ function TintBy(duration, color) {
  * @static
  * @memberof Tiny
  * @function TintTo
- * @param {number}  duration
- * @param {number}  color
+ * @param {number}              duration
+ * @param {number|Tiny.color}   color
  * @return {Tiny.Action}
  */
 function TintTo(duration, color) {
-  var action = TintBy(duration, color);
-  action.yoyo = false;
-  action.repeatTimes = 0;
-
+  if (Tiny.isNumber(color)) {
+    var c = Tiny.hex2rgb(color);
+    color = Tiny.color(c[0] * 255, c[1] * 255, c[2] * 255, c[3]);
+  }
+  var action = new _Action2.default(duration, {
+    colorR: color.r,
+    colorG: color.g,
+    colorB: color.b,
+    colorA: color.a
+  });
+  action._onUpdate = function (tween, object) {
+    object.tint = Tiny.rgb2hex([tween.colorR / 255, tween.colorG / 255, tween.colorB / 255]);
+  };
+  action._type = 'TintTo';
+  action._arg = [duration, color];
   return action;
 }
 
@@ -12334,9 +13147,7 @@ function TintTo(duration, color) {
  * @return {Tiny.Action}
  */
 function RepeatForever(action, delay) {
-  action.repeatTimes = Infinity;
-  delay && (action.repeatDelayTime = delay);
-  return action;
+  return Repeat(Infinity, action, delay);
 }
 
 /**
@@ -12349,13 +13160,76 @@ function RepeatForever(action, delay) {
  * @return {Tiny.Action}
  */
 function Repeat(times, action, delay) {
-  action.repeatTimes = times;
-  delay && (action.repeatDelayTime = delay);
+  !delay && action.repeatDelayTime && (delay = action.repeatDelayTime);
+
+  if (action._type && ['MoveBy', 'ScaleBy', 'RotateBy', 'TintBy'].indexOf(action._type) !== -1) {
+    action._onComplete = function (tween, object) {
+      if (!object.__tmp_times) {
+        object.__tmp_times = 1;
+      }
+      object.__tmp_times++;
+      if (object.__tmp_times > times) {
+        return;
+      }
+      if (action._caller === 'runAction') {
+        var fn = void 0;
+        switch (action._type) {
+          case 'MoveBy':
+            fn = MoveBy;
+            break;
+          case 'ScaleBy':
+            fn = ScaleBy;
+            break;
+          case 'RotateBy':
+            fn = RotateBy;
+            break;
+          case 'TintBy':
+            fn = TintBy;
+            break;
+        }
+        if (!fn) {
+          return;
+        }
+        var act = fn(action.duration, Object.assign(Object.create(Object.prototype), action._to || action.to));
+        act._onComplete = action._onComplete;
+        act.onStart = action.onStart;
+        act.onUpdate = action.onUpdate;
+        act.onComplete = action.onComplete;
+        object.runAction(act);
+      }
+    };
+    return action;
+  }
+
+  action.repeatDelayTime = delay;
+  action.repeatTimes = times - 1;
+  action._type = 'Repeat';
+  return action;
+}
+
+/**
+ * 原动作返回
+ *
+ * @static
+ * @memberof Tiny
+ * @function Back
+ * @param {Tiny.Action} action
+ * @return {Tiny.Action}
+ */
+function Back(action) {
+  action.yoyo = true;
+  if (!action.repeatTimes) {
+    action.repeatTimes = 1;
+  }
+  if (action._type === 'Repeat') {
+    action.repeatTimes = (action.repeatTimes - 1) * 2 + 1;
+  }
+  action._type = 'Back';
   return action;
 }
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12377,11 +13251,11 @@ var _settings = __webpack_require__(3);
 
 var _settings2 = _interopRequireDefault(_settings);
 
-var _TransformStatic = __webpack_require__(47);
+var _TransformStatic = __webpack_require__(48);
 
 var _TransformStatic2 = _interopRequireDefault(_TransformStatic);
 
-var _Transform = __webpack_require__(46);
+var _Transform = __webpack_require__(47);
 
 var _Transform2 = _interopRequireDefault(_Transform);
 
@@ -12562,6 +13436,8 @@ var DisplayObject = function (_EventEmitter) {
     /**
      * recursively updates transform of all objects from the root to this one
      * internal function for toLocal()
+     *
+     * @private
      */
 
   }, {
@@ -12846,8 +13722,9 @@ var DisplayObject = function (_EventEmitter) {
     }
 
     /**
+     * 设置是否可交互
      *
-     * @param b
+     * @param {boolean} b
      */
 
   }, {
@@ -12855,79 +13732,196 @@ var DisplayObject = function (_EventEmitter) {
     value: function setEventEnabled(b) {
       this.interactive = !!b;
     }
+
+    /**
+     *
+     * @param {number} x
+     * @param {number} y
+     */
+
   }, {
     key: 'setPosition',
     value: function setPosition(x, y) {
       this.position.set(x, y === void 0 ? x : y);
     }
+
+    /**
+     *
+     * @return {object}
+     */
+
   }, {
     key: 'getPosition',
     value: function getPosition() {
       return this.position;
     }
+
+    /**
+     *
+     * @param {number} x
+     */
+
   }, {
     key: 'setPositionX',
     value: function setPositionX(x) {
       this.x = x;
     }
+
+    /**
+     *
+     * @return {number}
+     */
+
   }, {
     key: 'getPositionX',
     value: function getPositionX() {
       return this.x;
     }
+
+    /**
+     *
+     * @param {number} y
+     */
+
   }, {
     key: 'setPositionY',
     value: function setPositionY(y) {
       this.y = y;
     }
+
+    /**
+     *
+     * @return {number}
+     */
+
   }, {
     key: 'getPositionY',
     value: function getPositionY() {
       return this.y;
     }
+
+    /**
+     *
+     * @param {number} x
+     * @param {number} y
+     */
+
   }, {
     key: 'setPivot',
     value: function setPivot(x, y) {
       this.pivot.set(x, y === void 0 ? x : y);
     }
+
+    /**
+     *
+     * @return {number}
+     */
+
   }, {
     key: 'getPivot',
     value: function getPivot() {
       return this.pivot;
     }
+
+    /**
+     *
+     * @param {number} rotation
+     */
+
   }, {
     key: 'setRotation',
     value: function setRotation(rotation) {
       this.rotation = rotation;
     }
+
+    /**
+     *
+     * @return {number}
+     */
+
   }, {
     key: 'getRotation',
     value: function getRotation() {
       return this.rotation;
     }
+
+    /**
+     *
+     * @param {number} alpha
+     */
+
   }, {
     key: 'setOpacity',
     value: function setOpacity(alpha) {
       this.alpha = alpha;
     }
+
+    /**
+     *
+     * @return {number}
+     */
+
   }, {
     key: 'getOpacity',
     value: function getOpacity() {
       return this.alpha;
     }
+
+    /**
+     *
+     * @param {boolean} visible
+     */
+
   }, {
     key: 'setVisible',
     value: function setVisible(visible) {
       this.visible = visible;
     }
+
+    /**
+     *
+     * @return {boolean}
+     */
+
+  }, {
+    key: 'getVisible',
+    value: function getVisible() {
+      return this.visible;
+    }
+
+    /**
+     *
+     * @param {number} x
+     * @param {number} y
+     */
+
   }, {
     key: 'setScale',
     value: function setScale(x, y) {
       this.scale.set(x, y === void 0 ? x : y);
     }
+
+    /**
+     *
+     * @return {object}
+     */
+
+  }, {
+    key: 'getScale',
+    value: function getScale() {
+      return this.scale;
+    }
+
+    /**
+     * 获取对象的属性：`x`, `y`, `angle`, `rotation`, `visible`, `alpha`, `scaleX`, `scaleY`, `tint`
+     *
+     * @return {object}
+     */
+
   }, {
     key: 'getNature',
     value: function getNature() {
+      var tint = Tiny.hex2rgb(this.tint);
       return {
         x: this.x,
         y: this.y,
@@ -12937,7 +13931,10 @@ var DisplayObject = function (_EventEmitter) {
         alpha: this.alpha,
         scaleX: this.scale.x,
         scaleY: this.scale.y,
-        tint: this.tint
+        colorR: tint[0] * 255,
+        colorG: tint[1] * 255,
+        colorB: tint[2] * 255,
+        colorA: 0
       };
     }
 
@@ -13178,7 +14175,7 @@ var DisplayObject = function (_EventEmitter) {
      * * IMPORTANT: This is a webGL only feature and will be ignored by the canvas renderer.
      * To remove filters simply set this property to 'null'
      *
-     * @member {Tiny.Filter[]}
+     * @member {array<Tiny.Filter>}
      */
 
   }, {
@@ -13201,7 +14198,7 @@ exports.default = DisplayObject;
 DisplayObject.prototype.displayObjectUpdateTransform = DisplayObject.prototype.updateTransform;
 
 /***/ }),
-/* 46 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13391,7 +14388,7 @@ var Transform = function (_TransformBase) {
 exports.default = Transform;
 
 /***/ }),
-/* 47 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13611,7 +14608,7 @@ var TransformStatic = function (_TransformBase) {
 exports.default = TransformStatic;
 
 /***/ }),
-/* 48 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13634,14 +14631,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var GraphicsData = function () {
   /**
    *
-   * @param {number} lineWidth - the width of the line to draw
-   * @param {number} lineColor - the color of the line to draw
-   * @param {number} lineAlpha - the alpha of the line to draw
-   * @param {number} fillColor - the color of the fill
-   * @param {number} fillAlpha - the alpha of the fill
-   * @param {boolean} fill - whether or not the shape is filled with a colour
-   * @param {boolean} nativeLines - the method for drawing lines
-   * @param {Tiny.Circle|Tiny.Rectangle|Tiny.Ellipse|Tiny.Polygon} shape - The shape object to draw.
+   * @param {number}                                                lineWidth   - the width of the line to draw
+   * @param {number}                                                lineColor   - the color of the line to draw
+   * @param {number}                                                lineAlpha   - the alpha of the line to draw
+   * @param {number}                                                fillColor   - the color of the fill
+   * @param {number}                                                fillAlpha   - the alpha of the fill
+   * @param {boolean}                                               fill        - whether or not the shape is filled with a colour
+   * @param {boolean}                                               nativeLines - the method for drawing lines
+   * @param {Tiny.Circle|Tiny.Rectangle|Tiny.Ellipse|Tiny.Polygon}  shape       - The shape object to draw.
    */
   function GraphicsData(lineWidth, lineColor, lineAlpha, fillColor, fillAlpha, fill, nativeLines, shape) {
     _classCallCheck(this, GraphicsData);
@@ -13747,7 +14744,7 @@ var GraphicsData = function () {
 exports.default = GraphicsData;
 
 /***/ }),
-/* 49 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13757,7 +14754,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _Matrix = __webpack_require__(50);
+var _Matrix = __webpack_require__(24);
 
 var _Matrix2 = _interopRequireDefault(_Matrix);
 
@@ -13945,559 +14942,6 @@ var GroupD8 = {
 exports.default = GroupD8;
 
 /***/ }),
-/* 50 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _Point = __webpack_require__(24);
-
-var _Point2 = _interopRequireDefault(_Point);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-/**
- * Matrix class as an object, which makes it a lot faster,
- * here is a representation of it :
- * | a | b | tx|
- * | c | d | ty|
- * | 0 | 0 | 1 |
- *
- * @class
- * @memberof Tiny
- */
-var Matrix = function () {
-  /**
-   * @param {number} [a=1] - x scale
-   * @param {number} [b=0] - y skew
-   * @param {number} [c=0] - x skew
-   * @param {number} [d=1] - y scale
-   * @param {number} [tx=0] - x translation
-   * @param {number} [ty=0] - y translation
-   */
-  function Matrix() {
-    var a = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-    var b = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-    var c = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-    var d = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 1;
-    var tx = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 0;
-    var ty = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 0;
-
-    _classCallCheck(this, Matrix);
-
-    /**
-     * @member {number}
-     * @default 1
-     */
-    this.a = a;
-
-    /**
-     * @member {number}
-     * @default 0
-     */
-    this.b = b;
-
-    /**
-     * @member {number}
-     * @default 0
-     */
-    this.c = c;
-
-    /**
-     * @member {number}
-     * @default 1
-     */
-    this.d = d;
-
-    /**
-     * @member {number}
-     * @default 0
-     */
-    this.tx = tx;
-
-    /**
-     * @member {number}
-     * @default 0
-     */
-    this.ty = ty;
-
-    this.array = null;
-  }
-
-  /**
-   * Creates a Matrix object based on the given array. The Element to Matrix mapping order is as follows:
-   *
-   * a = array[0]
-   * b = array[1]
-   * c = array[3]
-   * d = array[4]
-   * tx = array[2]
-   * ty = array[5]
-   *
-   * @param {number[]} array - The array that the matrix will be populated from.
-   */
-
-
-  _createClass(Matrix, [{
-    key: 'fromArray',
-    value: function fromArray(array) {
-      this.a = array[0];
-      this.b = array[1];
-      this.c = array[3];
-      this.d = array[4];
-      this.tx = array[2];
-      this.ty = array[5];
-    }
-
-    /**
-     * sets the matrix properties
-     *
-     * @param {number} a - Matrix component
-     * @param {number} b - Matrix component
-     * @param {number} c - Matrix component
-     * @param {number} d - Matrix component
-     * @param {number} tx - Matrix component
-     * @param {number} ty - Matrix component
-     *
-     * @return {Tiny.Matrix} This matrix. Good for chaining method calls.
-     */
-
-  }, {
-    key: 'set',
-    value: function set(a, b, c, d, tx, ty) {
-      this.a = a;
-      this.b = b;
-      this.c = c;
-      this.d = d;
-      this.tx = tx;
-      this.ty = ty;
-
-      return this;
-    }
-
-    /**
-     * Creates an array from the current Matrix object.
-     *
-     * @param {boolean} transpose - Whether we need to transpose the matrix or not
-     * @param {Float32Array} [out=new Float32Array(9)] - If provided the array will be assigned to out
-     * @return {number[]} the newly created array which contains the matrix
-     */
-
-  }, {
-    key: 'toArray',
-    value: function toArray(transpose, out) {
-      if (!this.array) {
-        this.array = new Float32Array(9);
-      }
-
-      var array = out || this.array;
-
-      if (transpose) {
-        array[0] = this.a;
-        array[1] = this.b;
-        array[2] = 0;
-        array[3] = this.c;
-        array[4] = this.d;
-        array[5] = 0;
-        array[6] = this.tx;
-        array[7] = this.ty;
-        array[8] = 1;
-      } else {
-        array[0] = this.a;
-        array[1] = this.c;
-        array[2] = this.tx;
-        array[3] = this.b;
-        array[4] = this.d;
-        array[5] = this.ty;
-        array[6] = 0;
-        array[7] = 0;
-        array[8] = 1;
-      }
-
-      return array;
-    }
-
-    /**
-     * Get a new position with the current transformation applied.
-     * Can be used to go from a child's coordinate space to the world coordinate space. (e.g. rendering)
-     *
-     * @param {Tiny.Point} pos - The origin
-     * @param {Tiny.Point} [newPos] - The point that the new position is assigned to (allowed to be same as input)
-     * @return {Tiny.Point} The new point, transformed through this matrix
-     */
-
-  }, {
-    key: 'apply',
-    value: function apply(pos, newPos) {
-      newPos = newPos || new _Point2.default();
-
-      var x = pos.x;
-      var y = pos.y;
-
-      newPos.x = this.a * x + this.c * y + this.tx;
-      newPos.y = this.b * x + this.d * y + this.ty;
-
-      return newPos;
-    }
-
-    /**
-     * Get a new position with the inverse of the current transformation applied.
-     * Can be used to go from the world coordinate space to a child's coordinate space. (e.g. input)
-     *
-     * @param {Tiny.Point} pos - The origin
-     * @param {Tiny.Point} [newPos] - The point that the new position is assigned to (allowed to be same as input)
-     * @return {Tiny.Point} The new point, inverse-transformed through this matrix
-     */
-
-  }, {
-    key: 'applyInverse',
-    value: function applyInverse(pos, newPos) {
-      newPos = newPos || new _Point2.default();
-
-      var id = 1 / (this.a * this.d + this.c * -this.b);
-
-      var x = pos.x;
-      var y = pos.y;
-
-      newPos.x = this.d * id * x + -this.c * id * y + (this.ty * this.c - this.tx * this.d) * id;
-      newPos.y = this.a * id * y + -this.b * id * x + (-this.ty * this.a + this.tx * this.b) * id;
-
-      return newPos;
-    }
-
-    /**
-     * Translates the matrix on the x and y.
-     *
-     * @param {number} x How much to translate x by
-     * @param {number} y How much to translate y by
-     * @return {Tiny.Matrix} This matrix. Good for chaining method calls.
-     */
-
-  }, {
-    key: 'translate',
-    value: function translate(x, y) {
-      this.tx += x;
-      this.ty += y;
-
-      return this;
-    }
-
-    /**
-     * Applies a scale transformation to the matrix.
-     *
-     * @param {number} x The amount to scale horizontally
-     * @param {number} y The amount to scale vertically
-     * @return {Tiny.Matrix} This matrix. Good for chaining method calls.
-     */
-
-  }, {
-    key: 'scale',
-    value: function scale(x, y) {
-      this.a *= x;
-      this.d *= y;
-      this.c *= x;
-      this.b *= y;
-      this.tx *= x;
-      this.ty *= y;
-
-      return this;
-    }
-
-    /**
-     * Applies a rotation transformation to the matrix.
-     *
-     * @param {number} angle - The angle in radians.
-     * @return {Tiny.Matrix} This matrix. Good for chaining method calls.
-     */
-
-  }, {
-    key: 'rotate',
-    value: function rotate(angle) {
-      var cos = Math.cos(angle);
-      var sin = Math.sin(angle);
-
-      var a1 = this.a;
-      var c1 = this.c;
-      var tx1 = this.tx;
-
-      this.a = a1 * cos - this.b * sin;
-      this.b = a1 * sin + this.b * cos;
-      this.c = c1 * cos - this.d * sin;
-      this.d = c1 * sin + this.d * cos;
-      this.tx = tx1 * cos - this.ty * sin;
-      this.ty = tx1 * sin + this.ty * cos;
-
-      return this;
-    }
-
-    /**
-     * Appends the given Matrix to this Matrix.
-     *
-     * @param {Tiny.Matrix} matrix - The matrix to append.
-     * @return {Tiny.Matrix} This matrix. Good for chaining method calls.
-     */
-
-  }, {
-    key: 'append',
-    value: function append(matrix) {
-      var a1 = this.a;
-      var b1 = this.b;
-      var c1 = this.c;
-      var d1 = this.d;
-
-      this.a = matrix.a * a1 + matrix.b * c1;
-      this.b = matrix.a * b1 + matrix.b * d1;
-      this.c = matrix.c * a1 + matrix.d * c1;
-      this.d = matrix.c * b1 + matrix.d * d1;
-
-      this.tx = matrix.tx * a1 + matrix.ty * c1 + this.tx;
-      this.ty = matrix.tx * b1 + matrix.ty * d1 + this.ty;
-
-      return this;
-    }
-
-    /**
-     * Sets the matrix based on all the available properties
-     *
-     * @param {number} x - Position on the x axis
-     * @param {number} y - Position on the y axis
-     * @param {number} pivotX - Pivot on the x axis
-     * @param {number} pivotY - Pivot on the y axis
-     * @param {number} scaleX - Scale on the x axis
-     * @param {number} scaleY - Scale on the y axis
-     * @param {number} rotation - Rotation in radians
-     * @param {number} skewX - Skew on the x axis
-     * @param {number} skewY - Skew on the y axis
-     * @return {Tiny.Matrix} This matrix. Good for chaining method calls.
-     */
-
-  }, {
-    key: 'setTransform',
-    value: function setTransform(x, y, pivotX, pivotY, scaleX, scaleY, rotation, skewX, skewY) {
-      var sr = Math.sin(rotation);
-      var cr = Math.cos(rotation);
-      var cy = Math.cos(skewY);
-      var sy = Math.sin(skewY);
-      var nsx = -Math.sin(skewX);
-      var cx = Math.cos(skewX);
-
-      var a = cr * scaleX;
-      var b = sr * scaleX;
-      var c = -sr * scaleY;
-      var d = cr * scaleY;
-
-      this.a = cy * a + sy * c;
-      this.b = cy * b + sy * d;
-      this.c = nsx * a + cx * c;
-      this.d = nsx * b + cx * d;
-
-      this.tx = x + (pivotX * a + pivotY * c);
-      this.ty = y + (pivotX * b + pivotY * d);
-
-      return this;
-    }
-
-    /**
-     * Prepends the given Matrix to this Matrix.
-     *
-     * @param {Tiny.Matrix} matrix - The matrix to prepend
-     * @return {Tiny.Matrix} This matrix. Good for chaining method calls.
-     */
-
-  }, {
-    key: 'prepend',
-    value: function prepend(matrix) {
-      var tx1 = this.tx;
-
-      if (matrix.a !== 1 || matrix.b !== 0 || matrix.c !== 0 || matrix.d !== 1) {
-        var a1 = this.a;
-        var c1 = this.c;
-
-        this.a = a1 * matrix.a + this.b * matrix.c;
-        this.b = a1 * matrix.b + this.b * matrix.d;
-        this.c = c1 * matrix.a + this.d * matrix.c;
-        this.d = c1 * matrix.b + this.d * matrix.d;
-      }
-
-      this.tx = tx1 * matrix.a + this.ty * matrix.c + matrix.tx;
-      this.ty = tx1 * matrix.b + this.ty * matrix.d + matrix.ty;
-
-      return this;
-    }
-
-    /**
-     * Decomposes the matrix (x, y, scaleX, scaleY, and rotation) and sets the properties on to a transform.
-     *
-     * @param {Tiny.Transform|Tiny.TransformStatic} transform - The transform to apply the properties to.
-     * @return {Tiny.Transform|Tiny.TransformStatic} The transform with the newly applied properties
-     */
-
-  }, {
-    key: 'decompose',
-    value: function decompose(transform) {
-      // sort out rotation / skew..
-      var a = this.a;
-      var b = this.b;
-      var c = this.c;
-      var d = this.d;
-
-      var skewX = -Math.atan2(-c, d);
-      var skewY = Math.atan2(b, a);
-
-      var delta = Math.abs(skewX + skewY);
-
-      if (delta < 0.00001) {
-        transform.rotation = skewY;
-
-        if (a < 0 && d >= 0) {
-          transform.rotation += transform.rotation <= 0 ? Math.PI : -Math.PI;
-        }
-
-        transform.skew.x = transform.skew.y = 0;
-      } else {
-        transform.skew.x = skewX;
-        transform.skew.y = skewY;
-      }
-
-      // next set scale
-      transform.scale.x = Math.sqrt(a * a + b * b);
-      transform.scale.y = Math.sqrt(c * c + d * d);
-
-      // next set position
-      transform.position.x = this.tx;
-      transform.position.y = this.ty;
-
-      return transform;
-    }
-
-    /**
-     * Inverts this matrix
-     *
-     * @return {Tiny.Matrix} This matrix. Good for chaining method calls.
-     */
-
-  }, {
-    key: 'invert',
-    value: function invert() {
-      var a1 = this.a;
-      var b1 = this.b;
-      var c1 = this.c;
-      var d1 = this.d;
-      var tx1 = this.tx;
-      var n = a1 * d1 - b1 * c1;
-
-      this.a = d1 / n;
-      this.b = -b1 / n;
-      this.c = -c1 / n;
-      this.d = a1 / n;
-      this.tx = (c1 * this.ty - d1 * tx1) / n;
-      this.ty = -(a1 * this.ty - b1 * tx1) / n;
-
-      return this;
-    }
-
-    /**
-     * Resets this Matix to an identity (default) matrix.
-     *
-     * @return {Tiny.Matrix} This matrix. Good for chaining method calls.
-     */
-
-  }, {
-    key: 'identity',
-    value: function identity() {
-      this.a = 1;
-      this.b = 0;
-      this.c = 0;
-      this.d = 1;
-      this.tx = 0;
-      this.ty = 0;
-
-      return this;
-    }
-
-    /**
-     * Creates a new Matrix object with the same values as this one.
-     *
-     * @return {Tiny.Matrix} A copy of this matrix. Good for chaining method calls.
-     */
-
-  }, {
-    key: 'clone',
-    value: function clone() {
-      var matrix = new Matrix();
-
-      matrix.a = this.a;
-      matrix.b = this.b;
-      matrix.c = this.c;
-      matrix.d = this.d;
-      matrix.tx = this.tx;
-      matrix.ty = this.ty;
-
-      return matrix;
-    }
-
-    /**
-     * Changes the values of the given matrix to be the same as the ones in this matrix
-     *
-     * @param {Tiny.Matrix} matrix - The matrix to copy from.
-     * @return {Tiny.Matrix} The matrix given in parameter with its values updated.
-     */
-
-  }, {
-    key: 'copy',
-    value: function copy(matrix) {
-      matrix.a = this.a;
-      matrix.b = this.b;
-      matrix.c = this.c;
-      matrix.d = this.d;
-      matrix.tx = this.tx;
-      matrix.ty = this.ty;
-
-      return matrix;
-    }
-
-    /**
-     * A default (identity) matrix
-     *
-     * @static
-     * @const
-     */
-
-  }], [{
-    key: 'IDENTITY',
-    get: function get() {
-      return new Matrix();
-    }
-
-    /**
-     * A temp matrix
-     *
-     * @static
-     * @const
-     */
-
-  }, {
-    key: 'TEMP_MATRIX',
-    get: function get() {
-      return new Matrix();
-    }
-  }]);
-
-  return Matrix;
-}();
-
-exports.default = Matrix;
-
-/***/ }),
 /* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -14528,7 +14972,7 @@ var _Container = __webpack_require__(8);
 
 var _Container2 = _interopRequireDefault(_Container);
 
-var _RenderTexture = __webpack_require__(27);
+var _RenderTexture = __webpack_require__(28);
 
 var _RenderTexture2 = _interopRequireDefault(_RenderTexture);
 
@@ -14556,35 +15000,28 @@ var SystemRenderer = function (_EventEmitter) {
   _inherits(SystemRenderer, _EventEmitter);
 
   /**
-   * @param {string} system - The name of the system this renderer is for.
-   * @param {object} [options] - The optional renderer parameters
-   * @param {number} [options.width=800] - the width of the screen
-   * @param {number} [options.height=600] - the height of the screen
-   * @param {HTMLCanvasElement} [options.view] - the canvas to use as a view, optional
-   * @param {boolean} [options.transparent=false] - If the render view is transparent, default false
-   * @param {boolean} [options.autoResize=false] - If the render view is automatically resized, default false
-   * @param {boolean} [options.antialias=false] - sets antialias (only applicable in chrome at the moment)
-   * @param {number} [options.resolution=1] - The resolution / device pixel ratio of the renderer. The
-   *  resolution of the renderer retina would be 2.
-   * @param {boolean} [options.clearBeforeRender=true] - This sets if the CanvasRenderer will clear the canvas or
-   *      not before the new render pass.
-   * @param {number} [options.backgroundColor=0x000000] - The background color of the rendered area
-   *  (shown if not transparent).
-   * @param {boolean} [options.roundPixels=false] - If true Tiny will Math.floor() x/y values when rendering,
-   *  stopping pixel interpolation.
+   * @param {string}            system                              - The name of the system this renderer is for.
+   * @param {number}            width                               - the width of the screen
+   * @param {number}            height                              - the height of the screen
+   * @param {object}            options                             - The optional renderer parameters
+   * @param {HTMLCanvasElement} options.view                        - the canvas to use as a view, optional
+   * @param {boolean}           options.antialias=false             - sets antialias (only applicable in chrome at the moment)
+   * @param {boolean}           options.autoResize=false            - If the render view is automatically resized, default false
+   * @param {number}            options.backgroundColor=0x000000    - The background color of the rendered area (shown if not transparent).
+   * @param {boolean}           options.clearBeforeRender=true      - This sets if the CanvasRenderer will clear the canvas or not before the new render pass.
+   * @param {number}            options.resolution=1                - The resolution / device pixel ratio of the renderer. The resolution of the renderer retina would be 2.
+   * @param {boolean}           options.roundPixels=false           - If true Tiny will Math.floor() x/y values when rendering, stopping pixel interpolation.
+   * @param {boolean}           options.transparent=false           - If the render view is transparent, default false
    */
-  function SystemRenderer(system, options, arg2, arg3) {
+  function SystemRenderer(system, width, height, options) {
     _classCallCheck(this, SystemRenderer);
 
-    // Support for constructor(system, screenWidth, screenHeight, options)
     var _this = _possibleConstructorReturn(this, (SystemRenderer.__proto__ || Object.getPrototypeOf(SystemRenderer)).call(this));
 
-    if (typeof options === 'number') {
-      options = Object.assign({
-        width: options,
-        height: arg2 || _settings2.default.RENDER_OPTIONS.height
-      }, arg3);
-    }
+    options = Object.assign({
+      width: width,
+      height: height
+    }, options);
 
     // Add the default render options
     options = Object.assign({}, _settings2.default.RENDER_OPTIONS, options);
@@ -14621,7 +15058,7 @@ var SystemRenderer = function (_EventEmitter) {
      *
      * @member {HTMLCanvasElement}
      */
-    _this.view = options.view;
+    _this.view = options.view || document.createElement('canvas');
 
     /**
      * The resolution / device pixel ratio of the renderer
@@ -15269,7 +15706,7 @@ var _Filter3 = _interopRequireDefault(_Filter2);
 
 var _math = __webpack_require__(2);
 
-var _path = __webpack_require__(31);
+var _path = __webpack_require__(32);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -15793,7 +16230,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 
-var _Sprite2 = __webpack_require__(26);
+var _Sprite2 = __webpack_require__(27);
 
 var _Sprite3 = _interopRequireDefault(_Sprite2);
 
@@ -15819,7 +16256,7 @@ var _TextMetrics = __webpack_require__(59);
 
 var _TextMetrics2 = _interopRequireDefault(_TextMetrics);
 
-var _trimCanvas = __webpack_require__(131);
+var _trimCanvas = __webpack_require__(132);
 
 var _trimCanvas2 = _interopRequireDefault(_trimCanvas);
 
@@ -15845,7 +16282,12 @@ var defaultDestroyOptions = {
  * A Text can be created directly from a string and a style object
  *
  * ```js
- * let text = new Tiny.Text('This is a Tiny text',{fontFamily : 'Arial', fontSize: 24, fill : 0xff1010, align : 'center'});
+ *  let text = new Tiny.Text('This is a Tiny text', {
+ *    fontFamily: 'Arial',
+ *    fontSize: 24,
+ *    fill: 0xff1010,
+ *    align: 'center'
+ *  });
  * ```
  *
  * @class
@@ -16059,8 +16501,7 @@ var Text = function (_Sprite) {
      * @param {string} text - The text to draw
      * @param {number} x - Horizontal position to draw the text
      * @param {number} y - Vertical position to draw the text
-     * @param {boolean} [isStroke=false] - Is this drawing for the outside stroke of the
-     *  text? If not, it's for the inside fill
+     * @param {boolean} [isStroke=false] - Is this drawing for the outside stroke of the text? If not, it's for the inside fill
      * @private
      */
 
@@ -16204,6 +16645,7 @@ var Text = function (_Sprite) {
 
     /**
      * calculates the bounds of the Text as a rectangle. The bounds calculation takes the worldTransform into account.
+     * @private
      */
 
   }, {
@@ -16822,48 +17264,34 @@ var defaultStyle = {
 
 var TextStyle = function () {
   /**
-   * @param {object} [style] - The style parameters
-   * @param {string} [style.align='left'] - Alignment for multiline text ('left', 'center' or 'right'),
-   *  does not affect single line text
-   * @param {boolean} [style.breakWords=false] - Indicates if lines can be wrapped within words, it
-   *  needs wordWrap to be set to true
-   * @param {boolean} [style.dropShadow=false] - Set a drop shadow for the text
-   * @param {number} [style.dropShadowAlpha=1] - Set alpha for the drop shadow
-   * @param {number} [style.dropShadowAngle=Math.PI/6] - Set a angle of the drop shadow
-   * @param {number} [style.dropShadowBlur=0] - Set a shadow blur radius
-   * @param {string} [style.dropShadowColor='#000000'] - A fill style to be used on the dropshadow e.g 'red', '#00FF00'
-   * @param {number} [style.dropShadowDistance=5] - Set a distance of the drop shadow
-   * @param {string|string[]|number|number[]|CanvasGradient|CanvasPattern} [style.fill='black'] - A canvas
-   *  fillstyle that will be used on the text e.g 'red', '#00FF00'. Can be an array to create a gradient
-   *  eg ['#000000','#FFFFFF']
-   * {@link https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fillStyle|MDN}
-   * @param {number} [style.fillGradientType=Tiny.TEXT_GRADIENT.LINEAR_VERTICAL] - If fill is an array of colours
-   *  to create a gradient, this can change the type/direction of the gradient. See {@link Tiny.TEXT_GRADIENT}
-   * @param {number[]} [style.fillGradientStops] - If fill is an array of colours to create a gradient, this array can set
-   * the stop points (numbers between 0 and 1) for the color, overriding the default behaviour of evenly spacing them.
-   * @param {string|string[]} [style.fontFamily='Arial'] - The font family
-   * @param {number|string} [style.fontSize=26] - The font size (as a number it converts to px, but as a string,
-   *  equivalents are '26px','20pt','160%' or '1.6em')
-   * @param {string} [style.fontStyle='normal'] - The font style ('normal', 'italic' or 'oblique')
-   * @param {string} [style.fontVariant='normal'] - The font variant ('normal' or 'small-caps')
-   * @param {string} [style.fontWeight='normal'] - The font weight ('normal', 'bold', 'bolder', 'lighter' and '100',
-   *  '200', '300', '400', '500', '600', '700', 800' or '900')
-   * @param {number} [style.letterSpacing=0] - The amount of spacing between letters, default is 0
-   * @param {number} [style.lineHeight] - The line height, a number that represents the vertical space that a letter uses
-   * @param {string} [style.lineJoin='miter'] - The lineJoin property sets the type of corner created, it can resolve
-   *      spiked text issues. Default is 'miter' (creates a sharp corner).
-   * @param {number} [style.miterLimit=10] - The miter limit to use when using the 'miter' lineJoin mode. This can reduce
-   *      or increase the spikiness of rendered text.
-   * @param {number} [style.padding=0] - Occasionally some fonts are cropped. Adding some padding will prevent this from
-   *     happening by adding padding to all sides of the text.
-   * @param {string|number} [style.stroke='black'] - A canvas fillstyle that will be used on the text stroke
-   *  e.g 'blue', '#FCFF00'
-   * @param {number} [style.strokeThickness=0] - A number that represents the thickness of the stroke.
-   *  Default is 0 (no stroke)
-   * @param {boolean} [style.trim=false] - Trim transparent borders
-   * @param {string} [style.textBaseline='alphabetic'] - The baseline of the text that is rendered.
-   * @param {boolean} [style.wordWrap=false] - Indicates if word wrap should be used
-   * @param {number} [style.wordWrapWidth=100] - The width at which text will wrap, it needs wordWrap to be set to true
+   * @param {object}                                                                  style                                                       - The style parameters
+   * @param {string}                                                                  style.align='left'                                          - Alignment for multiline text ('left', 'center' or 'right'), does not affect single line text
+   * @param {boolean}                                                                 style.breakWords=false                                      - Indicates if lines can be wrapped within words, it needs wordWrap to be set to true
+   * @param {boolean}                                                                 style.dropShadow=false                                      - Set a drop shadow for the text
+   * @param {number}                                                                  style.dropShadowAlpha=1                                     - Set alpha for the drop shadow
+   * @param {number}                                                                  style.dropShadowAngle=Math.PI/6                             - Set a angle of the drop shadow
+   * @param {number}                                                                  style.dropShadowBlur=0                                      - Set a shadow blur radius
+   * @param {string}                                                                  style.dropShadowColor='#000000'                             - A fill style to be used on the dropshadow e.g 'red', '#00FF00'
+   * @param {number}                                                                  style.dropShadowDistance=5                                  - Set a distance of the drop shadow
+   * @param {string|array<string>|number|array<number>|CanvasGradient|CanvasPattern}  style.fill='black'                                          - A canvas fillstyle that will be used on the text e.g 'red', '#00FF00'. Can be an array to create a gradient<br>eg ['#000000','#FFFFFF']<br>{@link https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fillStyle|MDN}
+   * @param {number}                                                                  style.fillGradientType=Tiny.TEXT_GRADIENT.LINEAR_VERTICAL   - If fill is an array of colours to create a gradient, this can change the type/direction of the gradient. See {@link Tiny.TEXT_GRADIENT}
+   * @param {array<number>}                                                           style.fillGradientStops                                     - If fill is an array of colours to create a gradient, this array can set the stop points (numbers between 0 and 1) for the color, overriding the default behaviour of evenly spacing them.
+   * @param {string|array<string>}                                                    style.fontFamily='Arial'                                    - The font family
+   * @param {number|string}                                                           style.fontSize=26                                           - The font size (as a number it converts to px, but as a string, equivalents are '26px','20pt','160%' or '1.6em')
+   * @param {string}                                                                  style.fontStyle='normal'                                    - The font style ('normal', 'italic' or 'oblique')
+   * @param {string}                                                                  style.fontVariant='normal'                                  - The font variant ('normal' or 'small-caps')
+   * @param {string}                                                                  style.fontWeight='normal'                                   - The font weight ('normal', 'bold', 'bolder', 'lighter' and '100', '200', '300', '400', '500', '600', '700', 800' or '900')
+   * @param {number}                                                                  style.letterSpacing=0                                       - The amount of spacing between letters, default is 0
+   * @param {number}                                                                  style.lineHeight                                            - The line height, a number that represents the vertical space that a letter uses
+   * @param {string}                                                                  style.lineJoin='miter'                                      - The lineJoin property sets the type of corner created, it can resolve spiked text issues. Default is 'miter' (creates a sharp corner).
+   * @param {number}                                                                  style.miterLimit=10                                         - The miter limit to use when using the 'miter' lineJoin mode. This can reduce or increase the spikiness of rendered text.
+   * @param {number}                                                                  style.padding=0                                             - Occasionally some fonts are cropped. Adding some padding will prevent this from happening by adding padding to all sides of the text.
+   * @param {string|number}                                                           style.stroke='black'                                        - A canvas fillstyle that will be used on the text stroke e.g 'blue', '#FCFF00'
+   * @param {number}                                                                  style.strokeThickness=0                                     - A number that represents the thickness of the stroke. Default is 0 (no stroke)
+   * @param {boolean}                                                                 style.trim=false                                            - Trim transparent borders
+   * @param {string}                                                                  style.textBaseline='alphabetic'                             - The baseline of the text that is rendered.
+   * @param {boolean}                                                                 style.wordWrap=false                                        - Indicates if word wrap should be used
+   * @param {number}                                                                  style.wordWrapWidth=100                                     - The width at which text will wrap, it needs wordWrap to be set to true
    */
   function TextStyle(style) {
     _classCallCheck(this, TextStyle);
@@ -17338,9 +17766,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
  * and rotation of the given Display Objects is ignored. For example:
  *
  * ```js
- * let renderer = Tiny.autoDetectRenderer(1024, 1024, { view: canvas, ratio: 1 });
- * let baseRenderTexture = new Tiny.BaseRenderTexture(renderer, 800, 600);
- * let sprite = Tiny.Sprite.fromImage("spinObj_01.png");
+ * let baseRenderTexture = new Tiny.BaseRenderTexture(800, 600);
+ * let sprite = Tiny.Sprite.fromImage('spinObj_01.png');
  *
  * sprite.position.x = 800/2;
  * sprite.position.y = 600/2;
@@ -17354,8 +17781,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
  * you can clear the transform
  *
  * ```js
+ * let app = new Tiny.Application();
+ * let renderer = app.renderer;
  *
- * sprite.setTransform()
+ * sprite.setTransform();
  *
  * let baseRenderTexture = new Tiny.BaseRenderTexture(100, 100);
  * let renderTexture = new Tiny.RenderTexture(baseRenderTexture);
@@ -17371,10 +17800,10 @@ var BaseRenderTexture = function (_BaseTexture) {
   _inherits(BaseRenderTexture, _BaseTexture);
 
   /**
-   * @param {number} [width=100] - The width of the base render texture
-   * @param {number} [height=100] - The height of the base render texture
-   * @param {number} [scaleMode=Tiny.settings.SCALE_MODE] - See {@link Tiny.SCALE_MODES} for possible values
-   * @param {number} [resolution=1] - The resolution / device pixel ratio of the texture being generated
+   * @param {number}  width=100                           - The width of the base render texture
+   * @param {number}  height=100                          - The height of the base render texture
+   * @param {number}  scaleMode=Tiny.settings.SCALE_MODE  - See {@link Tiny.SCALE_MODES} for possible values
+   * @param {number}  resolution=1                        - The resolution / device pixel ratio of the texture being generated
    */
   function BaseRenderTexture() {
     var width = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 100;
@@ -17483,7 +17912,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _GroupD = __webpack_require__(49);
+var _GroupD = __webpack_require__(50);
 
 var _GroupD2 = _interopRequireDefault(_GroupD);
 
@@ -17524,9 +17953,9 @@ var TextureUvs = function () {
    * Sets the texture Uvs based on the given frame information.
    *
    * @private
-   * @param {Tiny.Rectangle} frame - The frame of the texture
-   * @param {Tiny.Rectangle} baseFrame - The base frame of the texture
-   * @param {number} rotate - Rotation of frame, see {@link Tiny.GroupD8}
+   * @param {Tiny.Rectangle} frame      - The frame of the texture
+   * @param {Tiny.Rectangle} baseFrame  - The base frame of the texture
+   * @param {number}          rotate    - Rotation of frame, see {@link Tiny.GroupD8}
    */
 
 
@@ -17607,7 +18036,7 @@ var _BaseTexture3 = _interopRequireDefault(_BaseTexture2);
 
 var _utils = __webpack_require__(1);
 
-var _ticker = __webpack_require__(28);
+var _ticker = __webpack_require__(29);
 
 var _const = __webpack_require__(0);
 
@@ -18033,6 +18462,7 @@ var InteractionData = function () {
 
     /**
      * Indicates whether or not the pointer device that created the event is the primary pointer.
+     *
      * @see https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/isPrimary
      * @type {Boolean}
      */
@@ -18040,6 +18470,7 @@ var InteractionData = function () {
 
     /**
      * Indicates which button was pressed on the mouse or pointer device to trigger the event.
+     *
      * @see https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/button
      * @type {number}
      */
@@ -18047,6 +18478,7 @@ var InteractionData = function () {
 
     /**
      * Indicates which buttons are pressed on the mouse or pointer device when the event is triggered.
+     *
      * @see https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/buttons
      * @type {number}
      */
@@ -18055,6 +18487,7 @@ var InteractionData = function () {
     /**
      * The width of the pointer's contact along the x-axis, measured in CSS pixels.
      * radiusX of TouchEvents will be represented by this value.
+     *
      * @see https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/width
      * @type {number}
      */
@@ -18063,6 +18496,7 @@ var InteractionData = function () {
     /**
      * The height of the pointer's contact along the y-axis, measured in CSS pixels.
      * radiusY of TouchEvents will be represented by this value.
+     *
      * @see https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/height
      * @type {number}
      */
@@ -18070,6 +18504,7 @@ var InteractionData = function () {
 
     /**
      * The angle, in degrees, between the pointer device and the screen.
+     *
      * @see https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/tiltX
      * @type {number}
      */
@@ -18077,6 +18512,7 @@ var InteractionData = function () {
 
     /**
      * The angle, in degrees, between the pointer device and the screen.
+     *
      * @see https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/tiltY
      * @type {number}
      */
@@ -18084,6 +18520,7 @@ var InteractionData = function () {
 
     /**
      * The type of pointer that triggered the event.
+     *
      * @see https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/pointerType
      * @type {string}
      */
@@ -18092,6 +18529,7 @@ var InteractionData = function () {
     /**
      * Pressure applied by the pointing device during the event. A Touch's force property
      * will be represented by this value.
+     *
      * @see https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/pressure
      * @type {number}
      */
@@ -18099,6 +18537,7 @@ var InteractionData = function () {
 
     /**
      * From TouchEvents (not PointerEvents triggered by touches), the rotationAngle of the Touch.
+     *
      * @see https://developer.mozilla.org/en-US/docs/Web/API/Touch/rotationAngle
      * @type {number}
      */
@@ -18106,6 +18545,7 @@ var InteractionData = function () {
 
     /**
      * Twist of a stylus pointer.
+     *
      * @see https://w3c.github.io/pointerevents/#pointerevent-interface
      * @type {number}
      */
@@ -18113,6 +18553,7 @@ var InteractionData = function () {
 
     /**
      * Barrel pressure on a stylus pointer.
+     *
      * @see https://w3c.github.io/pointerevents/#pointerevent-interface
      * @type {number}
      */
@@ -18121,6 +18562,7 @@ var InteractionData = function () {
 
   /**
    * The unique identifier of the pointer. It will be the same as `identifier`.
+   *
    * @readonly
    * @member {number}
    * @see https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/pointerId
@@ -18219,12 +18661,12 @@ Object.defineProperty(exports, "__esModule", {
  * @name interactiveTarget
  * @memberof Tiny.interaction
  * @example
- *      function MyObject() {}
+ * function MyObject() {}
  *
- *      Object.assign(
- *          MyObject.prototype,
- *          Tiny.interaction.interactiveTarget
- *      );
+ * Object.assign(
+ *     MyObject.prototype,
+ *     Tiny.interaction.interactiveTarget
+ * );
  */
 exports.default = {
   /**
@@ -18235,8 +18677,8 @@ exports.default = {
    * const sprite = new Tiny.Sprite(texture);
    * sprite.interactive = true;
    * sprite.on('tap', (event) => {
-     *    //handle event
-     * });
+   *    //handle event
+   * });
    * @member {boolean}
    * @memberof Tiny.DisplayObject#
    */
@@ -18343,7 +18785,7 @@ Object.defineProperty(exports, 'Action', {
   }
 });
 
-var _ActionInterval = __webpack_require__(44);
+var _ActionInterval = __webpack_require__(45);
 
 Object.keys(_ActionInterval).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
@@ -18377,7 +18819,7 @@ Object.defineProperty(exports, 'InteractionData', {
   }
 });
 
-var _InteractionManager = __webpack_require__(133);
+var _InteractionManager = __webpack_require__(134);
 
 Object.defineProperty(exports, 'InteractionManager', {
   enumerable: true,
@@ -18404,11 +18846,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 "use strict";
 
 
-__webpack_require__(136);
-
 __webpack_require__(137);
 
-__webpack_require__(135);
+__webpack_require__(138);
+
+__webpack_require__(136);
 
 if (!window.ArrayBuffer) {
   window.ArrayBuffer = Array;
@@ -19155,10 +19597,10 @@ Url.prototype.parseHost = function () {
 
 /* eslint-disable no-undef */
 
-var Loader = __webpack_require__(145).default;
+var Loader = __webpack_require__(146).default;
 var Resource = __webpack_require__(84).default;
-var async = __webpack_require__(140);
-var b64 = __webpack_require__(141);
+var async = __webpack_require__(141);
+var b64 = __webpack_require__(142);
 
 Loader.Resource = Resource;
 Loader.async = async;
@@ -19548,7 +19990,7 @@ module.exports = Buffer;
 "use strict";
 
 
-var Texture = __webpack_require__(33);
+var Texture = __webpack_require__(34);
 
 /**
  * Helper class to create a webGL Framebuffer
@@ -19765,11 +20207,11 @@ module.exports = Framebuffer;
 "use strict";
 
 
-var compileProgram = __webpack_require__(35),
-    extractAttributes = __webpack_require__(37),
-    extractUniforms = __webpack_require__(38),
-    setPrecision = __webpack_require__(41),
-    generateUniformAccessObject = __webpack_require__(39);
+var compileProgram = __webpack_require__(36),
+    extractAttributes = __webpack_require__(38),
+    extractUniforms = __webpack_require__(39),
+    setPrecision = __webpack_require__(42),
+    generateUniformAccessObject = __webpack_require__(40);
 
 /**
  * Helper class to create a webGL Shader
@@ -19858,7 +20300,7 @@ module.exports = Shader;
 
 
 // state object//
-var setVertexAttribArrays = __webpack_require__(34);
+var setVertexAttribArrays = __webpack_require__(35);
 
 /**
  * Helper class to work with WebGL VertexArrayObjects (vaos)
@@ -20125,13 +20567,13 @@ module.exports = createContext;
 
 
 module.exports = {
-    compileProgram: __webpack_require__(35),
-    defaultValue: __webpack_require__(36),
-    extractAttributes: __webpack_require__(37),
-    extractUniforms: __webpack_require__(38),
-    generateUniformAccessObject: __webpack_require__(39),
-    setPrecision: __webpack_require__(41),
-    mapSize: __webpack_require__(40),
+    compileProgram: __webpack_require__(36),
+    defaultValue: __webpack_require__(37),
+    extractAttributes: __webpack_require__(38),
+    extractUniforms: __webpack_require__(39),
+    generateUniformAccessObject: __webpack_require__(40),
+    setPrecision: __webpack_require__(42),
+    mapSize: __webpack_require__(41),
     mapType: __webpack_require__(19)
 };
 
@@ -20650,7 +21092,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 	/** Expose `punycode` */
 	// Some AMD build optimizers, like r.js, check for specific condition patterns
 	// like the following:
-	if ("function" == 'function' && _typeof(__webpack_require__(30)) == 'object' && __webpack_require__(30)) {
+	if ("function" == 'function' && _typeof(__webpack_require__(31)) == 'object' && __webpack_require__(31)) {
 		!(__WEBPACK_AMD_DEFINE_RESULT__ = function () {
 			return punycode;
 		}.call(exports, __webpack_require__, exports, module),
@@ -20670,7 +21112,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 		root.punycode = punycode;
 	}
 })(undefined);
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(85)(module), __webpack_require__(43)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(85)(module), __webpack_require__(44)))
 
 /***/ }),
 /* 84 */
@@ -20691,11 +21133,11 @@ var _createClass = function () {
     };
 }();
 
-var _parseUri = __webpack_require__(138);
+var _parseUri = __webpack_require__(139);
 
 var _parseUri2 = _interopRequireDefault(_parseUri);
 
-var _miniSignals = __webpack_require__(139);
+var _miniSignals = __webpack_require__(140);
 
 var _miniSignals2 = _interopRequireDefault(_miniSignals);
 
@@ -21969,7 +22411,7 @@ var _Container = __webpack_require__(8);
 
 var _Container2 = _interopRequireDefault(_Container);
 
-var _ticker = __webpack_require__(28);
+var _ticker = __webpack_require__(29);
 
 var _settings = __webpack_require__(3);
 
@@ -21985,7 +22427,7 @@ var _Text = __webpack_require__(58);
 
 var _Text2 = _interopRequireDefault(_Text);
 
-var _Transition = __webpack_require__(29);
+var _Transition = __webpack_require__(30);
 
 var _Transition2 = _interopRequireDefault(_Transition);
 
@@ -22008,14 +22450,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  *
  * @example
  *
+ * // 定义启动参数
  * var config = {
  *   showFPS: true,
  *   renderOptions: {
  *     backgroundColor: 0x2a3145
  *   }
  * };
- * Tiny.app = new Tiny.Application(config);
- * Tiny.app.run(new MenuLayer());
+ * // 新建App
+ * var app = new Tiny.Application(config);
+ * // 通过 fromImage 实例化精灵
+ * var sprite = Tiny.Sprite.fromImage('https://zos.alipayobjects.com/rmsportal/nJBojwdMJfUqpCWvwyoA.png');
+ * // 启动
+ * app.run(sprite);
  *
  * @class
  * @memberof Tiny
@@ -22034,13 +22481,13 @@ var Application = function () {
     //游戏是否已经停止
     this._paused = true;
 
-    this._time = null;
-
     this._updatePoll = {};
 
     /**
      * WebGL renderer if available, otherwise CanvasRenderer
      * @member {Tiny.WebGLRenderer|Tiny.CanvasRenderer}
+     * @example
+     * var renderer = app.renderer
      */
     this.renderer = this.autoDetectRenderer(_settings.config.newWidth, _settings.config.newHeight, {
       view: this.view
@@ -22050,13 +22497,16 @@ var Application = function () {
     _const.WIN_SIZE.height = Math.round(this.renderer.height);
 
     /**
-     * The root display container that's renderered.
+     * 舞台对象，用户创建的显示类都会添加到这个对象中
+     *
      * @member {Tiny.Container}
      */
     this.stage = new _Container2.default();
     this.stage.scale.set(_settings.config.multiplier);
 
     /**
+     * 所有显示类的根容器
+     *
      * @member {Tiny.Container}
      */
     this.camera = new _Container2.default();
@@ -22065,6 +22515,13 @@ var Application = function () {
       this._createStatsLabel();
     }
   }
+
+  /**
+   *
+   * @private
+   * @param conf
+   */
+
 
   _createClass(Application, [{
     key: 'setup',
@@ -22089,7 +22546,7 @@ var Application = function () {
       }
 
       /**
-       * 就是那个用于渲染故事的普通 <canvas> 画布对象
+       * 就是那个用于渲染故事的普通 `<canvas>` 画布对象
        *
        * @property view
        * @type {HTMLCanvasElement}
@@ -22109,7 +22566,7 @@ var Application = function () {
     }
 
     /**
-     * Convenience method for stopping the render.
+     * 停止
      */
 
   }, {
@@ -22119,7 +22576,7 @@ var Application = function () {
     }
 
     /**
-     * Convenience method for starting the render.
+     * 开始
      */
 
   }, {
@@ -22128,18 +22585,38 @@ var Application = function () {
       this.ticker.start();
       this._paused = false;
     }
+
+    /**
+     * 恢复
+     */
+
   }, {
     key: 'resume',
     value: function resume() {
       this._paused = false;
-      Tiny.audioManager.resume();
+      try {
+        Tiny.audio.manager.resume();
+      } catch (e) {}
     }
+
+    /**
+     * 暂停
+     */
+
   }, {
     key: 'pause',
     value: function pause() {
       this._paused = true;
-      Tiny.audioManager.pause();
+      try {
+        Tiny.audio.manager.pause();
+      } catch (e) {}
     }
+
+    /**
+     * 是否暂停中
+     * @returns {boolean}
+     */
+
   }, {
     key: 'isPaused',
     value: function isPaused() {
@@ -22148,9 +22625,10 @@ var Application = function () {
 
     /**
      *
-     * @param {number}  width - the width of the renderers view
-     * @param {number}  height  - the height of the renderers view
-     * @param {Tiny.RENDER_OPTIONS}  options  - The optional renderer parameters
+     * @private
+     * @param {number}                width     - the width of the renderers view
+     * @param {number}                height    - the height of the renderers view
+     * @param {Tiny.RENDER_OPTIONS}   options   - The optional renderer parameters
      * @return {Tiny.WebGLRenderer|Tiny.CanvasRenderer} - Returns WebGL renderer if available, otherwise CanvasRenderer
      */
 
@@ -22200,9 +22678,9 @@ var Application = function () {
      * var app = new Tiny.Application({..});
      * app.replaceScene(scene, 'SlideInR', 800);
      *
-     * @param {Tiny.DisplayObject}  scene
-     * @param {string}  transition
-     * @param {number}  duration
+     * @param {Tiny.DisplayObject}  scene         场景对象
+     * @param {string}              transition    转场动画的字符，比如：Fade、MoveIn等。更多参照 {@link Tiny.Transition}
+     * @param {number}              duration      转场动画时长（单位：ms）
      */
 
   }, {
@@ -22255,6 +22733,23 @@ var Application = function () {
       // Start the rendering
       this.start();
     }
+
+    /**
+     * 游戏的主调度
+     *
+     * @example
+     *
+     * var app = new Tiny.Application();
+     * var fn = function() {
+     *  console.log('update.');
+     * }
+     *
+     * app.onUpdate(fn);
+     *
+     * @param {function}  fn
+     * @param {boolean}   force 是否强制覆盖方法池中同一个方法
+     */
+
   }, {
     key: 'onUpdate',
     value: function onUpdate(fn) {
@@ -22264,6 +22759,37 @@ var Application = function () {
       if (!this._updatePoll[key] || force) {
         this._updatePoll[key] = fn;
       }
+    }
+
+    /**
+     * 移除主调度中的某个方法
+     *
+     * @example
+     *
+     * var app = new Tiny.Application();
+     * var fn = function() {
+     *  console.log('update.');
+     * }
+     *
+     * app.onUpdate(fn);
+     *
+     * // 5秒后移除fn
+     * Tiny.ticker.shared.countDown({
+     *  duration: 1e3,
+     *  times: 5,
+     *  complete: function () {
+     *    app.offUpdate(fn);
+     *  }
+     * });
+     *
+     * @param fn
+     */
+
+  }, {
+    key: 'offUpdate',
+    value: function offUpdate(fn) {
+      var key = fn.toString();
+      delete this._updatePoll[key];
     }
 
     /**
@@ -22304,9 +22830,7 @@ var Application = function () {
         multiplier = Math.min(height / cHeight, width / cWidth);
       }
       multiplier = Number(multiplier.toFixed(4));
-      //console.log(multiplier)
       _settings.config.renderOptions.resolution = Number((1 / multiplier).toFixed(4));
-      //console.log(config.renderOptions.resolution)
       _settings.config.renderOptions.autoResize = true;
       _settings.config.newWidth = Math.round(cWidth * multiplier);
       _settings.config.newHeight = Math.round(cHeight * multiplier);
@@ -22346,9 +22870,7 @@ var Application = function () {
   }, {
     key: 'destroy',
     value: function destroy(removeView) {
-      this.stop();
-      this.ticker.remove(this.render, this);
-      this.ticker = null;
+      _tween2.default.removeAll();
 
       this.stage.destroy();
       this.stage = null;
@@ -22359,7 +22881,7 @@ var Application = function () {
       this.renderer.destroy(removeView);
       this.renderer = null;
 
-      _tween2.default.removeAll();
+      this.ticker.destroy();
     }
   }]);
 
@@ -22387,7 +22909,7 @@ var _Container2 = __webpack_require__(8);
 
 var _Container3 = _interopRequireDefault(_Container2);
 
-var _RenderTexture = __webpack_require__(27);
+var _RenderTexture = __webpack_require__(28);
 
 var _RenderTexture2 = _interopRequireDefault(_RenderTexture);
 
@@ -22395,11 +22917,11 @@ var _Texture = __webpack_require__(7);
 
 var _Texture2 = _interopRequireDefault(_Texture);
 
-var _GraphicsData = __webpack_require__(48);
+var _GraphicsData = __webpack_require__(49);
 
 var _GraphicsData2 = _interopRequireDefault(_GraphicsData);
 
-var _Sprite = __webpack_require__(26);
+var _Sprite = __webpack_require__(27);
 
 var _Sprite2 = _interopRequireDefault(_Sprite);
 
@@ -22448,7 +22970,7 @@ var Graphics = function (_Container) {
   _inherits(Graphics, _Container);
 
   /**
-   * @param {boolean} [nativeLines=false] - If true the lines will be draw using LINES instead of TRIANGLE_STRIP
+   * @param {boolean} nativeLines=false   - If true the lines will be draw using LINES instead of TRIANGLE_STRIP
    */
   function Graphics() {
     var nativeLines = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
@@ -22820,11 +23342,11 @@ var Graphics = function (_Container) {
      *
      * "borrowed" from https://code.google.com/p/fxcanvas/ - thanks google!
      *
-     * @param {number} x1 - The x-coordinate of the beginning of the arc
-     * @param {number} y1 - The y-coordinate of the beginning of the arc
-     * @param {number} x2 - The x-coordinate of the end of the arc
-     * @param {number} y2 - The y-coordinate of the end of the arc
-     * @param {number} radius - The radius of the arc
+     * @param {number}  x1      - The x-coordinate of the beginning of the arc
+     * @param {number}  y1      - The y-coordinate of the beginning of the arc
+     * @param {number}  x2      - The x-coordinate of the end of the arc
+     * @param {number}  y2      - The y-coordinate of the end of the arc
+     * @param {number}  radius  - The radius of the arc
      * @return {Tiny.Graphics} This Graphics object. Good for chaining method calls
      */
 
@@ -22880,15 +23402,12 @@ var Graphics = function (_Container) {
     /**
      * The arc method creates an arc/curve (used to create circles, or parts of circles).
      *
-     * @param {number} cx - The x-coordinate of the center of the circle
-     * @param {number} cy - The y-coordinate of the center of the circle
-     * @param {number} radius - The radius of the circle
-     * @param {number} startAngle - The starting angle, in radians (0 is at the 3 o'clock position
-     *  of the arc's circle)
-     * @param {number} endAngle - The ending angle, in radians
-     * @param {boolean} [anticlockwise=false] - Specifies whether the drawing should be
-     *  counter-clockwise or clockwise. False is default, and indicates clockwise, while true
-     *  indicates counter-clockwise.
+     * @param {number}    cx                  - The x-coordinate of the center of the circle
+     * @param {number}    cy                  - The y-coordinate of the center of the circle
+     * @param {number}    radius              - The radius of the circle
+     * @param {number}    startAngle          - The starting angle, in radians (0 is at the 3 o'clock position of the arc's circle)
+     * @param {number}    endAngle            - The ending angle, in radians
+     * @param {boolean}   anticlockwise=false - Specifies whether the drawing should be counter-clockwise or clockwise. False is default, and indicates clockwise, while true indicates counter-clockwise.
      * @return {Tiny.Graphics} This Graphics object. Good for chaining method calls
      */
 
@@ -22959,8 +23478,8 @@ var Graphics = function (_Container) {
      * Specifies a simple one-color fill that subsequent calls to other Graphics methods
      * (such as lineTo() or drawCircle()) use when drawing.
      *
-     * @param {number} [color=0] - the color of the fill
-     * @param {number} [alpha=1] - the alpha of the fill
+     * @param {number}  color=0   - the color of the fill
+     * @param {number}  alpha=1   - the alpha of the fill
      * @return {Tiny.Graphics} This Graphics object. Good for chaining method calls
      */
 
@@ -23003,10 +23522,10 @@ var Graphics = function (_Container) {
 
     /**
      *
-     * @param {number} x - The X coord of the top-left of the rectangle
-     * @param {number} y - The Y coord of the top-left of the rectangle
-     * @param {number} width - The width of the rectangle
-     * @param {number} height - The height of the rectangle
+     * @param {number}  x       - The X coord of the top-left of the rectangle
+     * @param {number}  y       - The Y coord of the top-left of the rectangle
+     * @param {number}  width   - The width of the rectangle
+     * @param {number}  height  - The height of the rectangle
      * @return {Tiny.Graphics} This Graphics object. Good for chaining method calls
      */
 
@@ -23020,11 +23539,11 @@ var Graphics = function (_Container) {
 
     /**
      *
-     * @param {number} x - The X coord of the top-left of the rectangle
-     * @param {number} y - The Y coord of the top-left of the rectangle
-     * @param {number} width - The width of the rectangle
-     * @param {number} height - The height of the rectangle
-     * @param {number} radius - Radius of the rectangle corners
+     * @param {number}  x       - The X coord of the top-left of the rectangle
+     * @param {number}  y       - The Y coord of the top-left of the rectangle
+     * @param {number}  width   - The width of the rectangle
+     * @param {number}  height  - The height of the rectangle
+     * @param {number}  radius  - Radius of the rectangle corners
      * @return {Tiny.Graphics} This Graphics object. Good for chaining method calls
      */
 
@@ -23039,9 +23558,9 @@ var Graphics = function (_Container) {
     /**
      * Draws a circle.
      *
-     * @param {number} x - The X coordinate of the center of the circle
-     * @param {number} y - The Y coordinate of the center of the circle
-     * @param {number} radius - The radius of the circle
+     * @param {number}  x       - The X coordinate of the center of the circle
+     * @param {number}  y       - The Y coordinate of the center of the circle
+     * @param {number}  radius  - The radius of the circle
      * @return {Tiny.Graphics} This Graphics object. Good for chaining method calls
      */
 
@@ -23056,10 +23575,10 @@ var Graphics = function (_Container) {
     /**
      * Draws an ellipse.
      *
-     * @param {number} x - The X coordinate of the center of the ellipse
-     * @param {number} y - The Y coordinate of the center of the ellipse
-     * @param {number} width - The half width of the ellipse
-     * @param {number} height - The half height of the ellipse
+     * @param {number}  x       - The X coordinate of the center of the ellipse
+     * @param {number}  y       - The Y coordinate of the center of the ellipse
+     * @param {number}  width   - The half width of the ellipse
+     * @param {number}  height  - The half height of the ellipse
      * @return {Tiny.Graphics} This Graphics object. Good for chaining method calls
      */
 
@@ -23074,7 +23593,7 @@ var Graphics = function (_Container) {
     /**
      * Draws a polygon using the given path.
      *
-     * @param {number[]|Tiny.Point[]} path - The path data used to construct the polygon.
+     * @param {array<number>|array<Tiny.Point>} path - The path data used to construct the polygon.
      * @return {Tiny.Graphics} This Graphics object. Good for chaining method calls
      */
 
@@ -23878,16 +24397,16 @@ exports.default = bezierCurveTo;
  * Ignored from docs since it is not directly exposed.
  *
  * @ignore
- * @param {number} fromX - Starting point x
- * @param {number} fromY - Starting point y
- * @param {number} cpX - Control point x
- * @param {number} cpY - Control point y
- * @param {number} cpX2 - Second Control point x
- * @param {number} cpY2 - Second Control point y
- * @param {number} toX - Destination point x
- * @param {number} toY - Destination point y
- * @param {number[]} [path=[]] - Path array to push points into
- * @return {number[]} Array of points of the curve
+ * @param {number}          fromX     - Starting point x
+ * @param {number}          fromY     - Starting point y
+ * @param {number}          cpX       - Control point x
+ * @param {number}          cpY       - Control point y
+ * @param {number}          cpX2      - Second Control point x
+ * @param {number}          cpY2      - Second Control point y
+ * @param {number}          toX       - Destination point x
+ * @param {number}          toY       - Destination point y
+ * @param {array<number>}   path=[]   - Path array to push points into
+ * @return {array<number>} Array of points of the curve
  */
 function bezierCurveTo(fromX, fromY, cpX, cpY, cpX2, cpY2, toX, toY) {
   var path = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : [];
@@ -24380,6 +24899,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
  * This shader is used to draw simple primitive shapes for {@link Tiny.Graphics}.
  *
  * @class
+ * @private
  * @memberof Tiny
  * @extends Tiny.Shader
  */
@@ -24521,7 +25041,7 @@ var _buildLine2 = _interopRequireDefault(_buildLine);
 
 var _utils = __webpack_require__(1);
 
-var _earcut = __webpack_require__(42);
+var _earcut = __webpack_require__(43);
 
 var _earcut2 = _interopRequireDefault(_earcut);
 
@@ -24689,7 +25209,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = buildRoundedRectangle;
 
-var _earcut = __webpack_require__(42);
+var _earcut = __webpack_require__(43);
 
 var _earcut2 = _interopRequireDefault(_earcut);
 
@@ -24975,7 +25495,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _Rectangle = __webpack_require__(25);
+var _Rectangle = __webpack_require__(26);
 
 var _Rectangle2 = _interopRequireDefault(_Rectangle);
 
@@ -25102,7 +25622,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _Rectangle = __webpack_require__(25);
+var _Rectangle = __webpack_require__(26);
 
 var _Rectangle2 = _interopRequireDefault(_Rectangle);
 
@@ -25237,7 +25757,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _Point = __webpack_require__(24);
+var _Point = __webpack_require__(25);
 
 var _Point2 = _interopRequireDefault(_Point);
 
@@ -27810,18 +28330,17 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 /**
  * An AnimatedSprite is a simple way to display an animation depicted by a list of textures.
  *
- * ```js
- * let alienImages = ["image_sequence_01.png","image_sequence_02.png","image_sequence_03.png","image_sequence_04.png"];
- * let textureArray = [];
+ *  ```js
+ *  let alienImages = ['image_sequence_01.png','image_sequence_02.png','image_sequence_03.png','image_sequence_04.png'];
+ *  let textureArray = [];
  *
- * for (let i=0; i < 4; i++)
- * {
- *      let texture = Tiny.Texture.fromImage(alienImages[i]);
- *      textureArray.push(texture);
- * };
+ *  for (let i=0; i < 4; i++) {
+ *    let texture = Tiny.Texture.fromImage(alienImages[i]);
+ *    textureArray.push(texture);
+ *  };
  *
- * let mc = new Tiny.AnimatedSprite(textureArray);
- * ```
+ *  let mc = new Tiny.AnimatedSprite(textureArray);
+ *  ```
  *
  * @class
  * @extends Tiny.Sprite
@@ -27831,9 +28350,8 @@ var AnimatedSprite = function (_core$Sprite) {
   _inherits(AnimatedSprite, _core$Sprite);
 
   /**
-   * @param {Tiny.Texture[]|FrameObject[]} textures - an array of {@link Tiny.Texture} or frame
-   *  objects that make up the animation
-   * @param {boolean} [autoUpdate=true] - Whether use Tiny.ticker.shared to auto update animation time.
+   * @param {Tiny.Texture[]|FrameObject[]}  textures          an array of {@link Tiny.Texture} or frame objects that make up the animation
+   * @param {boolean}                       autoUpdate=true   Whether use Tiny.ticker.shared to auto update animation time.
    */
   function AnimatedSprite(textures, autoUpdate) {
     _classCallCheck(this, AnimatedSprite);
@@ -28981,7 +29499,7 @@ var _Shader = __webpack_require__(12);
 
 var _Shader2 = _interopRequireDefault(_Shader);
 
-var _path = __webpack_require__(31);
+var _path = __webpack_require__(32);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -29075,11 +29593,9 @@ var Spritesheet = function () {
     }
 
     /**
-     * @param {Tiny.BaseTexture} baseTexture Reference to the source BaseTexture object.
-     * @param {Object} data - Spritesheet image data.
-     * @param {string} [resolutionFilename] - The filename to consider when determining
-     *        the resolution of the spritesheet. If not provided, the imageUrl will
-     *        be used on the BaseTexture.
+     * @param {Tiny.BaseTexture}  baseTexture         - Reference to the source BaseTexture object.
+     * @param {Object}            data                - Spritesheet image data.
+     * @param {string}            resolutionFilename  - The filename to consider when determining the resolution of the spritesheet. If not provided, the imageUrl will be used on the BaseTexture.
      */
 
   }]);
@@ -29322,15 +29838,189 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _Matrix = __webpack_require__(24);
+
+var _Matrix2 = _interopRequireDefault(_Matrix);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var tempMat = new _Matrix2.default();
+
+/**
+ * class controls uv transform and frame clamp for texture
+ *
+ * @class
+ * @memberof Tiny
+ */
+
+var TextureTransform = function () {
+  /**
+   *
+   * @param {Tiny.Texture} texture observed texture
+   * @param {number} [clampMargin] Changes frame clamping, 0.5 by default. Use -0.5 for extra border.
+   * @constructor
+   */
+  function TextureTransform(texture, clampMargin) {
+    _classCallCheck(this, TextureTransform);
+
+    this._texture = texture;
+
+    this.mapCoord = new _Matrix2.default();
+
+    this.uClampFrame = new Float32Array(4);
+
+    this.uClampOffset = new Float32Array(2);
+
+    this._lastTextureID = -1;
+
+    /**
+     * Changes frame clamping
+     * Works with TilingSprite and Mesh
+     * Change to 1.5 if you texture has repeated right and bottom lines, that leads to smoother borders
+     *
+     * @default 0
+     * @member {number}
+     */
+    this.clampOffset = 0;
+
+    /**
+     * Changes frame clamping
+     * Works with TilingSprite and Mesh
+     * Change to -0.5 to add a pixel to the edge, recommended for transparent trimmed textures in atlas
+     *
+     * @default 0.5
+     * @member {number}
+     */
+    this.clampMargin = typeof clampMargin === 'undefined' ? 0.5 : clampMargin;
+  }
+
+  /**
+   * texture property
+   * @member {Tiny.Texture}
+   */
+
+
+  _createClass(TextureTransform, [{
+    key: 'multiplyUvs',
+
+
+    /**
+     * Multiplies uvs array to transform
+     * @param {Float32Array} uvs mesh uvs
+     * @param {Float32Array} [out=uvs] output
+     * @returns {Float32Array} output
+     */
+    value: function multiplyUvs(uvs, out) {
+      if (out === undefined) {
+        out = uvs;
+      }
+
+      var mat = this.mapCoord;
+
+      for (var i = 0; i < uvs.length; i += 2) {
+        var x = uvs[i];
+        var y = uvs[i + 1];
+
+        out[i] = x * mat.a + y * mat.c + mat.tx;
+        out[i + 1] = x * mat.b + y * mat.d + mat.ty;
+      }
+
+      return out;
+    }
+
+    /**
+     * updates matrices if texture was changed
+     * @param {boolean} forceUpdate if true, matrices will be updated any case
+     * @returns {boolean} whether or not it was updated
+     */
+
+  }, {
+    key: 'update',
+    value: function update(forceUpdate) {
+      var tex = this._texture;
+
+      if (!tex || !tex.valid) {
+        return false;
+      }
+
+      if (!forceUpdate && this._lastTextureID === tex._updateID) {
+        return false;
+      }
+
+      this._lastTextureID = tex._updateID;
+
+      var uvs = tex._uvs;
+
+      this.mapCoord.set(uvs.x1 - uvs.x0, uvs.y1 - uvs.y0, uvs.x3 - uvs.x0, uvs.y3 - uvs.y0, uvs.x0, uvs.y0);
+
+      var orig = tex.orig;
+      var trim = tex.trim;
+
+      if (trim) {
+        tempMat.set(orig.width / trim.width, 0, 0, orig.height / trim.height, -trim.x / trim.width, -trim.y / trim.height);
+        this.mapCoord.append(tempMat);
+      }
+
+      var texBase = tex.baseTexture;
+      var frame = this.uClampFrame;
+      var margin = this.clampMargin / texBase.resolution;
+      var offset = this.clampOffset;
+
+      frame[0] = (tex._frame.x + margin + offset) / texBase.width;
+      frame[1] = (tex._frame.y + margin + offset) / texBase.height;
+      frame[2] = (tex._frame.x + tex._frame.width - margin + offset) / texBase.width;
+      frame[3] = (tex._frame.y + tex._frame.height - margin + offset) / texBase.height;
+      this.uClampOffset[0] = offset / texBase.realWidth;
+      this.uClampOffset[1] = offset / texBase.realHeight;
+
+      return true;
+    }
+  }, {
+    key: 'texture',
+    get: function get() {
+      return this._texture;
+    },
+    set: function set(value) {
+      this._texture = value;
+      this._lastTextureID = -1;
+    }
+  }]);
+
+  return TextureTransform;
+}();
+
+exports.default = TextureTransform;
+
+/***/ }),
+/* 124 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _settings = __webpack_require__(3);
 
 var _settings2 = _interopRequireDefault(_settings);
 
+var _utils = __webpack_require__(1);
+
+var utils = _interopRequireWildcard(_utils);
+
 var _const = __webpack_require__(0);
 
-var _TickerListener = __webpack_require__(124);
+var _TickerListener = __webpack_require__(125);
 
 var _TickerListener2 = _interopRequireDefault(_TickerListener);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -29338,8 +30028,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 /**
  * A Ticker class that runs an update loop that other objects listen to.
- * This class is composed around listeners
- * meant for execution on the next requested animation frame.
+ * This class is composed around listeners meant for execution on the next requested animation frame.
  * Animation frames are requested only when necessary,
  * e.g. When the ticker is started and the emitter has listeners.
  *
@@ -29376,9 +30065,7 @@ var Ticker = function () {
     this._maxElapsedMS = 100;
 
     /**
-     * Whether or not this ticker should invoke the method
-     * {@link Tiny.ticker.Ticker#start} automatically
-     * when a listener is added.
+     * Whether or not this ticker should invoke the method {@link Tiny.ticker.Ticker#start} automatically when a listener is added.
      *
      * @member {boolean}
      * @default false
@@ -29387,8 +30074,7 @@ var Ticker = function () {
 
     /**
      * Scalar time value from last frame to this frame.
-     * This value is capped by setting {@link Tiny.ticker.Ticker#minFPS}
-     * and is scaled with {@link Tiny.ticker.Ticker#speed}.
+     * This value is capped by setting {@link Tiny.ticker.Ticker#minFPS} and is scaled with {@link Tiny.ticker.Ticker#speed}.
      * **Note:** The cap may be exceeded by scaling.
      *
      * @member {number}
@@ -29398,10 +30084,8 @@ var Ticker = function () {
 
     /**
      * Time elapsed in milliseconds from last frame to this frame.
-     * Opposed to what the scalar {@link Tiny.ticker.Ticker#deltaTime}
-     * is based, this value is neither capped nor scaled.
-     * If the platform supports DOMHighResTimeStamp,
-     * this value will have a precision of 1 µs.
+     * Opposed to what the scalar {@link Tiny.ticker.Ticker#deltaTime} is based, this value is neither capped nor scaled.
+     * If the platform supports DOMHighResTimeStamp, this value will have a precision of 1 µs.
      * Defaults to target frame time
      *
      * @member {number}
@@ -29411,10 +30095,8 @@ var Ticker = function () {
 
     /**
      * The last time {@link Tiny.ticker.Ticker#update} was invoked.
-     * This value is also reset internally outside of invoking
-     * update, but only when a new animation frame is requested.
-     * If the platform supports DOMHighResTimeStamp,
-     * this value will have a precision of 1 µs.
+     * This value is also reset internally outside of invoking update, but only when a new animation frame is requested.
+     * If the platform supports DOMHighResTimeStamp, this value will have a precision of 1 µs.
      *
      * @member {number}
      * @default 0
@@ -29424,8 +30106,7 @@ var Ticker = function () {
     /**
      * Factor of current {@link Tiny.ticker.Ticker#deltaTime}.
      * @example
-     * // Scales ticker.deltaTime to what would be
-     * // the equivalent of approximately 120 FPS
+     * // Scales ticker.deltaTime to what would be the equivalent of approximately 120 FPS
      * ticker.speed = 2;
      *
      * @member {number}
@@ -29434,11 +30115,8 @@ var Ticker = function () {
     this.speed = 1;
 
     /**
-     * Whether or not this ticker has been started.
-     * `true` if {@link Tiny.ticker.Ticker#start} has been called.
-     * `false` if {@link Tiny.ticker.Ticker#stop} has been called.
-     * While `false`, this value may change to `true` in the
-     * event of {@link Tiny.ticker.Ticker#autoStart} being `true`
+     * Whether or not this ticker has been started. `true` if {@link Tiny.ticker.Ticker#start} has been called. `false` if {@link Tiny.ticker.Ticker#stop} has been called.
+     * While `false`, this value may change to `true` in the event of {@link Tiny.ticker.Ticker#autoStart} being `true`
      * and a listener is added.
      *
      * @member {boolean}
@@ -29684,6 +30362,65 @@ var Ticker = function () {
     }
 
     /**
+     * 定时触发
+     *
+     * @example
+     *
+     * Tiny.ticker.shared.countDown({
+     *   duration: 5e3,
+     *   callback: function () {
+     *     console.log('每五秒打印一次，共打印三次');
+     *   },
+     *   times: 3,
+     *   complete: function () {
+     *     console.log('Done');
+     *   }
+     * });
+     *
+     * @example
+     *
+     * var ticker = new Tiny.ticker.Ticker();
+     * ticker.countDown({
+     *   duration: 3e3,
+     *   callback: function () {
+     *     console.log('每三秒打印一次');
+     *   }
+     * });
+     * ticker.start();
+     *
+     * @param {object}    opts
+     * @param {number}    opts.duration   - 间隔时长（单位：ms）
+     * @param {function}  opts.callback
+     * @param {number}    opts.times      - 次数，不传即无限次
+     * @param {function}  opts.complete   - 完成后的回调
+     */
+
+  }, {
+    key: 'countDown',
+    value: function countDown(opts) {
+      var duration = opts.duration || 1e3;
+      var times = opts.times || Infinity;
+      var callback = opts.callback || function () {};
+      var complete = opts.complete || function () {};
+      var start = utils.getTime();
+      var count = 0;
+      var self = this;
+      var fn = function fn(time) {
+        if (count >= times) {
+          self.remove(fn);
+          complete(time);
+          return;
+        }
+        if (utils.getTime() - start >= duration) {
+          callback(time);
+          start += duration;
+          count++;
+        }
+      };
+      this.add(fn);
+    }
+
+    /**
      * Triggers an update. An update entails setting the
      * current {@link Tiny.ticker.Ticker#elapsedMS},
      * the current {@link Tiny.ticker.Ticker#deltaTime},
@@ -29798,7 +30535,7 @@ var Ticker = function () {
 exports.default = Ticker;
 
 /***/ }),
-/* 124 */
+/* 125 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29823,10 +30560,10 @@ var TickerListener = function () {
   /**
    * Constructor
    *
-   * @param {Function} fn - The listener function to be added for one update
-   * @param {Function} [context=null] - The listener context
-   * @param {number} [priority=0] - The priority for emitting
-   * @param {boolean} [once=false] - If the handler should fire once
+   * @param {Function}  fn              - The listener function to be added for one update
+   * @param {Function}  [context=null]  - The listener context
+   * @param {number}    [priority=0]    - The priority for emitting
+   * @param {boolean}   [once=false]    - If the handler should fire once
    */
   function TickerListener(fn) {
     var context = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
@@ -29882,8 +30619,8 @@ var TickerListener = function () {
   /**
    * Simple compare function to figure out if a function and context match.
    *
-   * @param {Function} fn - The listener function to be added for one update
-   * @param {Function} context - The listener context
+   * @param {Function}  fn       - The listener function to be added for one update
+   * @param {Function}  context  - The listener context
    * @return {boolean} `true` if the listener match the arguments
    */
 
@@ -29898,7 +30635,7 @@ var TickerListener = function () {
 
     /**
      * Emit by calling the current function.
-     * @param {number} deltaTime - time since the last emit.
+     * @param {number}  deltaTime - time since the last emit.
      * @return {TickerListener} Next ticker
      */
 
@@ -29930,7 +30667,7 @@ var TickerListener = function () {
 
     /**
      * Connect to the list.
-     * @param {TickerListener} previous - Input node, previous listener
+     * @param {TickerListener}  previous - Input node, previous listener
      */
 
   }, {
@@ -29946,8 +30683,7 @@ var TickerListener = function () {
 
     /**
      * Destroy and don't use after this.
-     * @param {boolean} [hard = false] `true` to remove the `next` reference, this
-     *        is considered a hard destroy. Soft destroy maintains the next reference.
+     * @param {boolean} [hard = false]  - `true` to remove the `next` reference, this is considered a hard destroy. Soft destroy maintains the next reference.
      * @return {TickerListener} The listener to redirect while emitting or removing.
      */
 
@@ -29986,7 +30722,7 @@ var TickerListener = function () {
 exports.default = TickerListener;
 
 /***/ }),
-/* 125 */
+/* 126 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30006,7 +30742,7 @@ function canUploadSameBuffer() {
 }
 
 /***/ }),
-/* 126 */
+/* 127 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30047,8 +30783,8 @@ var _math = __webpack_require__(2);
  * @static
  * @memberof Tiny
  * @function rectContainsRect
- * @param rect1
- * @param rect2
+ * @param {Tiny.Rectangle}  rect1
+ * @param {Tiny.Rectangle}  rect2
  * @return {boolean}
  */
 function rectContainsRect(rect1, rect2) {
@@ -30065,7 +30801,7 @@ function rectContainsRect(rect1, rect2) {
  * @static
  * @memberof Tiny
  * @function rectGetMaxX
- * @param rect
+ * @param {Tiny.Rectangle}  rect
  * @return {number}
  */
 function rectGetMaxX(rect) {
@@ -30078,7 +30814,7 @@ function rectGetMaxX(rect) {
  * @static
  * @memberof Tiny
  * @function rectGetMidX
- * @param rect
+ * @param {Tiny.Rectangle}  rect
  * @return {number}
  */
 function rectGetMidX(rect) {
@@ -30091,7 +30827,7 @@ function rectGetMidX(rect) {
  * @static
  * @memberof Tiny
  * @function rectGetMinX
- * @param rect
+ * @param {Tiny.Rectangle}  rect
  * @return {number}
  */
 function rectGetMinX(rect) {
@@ -30104,7 +30840,7 @@ function rectGetMinX(rect) {
  * @static
  * @memberof Tiny
  * @function rectGetMaxY
- * @param rect
+ * @param {Tiny.Rectangle}  rect
  * @return {number}
  */
 function rectGetMaxY(rect) {
@@ -30117,7 +30853,7 @@ function rectGetMaxY(rect) {
  * @static
  * @memberof Tiny
  * @function rectGetMidY
- * @param rect
+ * @param {Tiny.Rectangle}  rect
  * @return {number}
  */
 function rectGetMidY(rect) {
@@ -30130,7 +30866,7 @@ function rectGetMidY(rect) {
  * @static
  * @memberof Tiny
  * @function rectGetMinY
- * @param rect
+ * @param {Tiny.Rectangle}  rect
  * @return {number}
  */
 function rectGetMinY(rect) {
@@ -30154,8 +30890,8 @@ function rectGetMinY(rect) {
  * @static
  * @memberof Tiny
  * @function rectContainsPoint
- * @param rect
- * @param point
+ * @param {Tiny.Rectangle}  rect
+ * @param {Tiny.Point}      point
  * @return {boolean}
  */
 function rectContainsPoint(rect, point) {
@@ -30179,8 +30915,8 @@ function rectContainsPoint(rect, point) {
  * @static
  * @memberof Tiny
  * @function rectIntersectsRect
- * @param rectA
- * @param rectB
+ * @param {Tiny.Rectangle}  rectA
+ * @param {Tiny.Rectangle}  rectB
  * @return {boolean}
  */
 function rectIntersectsRect(rectA, rectB) {
@@ -30202,8 +30938,8 @@ function rectIntersectsRect(rectA, rectB) {
  * @static
  * @memberof Tiny
  * @function rectUnion
- * @param rectA
- * @param rectB
+ * @param {Tiny.Rectangle}  rectA
+ * @param {Tiny.Rectangle}  rectB
  * @return {Tiny.Rectangle}
  */
 function rectUnion(rectA, rectB) {
@@ -30226,14 +30962,14 @@ function rectUnion(rectA, rectB) {
  * @static
  * @memberof Tiny
  * @function isPixelCollision
- * @param first
- * @param x
- * @param y
- * @param isFirstCentred
- * @param other
- * @param x2
- * @param y2
- * @param isOtherCentred
+ * @param {Tiny.DisplayObject}  first
+ * @param {number}              x
+ * @param {number}              y
+ * @param {boolean}             isFirstCentred
+ * @param {Tiny.DisplayObject}  other
+ * @param {number}              x2
+ * @param {number}              y2
+ * @param {boolean}             isOtherCentred
  * @return {boolean}
  */
 function isPixelCollision(first, x, y, isFirstCentred, other, x2, y2, isOtherCentred) {
@@ -30330,7 +31066,7 @@ function isPixelCollision(first, x, y, isFirstCentred, other, x2, y2, isOtherCen
 }
 
 /***/ }),
-/* 127 */
+/* 128 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30392,7 +31128,7 @@ function determineCrossOrigin(url) {
 }
 
 /***/ }),
-/* 128 */
+/* 129 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30420,7 +31156,7 @@ function maxRecommendedTextures(max) {
 }
 
 /***/ }),
-/* 129 */
+/* 130 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30437,8 +31173,8 @@ exports.performMixins = performMixins;
  *
  * @memberof Tiny.mixins
  * @function mixin
- * @param {object} target The prototype or instance that properties and methods should be added to.
- * @param {object} source The source of properties and methods to mix in.
+ * @param {object} target - The prototype or instance that properties and methods should be added to.
+ * @param {object} source - The source of properties and methods to mix in.
  */
 function mixin(target, source) {
   if (!target || !source) return;
@@ -30466,8 +31202,8 @@ var mixins = [];
  * @memberof Tiny.mixins
  * @function delayMixin
  * @private
- * @param {object} target The prototype or instance that properties and methods should be added to.
- * @param {object} source The source of properties and methods to mix in.
+ * @param {object} target - The prototype or instance that properties and methods should be added to.
+ * @param {object} source - The source of properties and methods to mix in.
  */
 function delayMixin(target, source) {
   mixins.push(target, source);
@@ -30488,7 +31224,7 @@ function performMixins() {
 }
 
 /***/ }),
-/* 130 */
+/* 131 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30501,13 +31237,13 @@ Object.defineProperty(exports, "__esModule", {
  * Mixins functionality to make an object have "plugins".
  *
  * @example
- *      function MyObject() {}
+ *  function MyObject() {}
  *
- *      pluginTarget.mixin(MyObject);
+ *  pluginTarget.mixin(MyObject);
  *
  * @mixin
  * @memberof Tiny
- * @param {object} obj - The object to mix into.
+ * @param {object}  obj  - The object to mix into.
  */
 function pluginTarget(obj) {
   obj.__plugins = {};
@@ -30515,8 +31251,8 @@ function pluginTarget(obj) {
   /**
    * Adds a plugin to an object
    *
-   * @param {string} pluginName - The events that should be listed.
-   * @param {Function} ctor - The constructor function for the plugin.
+   * @param {string}    pluginName - The events that should be listed.
+   * @param {Function}  ctor - The constructor function for the plugin.
    */
   obj.registerPlugin = function registerPlugin(pluginName, ctor) {
     obj.__plugins[pluginName] = ctor;
@@ -30552,7 +31288,7 @@ exports.default = {
   /**
    * Mixes in the properties of the pluginTarget into another object
    *
-   * @param {object} obj - The obj to mix into
+   * @param {object}  obj  - The obj to mix into
    */
   mixin: function mixin(obj) {
     pluginTarget(obj);
@@ -30560,7 +31296,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 131 */
+/* 132 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30576,7 +31312,7 @@ exports.default = trimCanvas;
  * @memberof Tiny
  * @function trimCanvas
  * @private
- * @param {HTMLCanvasElement} canvas - the canvas to trim
+ * @param {HTMLCanvasElement} canvas  - the canvas to trim
  * @returns {object} Trim data
  */
 function trimCanvas(canvas) {
@@ -30642,7 +31378,7 @@ function trimCanvas(canvas) {
 }
 
 /***/ }),
-/* 132 */
+/* 133 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30740,7 +31476,7 @@ var InteractionEvent = function () {
 exports.default = InteractionEvent;
 
 /***/ }),
-/* 133 */
+/* 134 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30762,11 +31498,11 @@ var _InteractionData = __webpack_require__(65);
 
 var _InteractionData2 = _interopRequireDefault(_InteractionData);
 
-var _InteractionEvent = __webpack_require__(132);
+var _InteractionEvent = __webpack_require__(133);
 
 var _InteractionEvent2 = _interopRequireDefault(_InteractionEvent);
 
-var _InteractionTrackingData = __webpack_require__(134);
+var _InteractionTrackingData = __webpack_require__(135);
 
 var _InteractionTrackingData2 = _interopRequireDefault(_InteractionTrackingData);
 
@@ -30995,6 +31731,7 @@ var InteractionManager = function (_EventEmitter) {
      * values, objects are handled as dictionaries of CSS values for interactionDOMElement,
      * and functions are called instead of changing the CSS.
      * Default CSS cursor values are provided for 'default' and 'pointer' modes.
+     *
      * @member {Object.<string, (string|Function|Object.<string, string>)>}
      */
     _this.cursorStyles = {
@@ -32534,7 +33271,7 @@ core.WebGLRenderer.registerPlugin('interaction', InteractionManager);
 core.CanvasRenderer.registerPlugin('interaction', InteractionManager);
 
 /***/ }),
-/* 134 */
+/* 135 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32717,7 +33454,7 @@ InteractionTrackingData.FLAGS = Object.freeze({
 });
 
 /***/ }),
-/* 135 */
+/* 136 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32739,7 +33476,7 @@ if (!Math.sign) {
 }
 
 /***/ }),
-/* 136 */
+/* 137 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32758,7 +33495,7 @@ if (!Object.assign) {
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
 
 /***/ }),
-/* 137 */
+/* 138 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32844,10 +33581,10 @@ if (!global.cancelAnimationFrame) {
     return clearTimeout(id);
   };
 }
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(43)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(44)))
 
 /***/ }),
-/* 138 */
+/* 139 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32883,7 +33620,7 @@ module.exports = function parseURI(str, opts) {
 };
 
 /***/ }),
-/* 139 */
+/* 140 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33066,7 +33803,7 @@ exports['default'] = MiniSignal;
 module.exports = exports['default'];
 
 /***/ }),
-/* 140 */
+/* 141 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33280,7 +34017,7 @@ function queue(worker, concurrency) {
 //# sourceMappingURL=async.js.map
 
 /***/ }),
-/* 141 */
+/* 142 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33353,7 +34090,7 @@ function encodeBinary(input) {
 //# sourceMappingURL=b64.js.map
 
 /***/ }),
-/* 142 */
+/* 143 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33418,7 +34155,7 @@ function getResourcePath(resource, baseUrl) {
 }
 
 /***/ }),
-/* 143 */
+/* 144 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33448,7 +34185,7 @@ var _Texture2 = _interopRequireDefault(_Texture);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 144 */
+/* 145 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33458,16 +34195,25 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _loader = __webpack_require__(149);
+var _Loader = __webpack_require__(151);
 
 Object.defineProperty(exports, 'Loader', {
   enumerable: true,
   get: function get() {
-    return _interopRequireDefault(_loader).default;
+    return _interopRequireDefault(_Loader).default;
   }
 });
 
-var _spritesheetParser = __webpack_require__(142);
+var _BinaryLoader = __webpack_require__(150);
+
+Object.defineProperty(exports, 'BinaryLoader', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_BinaryLoader).default;
+  }
+});
+
+var _spritesheetParser = __webpack_require__(143);
 
 Object.defineProperty(exports, 'spritesheetParser', {
   enumerable: true,
@@ -33482,7 +34228,7 @@ Object.defineProperty(exports, 'getResourcePath', {
   }
 });
 
-var _textureParser = __webpack_require__(143);
+var _textureParser = __webpack_require__(144);
 
 Object.defineProperty(exports, 'textureParser', {
   enumerable: true,
@@ -33503,7 +34249,7 @@ Object.defineProperty(exports, 'Resource', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 145 */
+/* 146 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33519,15 +34265,15 @@ var _typeof = typeof Symbol === "function" && _typeof2(Symbol.iterator) === "sym
     return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof2(obj);
 };
 
-var _miniSignals = __webpack_require__(139);
+var _miniSignals = __webpack_require__(140);
 
 var _miniSignals2 = _interopRequireDefault(_miniSignals);
 
-var _parseUri = __webpack_require__(138);
+var _parseUri = __webpack_require__(139);
 
 var _parseUri2 = _interopRequireDefault(_parseUri);
 
-var _async = __webpack_require__(140);
+var _async = __webpack_require__(141);
 
 var async = _interopRequireWildcard(_async);
 
@@ -34139,7 +34885,7 @@ exports.default = Loader;
 //# sourceMappingURL=Loader.js.map
 
 /***/ }),
-/* 146 */
+/* 147 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -34161,7 +34907,7 @@ var _Resource = __webpack_require__(84);
 
 var _Resource2 = _interopRequireDefault(_Resource);
 
-var _b = __webpack_require__(141);
+var _b = __webpack_require__(142);
 
 var _b2 = _interopRequireDefault(_b);
 
@@ -34240,7 +34986,7 @@ function blobMiddlewareFactory() {
 //# sourceMappingURL=blob.js.map
 
 /***/ }),
-/* 147 */
+/* 148 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -34287,7 +35033,7 @@ Object.keys(_actions).forEach(function (key) {
   });
 });
 
-var _Transition = __webpack_require__(29);
+var _Transition = __webpack_require__(30);
 
 var _Transition2 = _interopRequireDefault(_Transition);
 
@@ -34295,7 +35041,7 @@ var _interaction = __webpack_require__(68);
 
 var interaction = _interopRequireWildcard(_interaction);
 
-var _loaders = __webpack_require__(144);
+var _loaders = __webpack_require__(145);
 
 var loaders = _interopRequireWildcard(_loaders);
 
@@ -34338,8 +35084,126 @@ var Loader = loaders && loaders.Loader ? new loaders.Loader() : null; // check i
 exports.Loader = Loader;
 
 /***/ }),
-/* 148 */,
-/* 149 */
+/* 149 */,
+/* 150 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _core = __webpack_require__(5);
+
+var core = _interopRequireWildcard(_core);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
+ * 二进制数据加载
+ *
+ * @example
+ *
+ *  var loader = new Tiny.loaders.BinaryLoader('https://zos.alipayobjects.com/rmsportal/rFWpAALTVTmVcfiQMRAV.png');
+ *  loader.load({
+ *    onComplete: function (data) {
+ *      console.log(data);
+ *      // Uint8Array(895) [137, 80, 78, 71, 13...]
+ *    }
+ *  });
+ *
+ * @class
+ * @memberof Tiny
+ */
+var BinaryLoader = function () {
+  /**
+   *
+   * @param {string}  url - 文件地址
+   */
+  function BinaryLoader(url) {
+    _classCallCheck(this, BinaryLoader);
+
+    this._url = url;
+  }
+
+  /**
+   * 执行加载
+   *
+   * @param {object}    opts
+   * @param {function}  opts.onComplete 成功回调
+   * @param {function}  opts.onError    失败回调
+   */
+
+
+  _createClass(BinaryLoader, [{
+    key: 'load',
+    value: function load(opts) {
+      if (!opts) {
+        opts = {};
+      }
+
+      var self = this;
+      var xhr = core.getXMLHttpRequest();
+      var onComplete = function onComplete(resourceLoader, resource) {
+        (opts.onComplete || function () {})(resourceLoader, resource);
+      };
+      var onError = function onError(error, resourceLoader, resource) {
+        var errorMsg = error + ', url: ' + resource.url;
+        (opts.onError || function () {
+          throw errorMsg;
+        })(errorMsg, resourceLoader, resource);
+      };
+
+      xhr.open('GET', self._url, true);
+
+      if (xhr.overrideMimeType) {
+        xhr.overrideMimeType('ext/plain; charset=x-user-defined');
+      }
+      xhr.onload = function () {
+        if (+xhr.readyState === 4 && +xhr.status === 200) {
+          onComplete(self._str2Uint8Array(xhr.responseText));
+        } else {
+          onError();
+        }
+      };
+      xhr.send(null);
+    }
+
+    /**
+     *
+     * @param strData
+     * @return {Uint8Array}
+     * @private
+     */
+
+  }, {
+    key: '_str2Uint8Array',
+    value: function _str2Uint8Array(strData) {
+      if (!strData) {
+        return null;
+      }
+
+      var arrData = new Uint8Array(strData.length);
+      for (var i = 0; i < strData.length; i++) {
+        arrData[i] = strData.charCodeAt(i) & 0xff;
+      }
+      return arrData;
+    }
+  }]);
+
+  return BinaryLoader;
+}();
+
+exports.default = BinaryLoader;
+
+/***/ }),
+/* 151 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -34355,7 +35219,7 @@ var _resourceLoader = __webpack_require__(71);
 
 var _resourceLoader2 = _interopRequireDefault(_resourceLoader);
 
-var _blob = __webpack_require__(146);
+var _blob = __webpack_require__(147);
 
 var _eventemitter = __webpack_require__(6);
 
@@ -34365,11 +35229,11 @@ var _utils = __webpack_require__(1);
 
 var utils = _interopRequireWildcard(_utils);
 
-var _textureParser = __webpack_require__(143);
+var _textureParser = __webpack_require__(144);
 
 var _textureParser2 = _interopRequireDefault(_textureParser);
 
-var _spritesheetParser = __webpack_require__(142);
+var _spritesheetParser = __webpack_require__(143);
 
 var _spritesheetParser2 = _interopRequireDefault(_spritesheetParser);
 
@@ -34385,47 +35249,41 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 /**
  *
- * The new loader, extends Resource Loader by Chad Engler: https://github.com/englercj/resource-loader
+ * 继承自 Resource Loader 的 Loader 类。
  *
  * ```js
- * const loader = Tiny.Loader; // pixi exposes a premade instance for you to use.
- * //or
- * const loader = new Tiny.loaders.Loader(); // you can also create your own if you want
+ * const loader = new Tiny.loaders.Loader(); // 你也可以通过 `Loader` 类自己实例化一个
+ * // 建议使用 Tiny.js 提供静态方法来获取 Loader 实例化对象
+ * // const loader = Tiny.Loader;
  *
- * const sprites = {};
- *
- * // Chainable `add` to enqueue a resource
- * loader.add('bunny', 'data/bunny.png')
- *       .add('spaceship', 'assets/spritesheet.json');
- * loader.add('scoreFont', 'assets/score.fnt');
- *
- * // Chainable `pre` to add a middleware that runs for each resource, *before* loading that resource.
- * // This is useful to implement custom caching modules (using filesystem, indexeddb, memory, etc).
- * loader.pre(cachingMiddleware);
- *
- * // Chainable `use` to add a middleware that runs for each resource, *after* loading that resource.
- * // This is useful to implement custom parsing modules (like spritesheet parsers, spine parser, etc).
- * loader.use(parsingMiddleware);
- *
- * // The `load` method loads the queue of resources, and calls the passed in callback called once all
- * // resources have loaded.
- * loader.load((loader, resources) => {
- *     // resources is an object where the key is the name of the resource loaded and the value is the resource object.
- *     // They have a couple default properties:
- *     // - `url`: The URL that the resource was loaded from
- *     // - `error`: The error that happened when trying to load (if any)
- *     // - `data`: The raw data that was loaded
- *     // also may contain other properties based on the middleware that runs.
- *     sprites.bunny = new Tiny.TilingSprite(resources.bunny.texture);
- *     sprites.spaceship = new Tiny.TilingSprite(resources.spaceship.texture);
- *     sprites.scoreFont = new Tiny.TilingSprite(resources.scoreFont.texture);
+ * // 声明资源文件
+ * var resources = [
+ *   'https://zos.alipayobjects.com/rmsportal/nJBojwdMJfUqpCWvwyoA.png',
+ *   'https://zos.alipayobjects.com/rmsportal/kkroUtIawGrWrqOLRmjq.jpg',
+ *   'https://zos.alipayobjects.com/rmsportal/jkgwjYSFHRkorsKaZbng.jpeg',
+ *   'https://zos.alipayobjects.com/rmsportal/HAacythTETlcsPxEePbk.webp',
+ *   'https://os.alipayobjects.com/rmsportal/atrIuwPurrBiNEyWNdQA.ogg'
+ * ];
+ * //执行加载
+ * loader.run({
+ *   resources: resources,
+ *   // 加载进度
+ *   onProgress: function(per){
+ *       console.log('percent:', per + '%');
+ *   },
+ *   // 单个资源加载完成后的回调
+ *   onComplete: function(resourceLoader, resource){
+ *       console.log(resource.url);
+ *   },
+ *   // 单个资源加载失败后的回调
+ *   onError: function(errorMsg, resourceLoader, resource){
+ *       console.log(errorMsg);
+ *   },
+ *   // 所有资源加载完成后的回调
+ *   onAllComplete: function (resourceLoader, object) {
+ *       console.log('all complete');
+ *   }
  * });
- *
- * // throughout the process multiple signals can be dispatched.
- * loader.onProgress.add(() => {}); // called once per loaded/errored file
- * loader.onError.add(() => {}); // called once per errored file
- * loader.onLoad.add(() => {}); // called once per loaded file
- * loader.onComplete.add(() => {}); // called once when the queued resources all load.
  * ```
  *
  * @see https://github.com/englercj/resource-loader
@@ -34475,7 +35333,7 @@ var Loader = function (_ResourceLoader) {
    * Adds a default middleware to the Tiny loader.
    *
    * @static
-   * @param {Function} fn - The middleware to add.
+   * @param {function} fn - The middleware to add.
    */
 
 
@@ -34484,12 +35342,13 @@ var Loader = function (_ResourceLoader) {
 
 
     /**
+     * 执行加载
      *
-     * @param {array}  opts.resources
-     * @param {function}  opts.onProgress
-     * @param {function}  opts.onComplete
-     * @param {function}  opts.onError
-     * @param {function}  opts.onAllComplete
+     * @param {array}     opts.resources        资源集合
+     * @param {function}  opts.onProgress       加载进度回调函数
+     * @param {function}  opts.onComplete       单个资源加载完成回调函数
+     * @param {function}  opts.onError          单个资源加载失败回调函数
+     * @param {function}  opts.onAllComplete    所有资源加载完成回调函数
      */
     value: function run(opts) {
       if (!opts) {

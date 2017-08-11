@@ -1,10 +1,15 @@
-import { default as TinyFactory } from './TinyFactory';
 import { default as BoundingBoxType } from './BoundingBoxType';
 
 /**
- * @inheritDoc
+ * 骨骼显示对象
+ * @class TinyArmatureDisplay
+ * @property {boolean} animation - 只读 dragonBones.Animation对象
+ * @property {dragonBones.Armature} armature - 只读  dragonBones.Armature实例
+ * @property {boolean} debugDraw - 开启骨骼调试信息
+ * @memberof Tiny.DragonBones
+ * @extends {Tiny.Container}
  */
-export default class TinyArmatureDisplay extends Tiny.Container {
+class TinyArmatureDisplay extends Tiny.Container {
   /**
    * @internal
    * @private
@@ -12,13 +17,9 @@ export default class TinyArmatureDisplay extends Tiny.Container {
   constructor() {
     super();
     this._armature = null;
-    /**
-     * {Tiny.Sprite}
-     * @internal
-     * @private
-     */
     this._debugDrawer = null;
   }
+
   /**
    * @private
    */
@@ -32,6 +33,7 @@ export default class TinyArmatureDisplay extends Tiny.Container {
 
     this.destroy();
   }
+
   /**
    * @private
    * @param {EventStringType} type
@@ -40,6 +42,7 @@ export default class TinyArmatureDisplay extends Tiny.Container {
   _dispatchEvent(type, eventObject) {
     this.emit(type, eventObject);
   }
+
   /**
    * @private
    * @param {boolean} isEnabled -
@@ -140,37 +143,46 @@ export default class TinyArmatureDisplay extends Tiny.Container {
   }
 
   /**
-   * @inheritDoc
-   * @param {EventStringType} type -
+   * listeners 别名 供dragonBones内部
+   * 是否注册了某一个类型的事件
+   * @private
+   * @method Tiny.DragonBones.TinyArmatureDisplay#hasEvent
+   * @param {String} type - 时间名字
+   * @return {boolean}
    */
   hasEvent(type) {
     return this.listeners(type, true);
   }
 
   /**
-   *
-   * @param {EventStringType} type
-   * @param {(event: EventObject) => void} listener
-   * @param {any} target
+   * addListener别名 供dragonBones内部
+   * @private
+   * @method Tiny.DragonBones.TinyArmatureDisplay#addEvent
+   * @param {String} type - 事件的名称
+   * @param {function} listener - 事件回调函数
+   * @param {any} target - 事件回调作用域
    */
   addEvent(type, listener, target) {
     this.addListener(type, listener, target);
   }
 
   /**
-   *
-   * @param {EventStringType} type
-   * @param {(event: EventObject) => void} listener
-   * @param {any} target
+   * removeListener别名 供dragonBones内部
+   * @private
+   * @method Tiny.DragonBones.TinyArmatureDisplay#removeEvent
+   * @param {String} type - 事件的名称
+   * @param {function} listener - 事件回调函数
+   * @param {any} target - 事件回调作用域
    */
   removeEvent(type, listener, target) {
     this.removeListener(type, listener, target);
   }
 
   /**
-   * @inheritDoc
+   * 销毁当前骨骼展示对象
+   * @method Tiny.DragonBones.TinyArmatureDisplay#dispose
    */
-  dispose(disposeProxy) {
+  dispose() {
     if (this._armature) {
       this._armature.dispose();
       this._armature = null;
@@ -178,16 +190,18 @@ export default class TinyArmatureDisplay extends Tiny.Container {
   }
 
   /**
-   * @inheritDoc
-   * @return {dragonBones.Armature}
+   * armature
+   * @property armature
+   * @type {dragonBones.Armature}
    */
   get armature() {
     return this._armature;
   }
 
   /**
-   * @inheritDoc
-   * @return {dragonBones.Animation}
+   * animation
+   * @property armature
+   * @type {dragonBones.Animation}
    */
   get animation() {
     return this._armature.animation;
@@ -195,40 +209,31 @@ export default class TinyArmatureDisplay extends Tiny.Container {
 
   /**
    * 增加调试模式快捷方式
+   * @type {boolean}
    */
   get debugDraw() {
     return this.armature.debugDraw;
   }
 
+  /**
+   * @param {Boolean} 是否开启调试模式
+   */
   set debugDraw(value) {
     this.armature.debugDraw = value;
   }
 
   /**
    * 增加播放动画快捷方式 参考dragonBones.Animation
+   * @method Tiny.DragonBones.TinyArmatureDisplay#play
    * @param animationName 动画数据名称，如果未设置，则播放默认动画，或将暂停状态切换为播放状态，或重新播放上一个正在播放的动画。
    * @param playTimes 播放次数。 [-1: 使用动画数据默认值, 0: 无限循环播放, [1~N]: 循环播放 N 次]
-   * @returns 对应的动画状态。
+   * @returns {dragonBones.AnimationState} 对应的动画状态。
    * @see dragonBones.AnimationState
    * @version DragonBones 3.0
    */
   play(animationName = null, playTimes = -1) {
     return this.animation.play(animationName, playTimes);
   }
-
-  /**
-   * @deprecated
-   * @param {boolean} on
-   * @see dragonBones.Armature#clock
-   * @see dragonBones.TinyFactory#clock
-   * @see dragonBones.Animation#timescale
-   * @see dragonBones.Animation#stop()
-   */
-  // advanceTimeBySelf(on) {
-  //   if (on) {
-  //     this._armature.clock = TinyFactory.clock;
-  //   } else {
-  //     this._armature.clock = null;
-  //   }
-  // }
 }
+
+export default TinyArmatureDisplay;

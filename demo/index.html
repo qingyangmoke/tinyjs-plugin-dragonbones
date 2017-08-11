@@ -1,122 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-  <title>Tiny-骨骼动画</title>
-  <meta charset="utf-8">
-  <script src="libs/tiny.debug.js"></script>
-  <script src="../dist/index.debug.js"></script>
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2,minimum-scale=1,user-scalable=1">
-  <style type="text/css">
-    body,
-    html,
-    canvas {
-      padding: 0;
-      margin: 0;
-      -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
-    }
-  </style>
+<meta charset="utf-8">
+<title>tinyjs-plugin-dragonbones Demo</title>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="yes" name="apple-touch-fullscreen"/>
+<meta content="telephone=no,email=no" name="format-detection"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"/>
+<link href="https://as.alipayobjects.com/g/h5-lib/antui/9.9.0-2/rem/antui.css" rel="stylesheet"/>
 </head>
-
 <body>
 
-  <script>
-    var config = {
-      showFPS: true, // 显示帧频
-      dpi: 1, // 分辨率
-      renderOptions: {
-        backgroundColor: 0x2a3145 // 画布背景色
-      }
-    };
-
-    var app = new Tiny.Application(config);
-
-    function setTitle(title, container) {
-      var title = new Tiny.Text(title, {
-        fontSize: '18px',
-        fill: 'white',
-      });
-
-      title.position.set(Tiny.WIN_SIZE.width / 2, 30);
-      title.anchor.set(0.5, 0);
-      container.addChild(title);
-    }
-
-    var container = new Tiny.Container();
-
-    setTitle('Tiny骨骼动画演示', container);
-
-    app.run(container);
-
-    //设置别名
-    var dragonBones = Tiny.DragonBones;
-    var resources = Tiny.Loader.resources;
-
-    var armatureDisplay;
-
-    function createBox(name, x, y, width, height, color) {
-      let graphics = new Tiny.Graphics();
-      graphics.beginFill(color);
-      graphics.drawRect(0, 0, width, height);
-      graphics.bounds = new Tiny.Rectangle(0, 0, width, height);
-      var rt = Tiny.RenderTexture.create(width, height);
-      app.renderer.render(graphics, rt);
-      let sprite = new Tiny.Sprite(rt);
-      var title = new Tiny.Text(name, {
-        fontSize: '18px',
-        fill: 'white',
-      });
-      title.position.set(sprite.width / 2, sprite.height / 2);
-      title.anchor.set(0.5, 0.5);
-      sprite.addChild(title);
-      sprite.position.set(x, y);
-
-      sprite.setEventEnabled(true);
-
-      sprite.mousedown = sprite.touchstart = function (data) {
-        data.stopPropagation();
-        console.log(title);
-        armatureDisplay.play(name);
-      };
-
-      return sprite;
-    }
-
-    function initDragon1() {
-      dragonBones.addDragonBonesData(resources["dragonBonesData"].data);
-      dragonBones.addTextureAtlasData(resources["textureDataA"].data, resources["textureA"].texture);
-
-      armatureDisplay = dragonBones.buildArmatureDisplay('Dragon');
-      armatureDisplay.x = app.renderer.width * 0.5;
-      armatureDisplay.y = app.renderer.height * 0.5 + 50;
-      armatureDisplay.scale.set(0.3, 0.3);
-
-      // //DragonBones Pro 默认生成四个动作 fall、jump、stand、walk
-      // armatureDisplay.animation.play("walk");
-      var animationState = armatureDisplay.play('walk');
-
-      container.addChild(armatureDisplay);
-
-      var top = 60;
-      var btnFall = createBox('fall', 0, top + 0, 100, 30, 0xff0000);
-      container.addChild(btnFall);
-      var btnJump = createBox('jump', 0, top + 40, 100, 30, 0xff0000);
-      container.addChild(btnJump);
-      var btnStand = createBox('stand', 0, top + 80, 100, 30, 0xff0000);
-      container.addChild(btnStand);
-      var btnWalk = createBox('walk', 0, top + 120, 100, 30, 0xff0000);
-      container.addChild(btnWalk);
-    }
-
-
-    Tiny.Loader
-      .add("dragonBonesData", "./resource/Dragon/Dragon_ske.json")
-      .add("textureDataA", "./resource/Dragon/Dragon_tex.json")
-      .add("textureA", "./resource/Dragon/Dragon_tex.png")
-      .load(function () {
-        initDragon1();
-      });
-  </script>
+<div class="am-list">
+  <div class="am-list-header">骨骼插件 Demo</div>
+  <div class="am-list-body">
+    <a href="debugdraw.html" class="am-list-item">
+      <div class="am-list-content">调试</div>
+      <div class="am-list-arrow"><span class="am-icon arrow horizontal"></span></div>
+    </a>
+    <a href="simple.html" class="am-list-item">
+      <div class="am-list-content">聚合演示</div>
+      <div class="am-list-arrow"><span class="am-icon arrow horizontal"></span></div>
+    </a>
+    <a href="mixed.html" class="am-list-item">
+      <div class="am-list-content">动画混合</div>
+      <div class="am-list-arrow"><span class="am-icon arrow horizontal"></span></div>
+    </a>
+    <a href="multi.html" class="am-list-item">
+      <div class="am-list-content">多人物</div>
+      <div class="am-list-arrow"><span class="am-icon arrow horizontal"></span></div>
+    </a>
+    <a href="bonemask.html" class="am-list-item">
+      <div class="am-list-content">动画遮罩</div>
+      <div class="am-list-arrow"><span class="am-icon arrow horizontal"></span></div>
+    </a>
+    <a href="timescale.html" class="am-list-item">
+      <div class="am-list-content">改变动画速度</div>
+      <div class="am-list-arrow"><span class="am-icon arrow horizontal"></span></div>
+    </a>
+  </div>
+</div>
 </body>
-
 </html>

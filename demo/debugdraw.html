@@ -20,101 +20,101 @@
 
 <body>
 
-  <script>
-    var config = {
-      showFPS: true, // 显示帧频
-      dpi: 1, // 分辨率
-      renderOptions: {
-        backgroundColor: 0x2a3145 // 画布背景色
-      }
+<script>
+  var config = {
+    showFPS: true, // 显示帧频
+    dpi: 1, // 分辨率
+    renderOptions: {
+      backgroundColor: 0x2a3145 // 画布背景色
+    }
+  };
+
+  var app = new Tiny.Application(config);
+
+  function setTitle(title, container) {
+    var title = new Tiny.Text(title, {
+      fontSize: '18px',
+      fill: 'white',
+    });
+
+    title.position.set(Tiny.WIN_SIZE.width / 2, 30);
+    title.anchor.set(0.5, 0);
+    container.addChild(title);
+  }
+
+  var container = new Tiny.Container();
+
+  setTitle('Tiny骨骼动画演示-debugdraw', container);
+
+  app.run(container);
+
+  //设置别名
+  var dragonBones = Tiny.DragonBones;
+  var resources = Tiny.Loader.resources;
+
+  var armatureDisplay;
+
+
+  function createBox(name, x, y, width, height, color) {
+    let graphics = new Tiny.Graphics();
+    graphics.beginFill(color);
+    graphics.drawRect(0, 0, width, height);
+    graphics.bounds = new Tiny.Rectangle(0, 0, width, height);
+    var rt = Tiny.RenderTexture.create(width, height);
+    app.renderer.render(graphics, rt);
+    let sprite = new Tiny.Sprite(rt);
+    var title = new Tiny.Text(armatureDisplay.debugDraw ? '已开启' : '已关闭', {
+      fontSize: '18px',
+      fill: 'white',
+    });
+    title.position.set(sprite.width / 2, sprite.height / 2);
+    title.anchor.set(0.5, 0.5);
+    sprite.addChild(title);
+
+    console.log(title);
+
+    sprite.position.set(x, y);
+
+    sprite.setEventEnabled(true);
+
+    sprite.mousedown = sprite.touchstart = function (data) {
+      data.stopPropagation();
+      armatureDisplay.debugDraw = !armatureDisplay.debugDraw;
+      title.text = armatureDisplay.debugDraw ? '已开启' : '已关闭';
     };
 
-    var app = new Tiny.Application(config);
+    return sprite;
+  }
 
-    function setTitle(title, container) {
-      var title = new Tiny.Text(title, {
-        fontSize: '18px',
-        fill: 'white',
-      });
+  function initDragon1() {
+    dragonBones.addDragonBonesData(resources["dragonBonesData"].data);
+    dragonBones.addTextureAtlasData(resources["textureDataA"].data, resources["textureA"].texture);
 
-      title.position.set(Tiny.WIN_SIZE.width / 2, 30);
-      title.anchor.set(0.5, 0);
-      container.addChild(title);
-    }
+    armatureDisplay = dragonBones.buildArmatureDisplay('Dragon');
+    armatureDisplay.x = app.renderer.width * 0.5;
+    armatureDisplay.y = app.renderer.height * 0.5 - 50;
+    armatureDisplay.scale.set(-0.3, 0.3);
 
-    var container = new Tiny.Container();
+    // //DragonBones Pro 默认生成四个动作 fall、jump、stand、walk
+    // armatureDisplay.animation.play("walk");
+    var animationState = armatureDisplay.play('walk');
 
-    setTitle('Tiny骨骼动画演示-debugdraw', container);
+    armatureDisplay.debugDraw = true;
 
-    app.run(container);
+    container.addChild(armatureDisplay);
 
-    //设置别名
-    var dragonBones = Tiny.DragonBones;
-    var resources = Tiny.Loader.resources;
+    var top = 60;
+    container.addChild(createBox(0.5, 0, top + 0, 100, 30, 0xff0000));
+  }
 
-    var armatureDisplay;
-
-
-    function createBox(name, x, y, width, height, color) {
-      let graphics = new Tiny.Graphics();
-      graphics.beginFill(color);
-      graphics.drawRect(0, 0, width, height);
-      graphics.bounds = new Tiny.Rectangle(0, 0, width, height);
-      var rt = Tiny.RenderTexture.create(width, height);
-      app.renderer.render(graphics, rt);
-      let sprite = new Tiny.Sprite(rt);
-      var title = new Tiny.Text(armatureDisplay.debugDraw ? '已开启' : '已关闭', {
-        fontSize: '18px',
-        fill: 'white',
-      });
-      title.position.set(sprite.width / 2, sprite.height / 2);
-      title.anchor.set(0.5, 0.5);
-      sprite.addChild(title);
-
-      console.log(title);
-
-      sprite.position.set(x, y);
-
-      sprite.setEventEnabled(true);
-
-      sprite.mousedown = sprite.touchstart = function (data) {
-        data.stopPropagation();
-        armatureDisplay.debugDraw = !armatureDisplay.debugDraw;
-        title.text = armatureDisplay.debugDraw ? '已开启' : '已关闭';
-      };
-
-      return sprite;
-    }
-
-    function initDragon1() {
-      dragonBones.addDragonBonesData(resources["dragonBonesData"].data);
-      dragonBones.addTextureAtlasData(resources["textureDataA"].data, resources["textureA"].texture);
-
-      armatureDisplay = dragonBones.buildArmatureDisplay('Dragon');
-      armatureDisplay.x = app.renderer.width * 0.5;
-      armatureDisplay.y = app.renderer.height * 0.5 - 50;
-      armatureDisplay.scale.set(-0.3, 0.3);
-
-      // //DragonBones Pro 默认生成四个动作 fall、jump、stand、walk
-      // armatureDisplay.animation.play("walk");
-      var animationState = armatureDisplay.play('walk');
-
-      armatureDisplay.debugDraw = true;
-
-      container.addChild(armatureDisplay);
-
-      var top = 60;
-      container.addChild(createBox(0.5, 0, top + 0, 100, 30, 0xff0000));
-    }
-
-    Tiny.Loader
-      .add("dragonBonesData", "./resource/Dragon/Dragon_ske.json")
-      .add("textureDataA", "./resource/Dragon/Dragon_tex.json")
-      .add("textureA", "./resource/Dragon/Dragon_tex.png")
-      .load(function () {
-        initDragon1();
-      });
-  </script>
+  Tiny.Loader
+    .add("dragonBonesData", "./resource/Dragon/Dragon_ske.json")
+    .add("textureDataA", "./resource/Dragon/Dragon_tex.json")
+    .add("textureA", "./resource/Dragon/Dragon_tex.png")
+    .load(function () {
+      initDragon1();
+    });
+</script>
 </body>
 
 </html>
