@@ -1,7 +1,7 @@
 {
   "name": "tinyjs-plugin-dragonbones",
   "version": "0.0.1",
-  "author": "采东",
+  "author": "采东 <qingyangmoke@qq.com>",
   "description": "Tiny 骨骼动画",
   "keywords": [
     "tinyjs",
@@ -12,10 +12,11 @@
     "type": "git",
     "url": "https://github.com/ant-tinyjs/tinyjs-plugin-dragonbones.git"
   },
-  "main": "src/index.js",
+  "main": "dist/index.debug.js",
   "files": [
     "src",
     "demo",
+    "dist",
     "tests"
   ],
   "scripts": {
@@ -28,7 +29,8 @@
     "test-cov": "istanbul cover _mocha -- ./tests --recursive --require ./tests/setup.js",
     "ci": "npm run lint && npm run test-cov",
     "preversion": "npm run ci",
-    "postversion": "git push && git push --tags"
+    "postversion": "git push && git push --tags",
+    "prepublish": "npm run build"
   },
   "license": "MIT",
   "devDependencies": {
@@ -52,6 +54,6 @@
   },
   "homepage": "https://github.com/ant-tinyjs/tinyjs-plugin-dragonbones#readme",
   "dependencies": {
-    "pixi-gl-core": "^1.1.0"
+    "tinyjs-plugin-mesh": "^0.0.1"
   }
 }

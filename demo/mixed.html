@@ -1,85 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <title>Tiny-骨骼动画</title>
-  <meta charset="utf-8">
-  <script src="libs/tiny.debug.js"></script>
-  <script src="../dist/index.debug.js"></script>
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2,minimum-scale=1,user-scalable=1">
-  <style type="text/css">
-    body,
-    html,
-    canvas {
-      padding: 0;
-      margin: 0;
-      -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
-    }
-  </style>
+<title>Tiny-骨骼动画</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2,minimum-scale=1,user-scalable=1">
+<style type="text/css">
+  body,
+  html,
+  canvas {
+    padding: 0;
+    margin: 0;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+  }
+</style>
 </head>
 
 <body>
 
-  <script>
-    var config = {
-      showFPS: true, // 显示帧频
-      dpi: 1, // 分辨率
-      renderOptions: {
-        backgroundColor: 0x2a3145 // 画布背景色
-      }
-    };
-
-    var app = new Tiny.Application(config);
-
-    function setTitle(title, container) {
-      var title = new Tiny.Text(title, {
-        fontSize: '18px',
-        fill: 'white',
-      });
-
-      title.position.set(Tiny.WIN_SIZE.width / 2, 30);
-      title.anchor.set(0.5, 0);
-      container.addChild(title);
+<script src="https://gw.alipayobjects.com/as/g/tiny/tiny/1.1.4/tiny.js"></script>
+<script src="../dist/index.debug.js"></script>
+<script>
+  var config = {
+    showFPS: true, // 显示帧频
+    dpi: 1, // 分辨率
+    renderOptions: {
+      backgroundColor: 0x2a3145 // 画布背景色
     }
+  };
 
-    var container = new Tiny.Container();
+  var app = new Tiny.Application(config);
 
-    setTitle('Tiny骨骼动画演示-动画混合', container);
+  function setTitle(title, container) {
+    var title = new Tiny.Text(title, {
+      fontSize: '18px',
+      fill: 'white',
+    });
 
-    app.run(container);
+    title.position.set(Tiny.WIN_SIZE.width / 2, 30);
+    title.anchor.set(0.5, 0);
+    container.addChild(title);
+  }
 
-    //设置别名
-    var dragonBones = Tiny.DragonBones;
-    var resources = Tiny.Loader.resources;
+  var container = new Tiny.Container();
 
-    var armatureDisplay;
+  setTitle('Tiny骨骼动画演示-动画混合', container);
 
-    function initDragon1() {
-      dragonBones.addDragonBonesData(resources["dragonBonesData"].data);
-      dragonBones.addTextureAtlasData(resources["textureDataA"].data, resources["textureA"].texture);
+  app.run(container);
 
-      armatureDisplay = dragonBones.buildArmatureDisplay('Dragon');
-      armatureDisplay.x = app.renderer.width * 0.5;
-      armatureDisplay.y = app.renderer.height * 0.5 - 50;
+  //设置别名
+  var dragonBones = Tiny.DragonBones;
+  var resources = Tiny.Loader.resources;
 
-      armatureDisplay.animation.fadeIn("walk", 0, -1, 0, 0, "UPPER_BODY_GROUP", dragonBones.Animation.SAME_GROUP);
+  var armatureDisplay;
 
-      armatureDisplay.animation.fadeIn("fall", 0, -1, 0, 0, "LOWER_BODY_GROUP", dragonBones.Animation.SAME_GROUP);
+  function initDragon1() {
+    dragonBones.addDragonBonesData(resources["dragonBonesData"].data);
+    dragonBones.addTextureAtlasData(resources["textureDataA"].data, resources["textureA"].texture);
 
-      armatureDisplay.scale.set(-0.3, 0.3);
+    armatureDisplay = dragonBones.buildArmatureDisplay('Dragon');
+    armatureDisplay.x = app.renderer.width * 0.5;
+    armatureDisplay.y = app.renderer.height * 0.5 - 50;
 
-      container.addChild(armatureDisplay);
-    }
+    armatureDisplay.animation.fadeIn("walk", 0, -1, 0, 0, "UPPER_BODY_GROUP", dragonBones.Animation.SAME_GROUP);
+
+    armatureDisplay.animation.fadeIn("fall", 0, -1, 0, 0, "LOWER_BODY_GROUP", dragonBones.Animation.SAME_GROUP);
+
+    armatureDisplay.scale.set(-0.3, 0.3);
+
+    container.addChild(armatureDisplay);
+  }
 
 
-    Tiny.Loader
-      .add("dragonBonesData", "./resource/Dragon/Dragon_ske.json")
-      .add("textureDataA", "./resource/Dragon/Dragon_tex.json")
-      .add("textureA", "./resource/Dragon/Dragon_tex.png")
-      .load(function () {
-        initDragon1();
-      });
-  </script>
+  Tiny.Loader
+    .add("dragonBonesData", "./resource/Dragon/Dragon_ske.json")
+    .add("textureDataA", "./resource/Dragon/Dragon_tex.json")
+    .add("textureA", "./resource/Dragon/Dragon_tex.png")
+    .load(function () {
+      initDragon1();
+    });
+</script>
 </body>
 
 </html>
