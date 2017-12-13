@@ -2,7 +2,7 @@
  * tinyjs-plugin-dragonbones
  * Description: Tiny 骨骼动画
  * Author: 采东 <qingyangmoke@qq.com>
- * Version: v0.0.1
+ * Version: v0.1.0
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')

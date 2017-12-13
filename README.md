@@ -14,8 +14,8 @@
 
 - 也可以直接引用线上cdn地址，注意要使用最新的版本号，例如：
 
-  - https://a.alipayobjects.com/g/tiny-plugins/tinyjs-plugin-dragonbones/0.0.1/index.js
-  - https://a.alipayobjects.com/g/tiny-plugins/tinyjs-plugin-dragonbones/0.0.1/index.debug.js
+  - https://a.alipayobjects.com/g/tiny-plugins/tinyjs-plugin-dragonbones/0.1.0/index.js
+  - https://a.alipayobjects.com/g/tiny-plugins/tinyjs-plugin-dragonbones/0.1.0/index.debug.js
 
 ## 示例
 
