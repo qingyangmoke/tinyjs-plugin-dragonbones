@@ -1,0 +1,25 @@
+{
+  "extends": "../.eslintrc",
+  "env": {
+    "mocha": true,
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "script"
+  },
+  "globals": {
+    "chai": true,
+    "sinon": true,
+    "expect": true,
+    "assert": true,
+    "ok": true,
+    "Tiny": true
+  },
+  "rules": {
+    "func-names": 0,
+    "no-var": 0,
+    "no-magic-numbers": 0,
+    "no-unused-expressions": 0
+  }
+}
