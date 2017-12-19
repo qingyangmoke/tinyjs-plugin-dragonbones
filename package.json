@@ -1,7 +1,7 @@
 {
   "name": "tinyjs-plugin-dragonbones",
-  "version": "0.1.1",
-  "author": "采东 <qingyangmoke@qq.com>",
+  "version": "0.1.2",
+  "author": "清扬陌客",
   "description": "Tiny 骨骼动画",
   "keywords": [
     "tinyjs",
