@@ -17,24 +17,31 @@
 </head>
 
 <body>
-
   <script src="https://gw.alipayobjects.com/as/g/tiny/tiny/1.1.5/tiny.js"></script>
   <script src="../dist/index.debug.js"></script>
   <script src="./js/dragonBonesTest.js"></script>
+
   <script>
     var _dragonBonesTest = new dragonBonesTest();
-    _dragonBonesTest.setup('Tiny骨骼动画演示-组合动画');
-    _dragonBonesTest.buildArmatureDisplay('Dragon', 'Dragon', function (armatureDisplay) {
+    _dragonBonesTest.setup('Tiny骨骼动画演示-网格动画');
+    _dragonBonesTest.buildArmatureDisplay('Ubbie', 'ubbie', function (armatureDisplay) {
       armatureDisplay.x = _dragonBonesTest.app.renderer.width * 0.5;
-      armatureDisplay.y = _dragonBonesTest.app.renderer.height * 0.5 - 50;
-      armatureDisplay.scale.set(-0.6, 0.6);
+      armatureDisplay.y = _dragonBonesTest.app.renderer.height * 0.5 + 200;
+      armatureDisplay.scale.set(-0.8, 0.8);
 
-      armatureDisplay.animation.fadeIn("walk", 0, -1, 0, 0, "UPPER_BODY_GROUP", Tiny.DragonBones.Animation.SAME_GROUP);
-
-      armatureDisplay.animation.fadeIn("fall", 0, -1, 0, 0, "LOWER_BODY_GROUP", Tiny.DragonBones.Animation.SAME_GROUP);
+      var animationState = armatureDisplay.play('stand');
 
       _dragonBonesTest.createButton("debugDraw", 0, 100, 120, 60, 0xff0000, function () {
         armatureDisplay.debugDraw = !armatureDisplay.debugDraw;
+      });
+      _dragonBonesTest.createButton("stand", 0, 200, 120, 60, 0xff0000, function () {
+        armatureDisplay.play('stand');
+      });
+      _dragonBonesTest.createButton("walk", 0, 300, 120, 60, 0xff0000, function () {
+        armatureDisplay.play('walk');
+      });
+      _dragonBonesTest.createButton("turn face", 0, 400, 120, 60, 0xff0000, function () {
+        armatureDisplay.play('turn face');
       });
     });
   </script>
