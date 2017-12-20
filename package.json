@@ -1,6 +1,6 @@
 {
   "name": "tinyjs-plugin-dragonbones",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "author": "清扬陌客",
   "description": "Tiny 骨骼动画",
   "keywords": [
@@ -59,6 +59,6 @@
   },
   "homepage": "https://github.com/ant-tinyjs/tinyjs-plugin-dragonbones#readme",
   "dependencies": {
-    "tinyjs-plugin-mesh": "^0.0.1"
+    "tinyjs-plugin-mesh": "0.0.3"
   }
 }

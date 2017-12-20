@@ -1,7 +1,7 @@
-import {default as dragonBones} from '../libs/dragonBones';
-import {default as BlendMode} from './BlendMode';
-import {default as TinyTextureAtlasData} from './TinyTextureAtlasData';
-const {BaseObject, Slot} = dragonBones;
+import { default as dragonBones } from '../libs/dragonBones';
+import { default as BlendMode } from './BlendMode';
+import { default as TinyTextureAtlasData } from './TinyTextureAtlasData';
+const { BaseObject, Slot } = dragonBones;
 /**
  * Tiny 插槽。
  *
@@ -18,7 +18,6 @@ class TinySlot extends Slot {
      * @private
      */
     this._renderDisplay = null;
-    this._updateTransform = Tiny.VERSION[0] === '3' ? this._updateTransformV3 : this._updateTransformV4;
   }
 
   /**
@@ -297,36 +296,6 @@ class TinySlot extends Slot {
    * @param {boolean} isSkinnedMesh
    */
   _updateTransform(isSkinnedMesh) {
-    throw new Error();
-  }
-
-  /**
-   * @private
-   * @param {boolean} isSkinnedMesh
-   */
-  _updateTransformV3(isSkinnedMesh) {
-    if (isSkinnedMesh) { // Identity transform.
-      this._renderDisplay.setTransform(0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-    } else {
-      this.updateGlobalTransform(); // Update transform.
-
-      const x = this.globalTransformMatrix.tx - (this.globalTransformMatrix.a * this._pivotX + this.globalTransformMatrix.c * this._pivotY); // Pixi pivot do not work.
-      const y = this.globalTransformMatrix.ty - (this.globalTransformMatrix.b * this._pivotX + this.globalTransformMatrix.d * this._pivotY); // Pixi pivot do not work.
-      const transform = this.global;
-      this._renderDisplay.setTransform(
-        x, y,
-        transform.scaleX, transform.scaleY,
-        transform.skewX,
-        0.0, transform.skewY - transform.skewX
-      );
-    }
-  }
-
-  /**
-   * @private
-   * @param {boolean} isSkinnedMesh
-   */
-  _updateTransformV4(isSkinnedMesh) {
     if (isSkinnedMesh) { // Identity transform.
       this._renderDisplay.setTransform(0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0);
     } else {

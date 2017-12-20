@@ -1,89 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<title>Tiny-骨骼动画</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2,minimum-scale=1,user-scalable=1">
-<style type="text/css">
-  body,
-  html,
-  canvas {
-    padding: 0;
-    margin: 0;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
-  }
-</style>
+  <title>Tiny-骨骼动画</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2,minimum-scale=1,user-scalable=1">
+  <style type="text/css">
+    body,
+    html,
+    canvas {
+      padding: 0;
+      margin: 0;
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+    }
+  </style>
 </head>
 
 <body>
 
-<script src="https://gw.alipayobjects.com/as/g/tiny/tiny/1.1.5/tiny.js"></script>
-<script src="../dist/index.debug.js"></script>
-<script>
-  var config = {
-    showFPS: true, // 显示帧频
-    dpi: 1, // 分辨率
-    width: 320,
-    height: 568,
-    fixSize: true,
-    renderOptions: {
-      backgroundColor: 0x2a3145 // 画布背景色
-    }
-  };
-
-  var app = new Tiny.Application(config);
-
-  function setTitle(title, container) {
-    var title = new Tiny.Text(title, {
-      fontSize: '18px',
-      fill: 'white',
+  <script src="https://gw.alipayobjects.com/as/g/tiny/tiny/1.1.5/tiny.js"></script>
+  <script src="../dist/index.debug.js"></script>
+  <script src="./js/dragonBonesTest.js"></script>
+  <script>
+    var _dragonBonesTest = new dragonBonesTest();
+    _dragonBonesTest.setup('Tiny骨骼动画演示-动画遮罩');
+    _dragonBonesTest.buildArmatureDisplay('Dragon', 'Dragon', function (armatureDisplay) {
+      armatureDisplay.x = _dragonBonesTest.app.renderer.width * 0.5;
+      armatureDisplay.y = _dragonBonesTest.app.renderer.height * 0.5 - 50;
+      armatureDisplay.scale.set(-0.6, 0.6);
+      // //DragonBones Pro 默认生成四个动作 fall、jump、stand、walk
+      // armatureDisplay.animation.play("walk");
+      var animationState = armatureDisplay.play('walk');
+      animationState.addBoneMask("head");
+      _dragonBonesTest.createButton("debugDraw", 0, 100, 120, 60, 0xff0000, function () {
+        armatureDisplay.debugDraw = !armatureDisplay.debugDraw;
+      });
     });
-
-    title.position.set(Tiny.WIN_SIZE.width / 2, 30);
-    title.anchor.set(0.5, 0);
-    container.addChild(title);
-  }
-
-  var container = new Tiny.Container();
-
-  setTitle('Tiny骨骼动画演示-动画遮罩', container);
-
-  app.run(container);
-
-  //设置别名
-  var dragonBones = Tiny.DragonBones;
-  var resources = Tiny.Loader.resources;
-
-  var armatureDisplay;
-
-  function initDragon1() {
-    dragonBones.addDragonBonesData(resources["dragonBonesData"].data);
-    dragonBones.addTextureAtlasData(resources["textureDataA"].data, resources["textureA"].texture);
-
-    armatureDisplay = dragonBones.buildArmatureDisplay('Dragon');
-    armatureDisplay.x = app.renderer.width * 0.5;
-    armatureDisplay.y = app.renderer.height * 0.5 - 50;
-    armatureDisplay.scale.set(-0.3, 0.3);
-
-    // //DragonBones Pro 默认生成四个动作 fall、jump、stand、walk
-    // armatureDisplay.animation.play("walk");
-    var animationState = armatureDisplay.play('walk');
-
-    // 动画遮罩  就是只将动画的一部分呈现出来，例如下面的代码，将只播放head和body两个骨头的跑步动画，其他骨头将维持原姿势不动。
-    animationState.addBoneMask("head");
-    // animationState.addBoneMask("body");
-
-    container.addChild(armatureDisplay);
-  }
-
-  Tiny.Loader
-    .add("dragonBonesData", "./resource/Dragon/Dragon_ske.json")
-    .add("textureDataA", "./resource/Dragon/Dragon_tex.json")
-    .add("textureA", "./resource/Dragon/Dragon_tex.png")
-    .load(function () {
-      initDragon1();
-    });
-</script>
+  </script>
 </body>
 
 </html>
