@@ -116,8 +116,10 @@ dragonBonesTest.prototype.setup = function (title, canvasPadding) {
 
   this.app.run(this.container);
 
-  // 在run之后调用
-  fixMeshCanvasRendererGap(this.app, canvasPadding);
+  if (canvasPadding && canvasPadding > 0) {
+    // 在run之后调用
+    fixMeshCanvasRendererGap(this.app, canvasPadding);
+  }
 }
 
 /**

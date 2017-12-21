@@ -18,6 +18,7 @@ class TinyArmatureDisplay extends Tiny.Container {
     super();
     this._armature = null;
     this._debugDrawer = null;
+    this._meshCanvasRenderDrawImageTimes = 1;
   }
 
   /**
@@ -233,6 +234,31 @@ class TinyArmatureDisplay extends Tiny.Container {
    */
   play(animationName = null, playTimes = -1) {
     return this.animation.play(animationName, playTimes);
+  }
+
+  /*
+   * 解决的痛点是 如果使用canvas渲染 骨骼动画使用网格属性 这时候Mesh是把图片化成了N多个三角形
+   * 这样导致一个问题就是在canvas绘制下 这些三角形会有间隙 在webgl下没问题，这和canvas本身绘制有关系
+   * 解决方案是Mesh 插件里MeshCanvasRender 渲染的时候
+   * 把每个网格三角形贴图的地方加一个for循环 重复贴几次  间隙就没有了
+   * 业务可以自己选择重复帖几次 经测试是不同的骨骼需要贴的次数不一样
+   * 就是不知道这种方式会不会造成CPU过高
+   * 原理类似于ps上你画一个三角形图形 放大N倍也会看到很多的半透明锯齿
+   * 如果你把图层复制粘贴N次 这种半透明的锯齿就会逐渐的变少
+   * 重复贴的次数足够多的话 半透明的锯齿就会消失
+  */
+
+  /**
+   * 插件里MeshCanvasRender 网格贴图绘制的重复贴图次数 默认是1
+   * @property meshCanvasRenderDrawImageTimes
+   * @type {number}
+   */
+  get meshCanvasRenderDrawImageTimes() {
+    return this._meshCanvasRenderDrawImageTimes;
+  }
+
+  set meshCanvasRenderDrawImageTimes(value) {
+    this._meshCanvasRenderDrawImageTimes = value;
   }
 }
 
