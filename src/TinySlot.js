@@ -243,7 +243,8 @@ class TinySlot extends Slot {
   _updateMesh() {
     const meshDisplay = this._renderDisplay;// as Tiny.mesh.Mesh;
     const hasFFD = this._ffdVertices.length > 0;
-
+    // 设置重复贴图次数 2017年12月21日
+    meshDisplay.canvasDrawTimes = this._armature.display.meshCanvasRenderDrawImageTimes || 1;
     if (this._meshData.skinned) {
       for (let i = 0, iF = 0, l = this._meshData.vertices.length; i < l; i += 2) {
         const iH = i / 2;

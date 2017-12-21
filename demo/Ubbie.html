@@ -25,6 +25,7 @@
     var _dragonBonesTest = new dragonBonesTest();
     _dragonBonesTest.setup('Tiny骨骼动画演示-网格动画');
     _dragonBonesTest.buildArmatureDisplay('Ubbie', 'ubbie', function (armatureDisplay) {
+      armatureDisplay.meshCanvasRenderDrawImageTimes = 3;
       armatureDisplay.x = _dragonBonesTest.app.renderer.width * 0.5;
       armatureDisplay.y = _dragonBonesTest.app.renderer.height * 0.5 + 200;
       armatureDisplay.scale.set(-0.8, 0.8);
