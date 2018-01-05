@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Tiny-骨骼动画</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2,minimum-scale=1,user-scalable=1">
+  <style type="text/css">
+    body,
+    html,
+    canvas {
+      padding: 0;
+      margin: 0;
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+    }
+  </style>
+</head>
+
+<body>
+  <script src="https://gw.alipayobjects.com/as/g/tiny/tiny/1.1.5/tiny.js"></script>
+  <script src="../dist/index.debug.js"></script>
+  <script src="./js/dragonBonesTest.js"></script>
+
+  <script>
+
+    // 例子中素材+部分代码来自 @白鹭 http://developer.egret.com/cn/example/egret2d/index.html#160-db-change-disp
+    // 皮肤文件已经把白鹭格式转成tiny格式
+    // var skin1 = 'm_121005'; // ["m_121005_F_S_png", "m_121005_F_L1_png", "m_121005_F_L2_png", "m_121005_F_R1_png", "m_121005_F_R2_png"];
+    // var skin2 = 'm_121011';// ["m_121011_F_S_png", "m_121011_F_L1_png", "m_121011_F_L2_png", "m_121011_F_R1_png", "m_121011_F_R2_png"];
+    // var skin3 = 'm_122003';
+    // var skin4 = 'm_121004';
+    var skins = ['m_121005', 'm_121011', 'm_122003', 'm_121004', 'm_122012'];
+    var hairs = ['m_106004_F_F_png', 'm_106002_F_F_png', 'm_106005_F_F_png', 'm_106012_F_F_png', 'm_106011_F_F_png'];
+    var shoes = ['116003', '116004', '116002', '116012', '116011'];
+    var skinIdx = 0;
+    function randomArr(arr) {
+      var len = arr.length;
+      var index = Math.min(len - 1, Math.max(0, Math.floor(Math.random() * len)));
+      return arr[index];
+    }
+    function changeSkin() {
+      setCloth(randomArr(skins));
+      setHair(randomArr(hairs));
+      setShoes(randomArr(shoes));
+      // skinIdx++;
+    }
+
+    // 上衣
+    //参数为即将替换的纹理集ID
+    function setCloth(val) {
+      console.log(val);
+      setNewSlot("Ayifu", val + '_F_S_png');
+      setNewSlot("Axiuzi11", val + '_F_L1_png');
+      setNewSlot("Axiuzi21", val + '_F_L2_png');
+      setNewSlot("Axiuzi12", val + '_F_R1_png');
+      setNewSlot("Axiuzi22", val + '_F_R2_png');
+    }
+
+    // 头发
+    function setHair(val) {
+      console.log('setHair:', val);
+      setNewSlot("Atoufa", val);
+    }
+
+    // 鞋
+    function setShoes(val) {
+      console.log('setShoes:', val);
+      setNewSlot("Axiezi1", 'm_' + val + '_F_L_png');
+      setNewSlot("Axiezi2", 'm_' + val + '_F_R_png');
+      val = 131003;
+      setNewSlot("Akuzi21", 'mm_' + val + '_F_R1_png');
+      setNewSlot("Akuzi22", 'mm_' + val + '_F_L1_png');
+    }
+
+    var _armature = null;
+    //针对slot设置其新内容
+    function setNewSlot(slotName, textureName) {
+      //方法1
+      var slot = _armature.getSlot(slotName);
+      var aliMoleHitTexture = Tiny.TextureCache[textureName];
+      var dcMoleSprite = new Tiny.Sprite(aliMoleHitTexture);
+      dcMoleSprite.anchor.set(0.5, 0.5);
+      slot.setDisplay(dcMoleSprite);
+
+      //方法2，仅限于slot中内容为Sprite
+      // var slot  = this._armature.getSlot(slotName);
+      // slot.display.texture = Tiny.TextureCache[textureName];
+    }
+
+    // 加载皮肤文件
+    function loadSkinData(callback) {
+      const loader = new Tiny.loaders.Loader();
+      loader
+        .add("./resource/man/man_skin.json")
+        .load()
+        .on('complete', function (loader, resource) {
+          setTimeout(callback, 1500);
+        });
+    }
+    var _dragonBonesTest = new dragonBonesTest();
+    _dragonBonesTest.setup('Tiny骨骼动画演示-换装');
+    _dragonBonesTest.buildArmatureDisplay('man', 'man', function (armatureDisplay) {
+      armatureDisplay.x = _dragonBonesTest.app.renderer.width * 0.5;
+      armatureDisplay.y = _dragonBonesTest.app.renderer.height * 0.5 + 50;
+      var animationState = armatureDisplay.play('runFront', 0, -1, 0);
+      _armature = armatureDisplay.armature;
+      _dragonBonesTest.titleSprite.text = "加载皮肤中。。。";
+      loadSkinData(function () {
+        armatureDisplay.setEventEnabled(true);
+        _dragonBonesTest.titleSprite.text = "点我点我-快给我换个漂亮的衣服吧";
+        armatureDisplay.mousedown = armatureDisplay.touchstart = function (data) {
+          changeSkin();
+        };
+      });
+    });
+  </script>
+</body>
+
+</html>

@@ -112,6 +112,7 @@ dragonBonesTest.prototype.setup = function (title, canvasPadding) {
 
   titleSprite.position.set(Tiny.WIN_SIZE.width / 2, 30);
   titleSprite.anchor.set(0.5, 0);
+  this.titleSprite = titleSprite;
   this.container.addChild(titleSprite);
 
   this.app.run(this.container);
