@@ -77,10 +77,10 @@
     function setNewSlot(slotName, textureName) {
       //方法1
       var slot = _armature.getSlot(slotName);
-      var aliMoleHitTexture = Tiny.TextureCache[textureName];
-      var dcMoleSprite = new Tiny.Sprite(aliMoleHitTexture);
-      dcMoleSprite.anchor.set(0.5, 0.5);
-      slot.setDisplay(dcMoleSprite);
+      var slotTexture = Tiny.TextureCache[textureName];
+      var slotSprite = new Tiny.Sprite(slotTexture);
+      slotSprite.anchor.set(0.5, 0.5);
+      slot.setDisplay(slotSprite);
 
       //方法2，仅限于slot中内容为Sprite
       // var slot  = this._armature.getSlot(slotName);
