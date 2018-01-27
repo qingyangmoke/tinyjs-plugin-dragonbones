@@ -9009,9 +9009,13 @@ var dragonBones;
       if (passedTime < 0.0) {
         passedTime = new Date().getTime() / dragonBones.DragonBones.SECOND_TO_MILLISECOND - this.time;
       }
-      if (this.timeScale !== 1.0) {
-        passedTime *= this.timeScale;
-      }
+      // let passedTime1 = passedTime;
+      // console.log(passedTime);
+      // if (this.timeScale !== 1.0) {
+      //   passedTime *= this.timeScale;
+      // }
+      passedTime = Math.max(0, passedTime);
+      // console.log(·, passedTime1);
       if (passedTime < 0.0) {
         this.time -= passedTime;
       }
