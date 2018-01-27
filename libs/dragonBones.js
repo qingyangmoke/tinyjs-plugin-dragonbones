@@ -8324,6 +8324,8 @@ var dragonBones;
       }
     };
     AnimationTimelineState.prototype.update = function (passedTime) {
+      // 限制一下时间 防止传入INF
+      passedTime = Math.min(10, Math.max(0, passedTime));
       var prevState = this._playState;
       var prevPlayTimes = this._currentPlayTimes;
       var prevTime = this._currentTime;
@@ -8381,19 +8383,13 @@ var dragonBones;
                 }
               }
               while (crossedFrame) {
-                let shouldBreak = false;
                 if (this._position <= crossedFrame.position &&
                   crossedFrame.position <= this._position + this._duration) {
                   this._onCrossFrame(crossedFrame);
-                  shouldBreak = true;
                 }
                 if (loopCompleteEvent && crossedFrame === this._timelineData.frames[0]) {
                   this._armature._bufferEvent(loopCompleteEvent, dragonBones.EventObject.LOOP_COMPLETE);
                   loopCompleteEvent = null;
-                  shouldBreak = true;
-                }
-                if (shouldBreak) {
-                  break;
                 }
                 crossedFrame = crossedFrame.prev;
                 if (crossedFrame === currentFrame) {
@@ -8415,20 +8411,14 @@ var dragonBones;
                 }
               }
               while (crossedFrame) {
-                let shouldBreak = false;
                 crossedFrame = crossedFrame.next;
                 if (loopCompleteEvent && crossedFrame === this._timelineData.frames[0]) {
                   this._armature._bufferEvent(loopCompleteEvent, dragonBones.EventObject.LOOP_COMPLETE);
                   loopCompleteEvent = null;
-                  shouldBreak = true;
                 }
                 if (this._position <= crossedFrame.position &&
                   crossedFrame.position <= this._position + this._duration) {
                   this._onCrossFrame(crossedFrame);
-                  shouldBreak = true;
-                }
-                if (shouldBreak) {
-                  break;
                 }
                 if (crossedFrame === currentFrame) {
                   break;
@@ -9009,13 +8999,10 @@ var dragonBones;
       if (passedTime < 0.0) {
         passedTime = new Date().getTime() / dragonBones.DragonBones.SECOND_TO_MILLISECOND - this.time;
       }
-      // let passedTime1 = passedTime;
-      // console.log(passedTime);
       // if (this.timeScale !== 1.0) {
       //   passedTime *= this.timeScale;
       // }
-      passedTime = Math.max(0, passedTime);
-      // console.log(·, passedTime1);
+      passedTime = Math.min(10, Math.max(0, passedTime));
       if (passedTime < 0.0) {
         this.time -= passedTime;
       }
