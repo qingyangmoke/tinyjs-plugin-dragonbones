@@ -8381,13 +8381,19 @@ var dragonBones;
                 }
               }
               while (crossedFrame) {
+                let shouldBreak = false;
                 if (this._position <= crossedFrame.position &&
                   crossedFrame.position <= this._position + this._duration) {
                   this._onCrossFrame(crossedFrame);
+                  shouldBreak = true;
                 }
                 if (loopCompleteEvent && crossedFrame === this._timelineData.frames[0]) {
                   this._armature._bufferEvent(loopCompleteEvent, dragonBones.EventObject.LOOP_COMPLETE);
                   loopCompleteEvent = null;
+                  shouldBreak = true;
+                }
+                if (shouldBreak) {
+                  break;
                 }
                 crossedFrame = crossedFrame.prev;
                 if (crossedFrame === currentFrame) {
@@ -8409,14 +8415,20 @@ var dragonBones;
                 }
               }
               while (crossedFrame) {
+                let shouldBreak = false;
                 crossedFrame = crossedFrame.next;
                 if (loopCompleteEvent && crossedFrame === this._timelineData.frames[0]) {
                   this._armature._bufferEvent(loopCompleteEvent, dragonBones.EventObject.LOOP_COMPLETE);
                   loopCompleteEvent = null;
+                  shouldBreak = true;
                 }
                 if (this._position <= crossedFrame.position &&
                   crossedFrame.position <= this._position + this._duration) {
                   this._onCrossFrame(crossedFrame);
+                  shouldBreak = true;
+                }
+                if (shouldBreak) {
+                  break;
                 }
                 if (crossedFrame === currentFrame) {
                   break;
