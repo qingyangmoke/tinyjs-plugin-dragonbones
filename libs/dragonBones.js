@@ -9003,9 +9003,10 @@ var dragonBones;
         // passedTime = new Date().getTime() / dragonBones.DragonBones.SECOND_TO_MILLISECOND - this.time;
         passedTime = Tiny.getTime() / dragonBones.DragonBones.SECOND_TO_MILLISECOND - this.time;
       }
-      // if (this.timeScale !== 1.0) {
-      //   passedTime *= this.timeScale;
-      // }
+      passedTime = Math.min(1, Math.max(0, passedTime));
+      if (this.timeScale !== 1.0) {
+        passedTime *= this.timeScale;
+      }
       if (passedTime < 0.0) {
         this.time -= passedTime;
       }
