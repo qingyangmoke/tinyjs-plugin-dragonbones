@@ -8324,8 +8324,10 @@ var dragonBones;
       }
     };
     AnimationTimelineState.prototype.update = function (passedTime) {
-      // 限制一下时间 防止传入INF
-      passedTime = Math.min(10, Math.max(0, passedTime));
+      // 限制一下时间 防止传入Infinity 和 <0
+      if (passedTime === Infinity || passedTime < 0) {
+        passedTime = 0;
+      }
       var prevState = this._playState;
       var prevPlayTimes = this._currentPlayTimes;
       var prevTime = this._currentTime;
@@ -8960,7 +8962,8 @@ var dragonBones;
        * 当前时间。 (以秒为单位)
        * @version DragonBones 3.0
        */
-      this.time = new Date().getTime() / dragonBones.DragonBones.SECOND_TO_MILLISECOND;
+      // this.time = new Date().getTime() / dragonBones.DragonBones.SECOND_TO_MILLISECOND;
+      this.time = Tiny.getTime() / dragonBones.DragonBones.SECOND_TO_MILLISECOND;
       /**
        * @language zh_CN
        * 时间流逝速度，用于控制动画变速播放。 [0: 停止播放, (0~1): 慢速播放, 1: 正常播放, (1~N): 快速播放]
@@ -8997,12 +9000,12 @@ var dragonBones;
         passedTime = 0.0;
       }
       if (passedTime < 0.0) {
-        passedTime = new Date().getTime() / dragonBones.DragonBones.SECOND_TO_MILLISECOND - this.time;
+        // passedTime = new Date().getTime() / dragonBones.DragonBones.SECOND_TO_MILLISECOND - this.time;
+        passedTime = Tiny.getTime() / dragonBones.DragonBones.SECOND_TO_MILLISECOND - this.time;
       }
       // if (this.timeScale !== 1.0) {
       //   passedTime *= this.timeScale;
       // }
-      passedTime = Math.min(10, Math.max(0, passedTime));
       if (passedTime < 0.0) {
         this.time -= passedTime;
       }
