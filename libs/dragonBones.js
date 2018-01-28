@@ -8999,9 +8999,11 @@ var dragonBones;
       if (passedTime !== passedTime) {
         passedTime = 0.0;
       }
+      const currentTime = Tiny.getTime() / dragonBones.DragonBones.SECOND_TO_MILLISECOND;
       if (passedTime < 0.0) {
         // passedTime = new Date().getTime() / dragonBones.DragonBones.SECOND_TO_MILLISECOND - this.time;
-        passedTime = Tiny.getTime() / dragonBones.DragonBones.SECOND_TO_MILLISECOND - this.time;
+        // passedTime = Tiny.getTime() / dragonBones.DragonBones.SECOND_TO_MILLISECOND - this.time;
+        passedTime = currentTime - this.time;
       }
       /**
        * 控制一下两帧requestAnimationFrame之间的数值差
@@ -9013,12 +9015,13 @@ var dragonBones;
       if (this.timeScale !== 1.0) {
         passedTime *= this.timeScale;
       }
-      if (passedTime < 0.0) {
-        this.time -= passedTime;
-      }
-      else {
-        this.time += passedTime;
-      }
+      // if (passedTime < 0.0) {
+      //   this.time -= passedTime;
+      // }
+      // else {
+      //   this.time += passedTime;
+      // }
+      this.time = currentTime;
       if (passedTime) {
         var i = 0, r = 0, l = this._animatebles.length;
         for (; i < l; ++i) {
