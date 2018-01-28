@@ -9003,7 +9003,13 @@ var dragonBones;
         // passedTime = new Date().getTime() / dragonBones.DragonBones.SECOND_TO_MILLISECOND - this.time;
         passedTime = Tiny.getTime() / dragonBones.DragonBones.SECOND_TO_MILLISECOND - this.time;
       }
-      passedTime = Math.min(1, Math.max(0, passedTime));
+      /**
+       * 控制一下两帧requestAnimationFrame之间的数值差
+       * 正常是0.016一帧
+       * 如果改时间这个数值有可能会成负数或特别大的数字
+       * 这里控制一下两帧的最大最小值  最小是0.01秒 最大是1秒
+       * */
+      passedTime = Math.min(1, Math.max(0.01, passedTime));
       if (this.timeScale !== 1.0) {
         passedTime *= this.timeScale;
       }
