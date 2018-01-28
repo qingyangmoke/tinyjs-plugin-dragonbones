@@ -9021,6 +9021,7 @@ var dragonBones;
       // else {
       //   this.time += passedTime;
       // }
+      // #0.1.8 time 每次都设置成当前时间 解决长时间暂停后骨骼动画延迟时间太长才播放的问题
       this.time = currentTime;
       if (passedTime) {
         var i = 0, r = 0, l = this._animatebles.length;
