@@ -8324,6 +8324,10 @@ var dragonBones;
       }
     };
     AnimationTimelineState.prototype.update = function (passedTime) {
+      // 限制一下时间 防止传入Infinity 和 <0
+      if (passedTime === Infinity || passedTime < 0) {
+        passedTime = 0;
+      }
       var prevState = this._playState;
       var prevPlayTimes = this._currentPlayTimes;
       var prevTime = this._currentTime;
@@ -8958,7 +8962,8 @@ var dragonBones;
        * 当前时间。 (以秒为单位)
        * @version DragonBones 3.0
        */
-      this.time = new Date().getTime() / dragonBones.DragonBones.SECOND_TO_MILLISECOND;
+      // this.time = new Date().getTime() / dragonBones.DragonBones.SECOND_TO_MILLISECOND;
+      this.time = Tiny.getTime() / dragonBones.DragonBones.SECOND_TO_MILLISECOND;
       /**
        * @language zh_CN
        * 时间流逝速度，用于控制动画变速播放。 [0: 停止播放, (0~1): 慢速播放, 1: 正常播放, (1~N): 快速播放]
@@ -8994,18 +8999,30 @@ var dragonBones;
       if (passedTime !== passedTime) {
         passedTime = 0.0;
       }
+      const currentTime = Tiny.getTime() / dragonBones.DragonBones.SECOND_TO_MILLISECOND;
       if (passedTime < 0.0) {
-        passedTime = new Date().getTime() / dragonBones.DragonBones.SECOND_TO_MILLISECOND - this.time;
+        // passedTime = new Date().getTime() / dragonBones.DragonBones.SECOND_TO_MILLISECOND - this.time;
+        // passedTime = Tiny.getTime() / dragonBones.DragonBones.SECOND_TO_MILLISECOND - this.time;
+        passedTime = currentTime - this.time;
       }
+      /**
+       * 控制一下两帧requestAnimationFrame之间的数值差
+       * 正常是0.016一帧
+       * 如果改时间这个数值有可能会成负数或特别大的数字
+       * 这里控制一下两帧的最大最小值  最小是0.01秒 最大是1秒
+       * */
+      passedTime = Math.min(1, Math.max(0.01, passedTime));
       if (this.timeScale !== 1.0) {
         passedTime *= this.timeScale;
       }
-      if (passedTime < 0.0) {
-        this.time -= passedTime;
-      }
-      else {
-        this.time += passedTime;
-      }
+      // if (passedTime < 0.0) {
+      //   this.time -= passedTime;
+      // }
+      // else {
+      //   this.time += passedTime;
+      // }
+      // #0.1.8 time 每次都设置成当前时间 解决长时间暂停后骨骼动画延迟时间太长才播放的问题
+      this.time = currentTime;
       if (passedTime) {
         var i = 0, r = 0, l = this._animatebles.length;
         for (; i < l; ++i) {
